@@ -1,6 +1,8 @@
-import './Login.css';
+import './Onboarding.css';
+import { Login } from './Login';
+import { Signup } from './Signup';
 
-export const Login = () => {
+export const Onboarding = () => {
     return (
         <>
             <div className='container'>
@@ -13,10 +15,7 @@ export const Login = () => {
                     <p className='subtitle'>a diary that listens</p>
                 </div>
 
-                <div className='input-fields'>
-                    <input type="text" className='input' placeholder='Enter username' />
-                    <button className='login-button'>Login</button>
-                </div>
+                
             </div>
         </>
     )
