@@ -1,0 +1,69 @@
+.navbar-container {
+    position: fixed;
+  top: 0;                  /* stick to top */
+  left: 50%;               /* move to center of viewport */
+  transform: translateX(-50%);  /* pull back by half width */
+  z-index: 1000;           /* ensure it stays above content */
+  
+    display: flex;
+    flex-direction: row;
+width: 100%;
+
+justify-content: space-between;
+align-items: center;
+}
+
+.navbar-path {
+display: flex;
+align-items: center;
+gap: 7px;
+padding-left: 24px;
+}
+
+.logo-name {
+    display: flex;
+    flex-direction: row;
+align-items: center;
+gap: 10px;
+}
+
+.logo {
+    width: 30px;
+height: 60px;
+}
+
+.heading {
+    color: #000;
+text-align: center;
+font-family: Sora;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin: 0;
+padding: 0;
+}
+
+.navbar-links {
+    display: flex;
+padding-left: 24px;
+padding-right: 24px;
+justify-content: flex-end;
+align-items: center;
+gap: 24px;
+}
+
+.navlink {
+    color: #343434;
+text-align: center;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.profile-photo {
+    width: 30px;
+height: 30px;
+}
