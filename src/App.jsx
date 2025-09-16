@@ -3,13 +3,14 @@ import { Routes, Route } from 'react-router';
 import './App.css'
 import { Signup } from './pages/Onboarding/Signup';
 import { Landing } from './pages/Landing/Landing';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 function App() {
 
 
   return (
     <>
-      <Landing />
+      <Dashboard />
       {/* <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/login' element={<Login />} />
