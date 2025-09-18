@@ -1,0 +1,39 @@
+.mood-card {
+    box-sizing: border-box;
+  border-radius: 33px;
+  border: 1px solid #FFF;
+  background: linear-gradient(
+    116deg,
+    rgba(255, 255, 255, 0.66) 11.18%,
+    rgba(255, 255, 255, 0.30) 84.34%
+  );
+  box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(98px);
+
+   width: 245px;
+height: 135px;  /* 👈 fixed card height */
+  padding: 16px 12px;
+
+  display: flex;
+  flex-direction: column;
+  /* gap: 8px; */
+
+  justify-content: space-between;
+}
+
+.mood-heading {
+  color: #343434;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.chart-wrapper {
+ flex: 1;       /* take all leftover space */
+  width: 100%;
+  min-height: 0; /* 👈 VERY IMPORTANT for flex children */
+}
+
+
+

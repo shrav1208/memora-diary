@@ -1,0 +1,543 @@
+{
+  "diary_entries": [
+    {
+      "id": 1,
+      "title": "New Month Vibes",
+      "date": "2025-03-01",
+      "time": "09:15",
+      "content": "March is finally here and I'm lowkey excited about what's coming. Been feeling like I'm stuck in a rut lately, but something about today just hits different. Maybe it's the way the sun's shining or maybe I'm just being delusional, but I've got this weird optimism brewing inside me."
+    },
+    {
+      "id": 2,
+      "title": "Coffee Shop Thoughts",
+      "date": "2025-03-02",
+      "time": "14:30",
+      "content": "Sitting at my usual spot in the coffee shop, watching people rush by with their lives all figured out. Or at least that's what it looks like from here. Had this random convo with the barista today - turns out we're both struggling with the same existential crisis about what we're doing with our lives. It's weirdly comforting to know I'm not the only one who's completely lost.\n\nThe latte art today was a heart, which felt like the universe throwing me a bone. Sometimes it's the little things that keep you going, you know? Been thinking about that job application I submitted last week. The silence is killing me, but I'm trying not to overthink it."
+    },
+    {
+      "id": 3,
+      "title": "Family Drama Again",
+      "date": "2025-03-03",
+      "time": "21:45",
+      "content": "Mom called today and within five minutes we were arguing about my life choices again. Why do parents have this superpower of making you feel like a complete failure with just one conversation? She means well, I know she does, but damn it's exhausting having to defend every single decision I make.\n\nShe's worried I'm wasting my potential, whatever that means. Like, what if this is my potential? What if I'm exactly where I'm supposed to be right now, figuring things out one day at a time? Not everyone has a five-year plan mapped out since they were twelve."
+    },
+    {
+      "id": 4,
+      "title": "Rainy Day Blues",
+      "date": "2025-03-04",
+      "time": "16:20",
+      "content": "It's been raining all day and I'm feeling mad melancholy. There's something about rainy days that just makes you wanna curl up and overthink everything. Been scrolling through old photos and wondering how I ended up here.\n\nRemember when we used to think 25 would be so old and we'd have everything figured out? Plot twist: we don't know shit. But maybe that's okay? Maybe nobody really knows what they're doing and we're all just winging it with different levels of confidence."
+    },
+    {
+      "id": 5,
+      "title": "Good News Finally",
+      "date": "2025-03-05",
+      "time": "11:00",
+      "content": "YOOO I GOT THE JOB!!! Still can't believe it tbh. Been staring at the email for like an hour now making sure I'm not hallucinating. All those nights staying up late perfecting my resume and practicing interview questions actually paid off.\n\nCalled my best friend immediately and we both started crying happy tears. It's been such a rough few months and this feels like the light at the end of the tunnel. Mom's gonna be so smug when I tell her, but honestly I don't even care. I'm just grateful something finally worked out."
+    },
+    {
+      "id": 6,
+      "title": "First Day Jitters",
+      "date": "2025-03-10",
+      "time": "07:30",
+      "content": "Starting the new job today and I'm nervous as hell. Barely slept last night because my brain wouldn't shut up. What if I'm not good enough? What if they realize they made a mistake hiring me? Imposter syndrome is hitting hard right now.\n\nPicked out my outfit like three times. Trying to find that sweet spot between professional and 'this is definitely me.' Why is adulting so complicated? Anyway, wish me luck. Time to fake it till I make it."
+    },
+    {
+      "id": 7,
+      "title": "Survived Day One",
+      "date": "2025-03-10",
+      "time": "19:15",
+      "content": "Made it through the first day without any major disasters! Everyone seems pretty chill actually. My manager Sarah is super nice and doesn't have that corporate robot vibe I was expecting. Still overwhelming AF with all the new information, but I think I can handle this.\n\nThey have free snacks in the break room which is honestly a game changer. It's the little things that matter, right? Feeling cautiously optimistic about this whole situation."
+    },
+    {
+      "id": 8,
+      "title": "Weekend Plans",
+      "date": "2025-03-14",
+      "time": "20:00",
+      "content": "Finally made it to Friday of my first week. Brain feels like mush but in a good way? Like, I actually used it for something productive instead of just doom scrolling all day. Planning to do absolutely nothing this weekend except maybe binge watch that show everyone's been talking about.\n\nMight order some takeout and just vibe. Sometimes the best weekends are the ones where you don't leave your apartment. Self-care looks different for everyone and mine involves pizza and not wearing real pants."
+    },
+    {
+      "id": 9,
+      "title": "Sunday Scaries",
+      "date": "2025-03-16",
+      "time": "18:30",
+      "content": "The Sunday scaries are real y'all. Even though I actually like my job so far, there's still that weird anxiety about Monday morning. Maybe it's just habit at this point, or maybe it's because everything still feels so new and uncertain.\n\nSpent the day meal prepping and doing laundry like a proper adult. Look at me being all responsible and shit. Still feels weird but I'm slowly getting used to having a routine again."
+    },
+    {
+      "id": 10,
+      "title": "Office Politics Already",
+      "date": "2025-03-18",
+      "time": "12:45",
+      "content": "Only been here a week and already picking up on the office drama. Apparently there's this whole thing between two departments that goes back years. I'm just trying to keep my head down and do my work, but it's like watching a soap opera unfold in real time.\n\nStaying neutral is probably the smart move here, but damn it's entertaining. At least work isn't boring, right? Still figuring out who I can trust and who's just being fake nice because I'm new."
+    },
+    {
+      "id": 11,
+      "title": "Making Friends Maybe",
+      "date": "2025-03-20",
+      "time": "16:00",
+      "content": "Had lunch with Jessica from accounting today and she seems really cool. Finally someone who gets my sense of humor and doesn't look at me weird when I make random references. We bonded over our shared love of true crime podcasts and overpriced coffee.\n\nIt's weird making friends as an adult. Like, do I ask for her number? Is that too forward? Why didn't anyone teach us how to navigate workplace friendships? Anyway, she mentioned this happy hour thing on Friday so maybe I'll actually go and be social for once."
+    },
+    {
+      "id": 12,
+      "title": "Homesick Feelings",
+      "date": "2025-03-22",
+      "time": "22:10",
+      "content": "Feeling super homesick tonight for no apparent reason. Maybe it's because I saw this couple at the grocery store that reminded me of my parents, or maybe it's just one of those days where everything feels heavy.\n\nBeen thinking about calling home but I don't want to worry them. They're probably doing just fine without me constantly checking in. It's weird how you can feel lonely even when your life is going well. Missing the comfort of familiar faces and inside jokes that don't need explanation.\n\nMight book a flight home for next month if I can swing it financially. Nothing beats mom's cooking and dad's terrible jokes when you're feeling lost."
+    },
+    {
+      "id": 13,
+      "title": "Happy Hour Adventures",
+      "date": "2025-03-27",
+      "time": "23:45",
+      "content": "Went to that happy hour with Jessica and it was actually fun! Met a bunch of people from other departments and realized everyone's just as confused about life as I am. There's something liberating about that.\n\nHad maybe one too many drinks and definitely overshared about my dating life, but everyone was cool about it. Turns out half the office is single and struggling with the same stupid dating apps. At least I'm not alone in my romantic disasters.\n\nFeeling grateful for putting myself out there instead of just going home and watching Netflix like usual. Sometimes you gotta push yourself out of your comfort zone."
+    },
+    {
+      "id": 14,
+      "title": "March Madness",
+      "date": "2025-03-30",
+      "time": "14:20",
+      "content": "Can't believe March is almost over already. Feels like yesterday I was freaking out about starting this job and now I'm actually getting the hang of things. Still have no idea what I'm doing half the time, but I'm getting better at pretending like I do.\n\nBeen thinking about how much can change in just one month. This time last month I was unemployed and living off ramen noodles. Now I have a steady paycheck and actual adult problems like figuring out my 401k. Growth is weird but I'm not complaining."
+    },
+    {
+      "id": 15,
+      "title": "April Fool's Day",
+      "date": "2025-04-01",
+      "time": "08:00",
+      "content": "Someone in the office thought it would be hilarious to put plastic wrap over the toilet seats. Real mature, Kevin from marketing. At least it wasn't anything too elaborate or mean-spirited. \n\nNot really in the mood for pranks today tbh. Been feeling kinda blah lately and can't pinpoint why. Maybe it's just the Monday blues hitting extra hard, or maybe I'm still adjusting to having actual responsibilities again."
+    },
+    {
+      "id": 16,
+      "title": "Dating App Disasters",
+      "date": "2025-04-03",
+      "time": "21:30",
+      "content": "Had another terrible date tonight courtesy of that cursed dating app. Why do guys think talking about their ex for the entire dinner is appropriate first date conversation? Like, I get it, you have baggage, but maybe save that for therapy?\n\nI'm starting to think I should just delete all these apps and embrace the single life. At least when I'm alone I don't have to pretend to be interested in someone's cryptocurrency investment strategies. Maybe I'll get a cat instead. Cats don't mansplain things to you.\n\nJessica keeps telling me to give it more time, but honestly I'm running out of patience with the whole dating scene. Everyone's either emotionally unavailable or trying way too hard to impress. Where are all the normal people hiding?"
+    },
+    {
+      "id": 17,
+      "title": "Spring Cleaning Therapy",
+      "date": "2025-04-05",
+      "time": "15:45",
+      "content": "Spent the entire weekend deep cleaning my apartment and it was weirdly therapeutic. There's something about organizing your physical space that helps organize your mental space too. Found so much random stuff I forgot I had, including that book I swore I'd read last year.\n\nDonated like three bags of clothes I never wear anymore. Why do we hold onto things that don't serve us? Whether it's clothes or people or bad habits, sometimes you just gotta let go and make space for better things.\n\nFeeling lighter already, and not just because my closet isn't bursting at the seams anymore."
+    },
+    {
+      "id": 18,
+      "title": "Work Stress Building",
+      "date": "2025-04-08",
+      "time": "18:00",
+      "content": "This project I'm working on is kicking my ass. Sarah keeps adding more requirements and the deadline isn't moving. Starting to feel that familiar panic creeping in, the one that makes me question if I'm actually qualified for this job.\n\nStayed late again tonight trying to catch up, but it feels like I'm swimming upstream. Everyone else seems to handle the workload just fine while I'm over here drowning in spreadsheets and anxiety. Maybe I bit off more than I can chew with this position."
+    },
+    {
+      "id": 19,
+      "title": "Breakthrough Moment",
+      "date": "2025-04-10",
+      "time": "16:30",
+      "content": "Holy shit, I think I actually figured it out! That project that's been making me lose sleep for weeks suddenly clicked today. Sometimes you just need to step away from something and come back with fresh eyes.\n\nJessica helped me see a different approach over lunch and it was like a lightbulb went off. This is why having work friends is clutch - they save your sanity when you're too deep in your own head. Feeling like maybe I do belong here after all.\n\nSarah seemed impressed with my solution too, which is a huge confidence boost. Maybe I'm not as hopeless as I thought."
+    },
+    {
+      "id": 20,
+      "title": "Random Acts of Kindness",
+      "date": "2025-04-12",
+      "time": "19:20",
+      "content": "A stranger paid for my coffee today when my card got declined. So embarrassing but also so sweet. Made me remember that there are still good people out there who do nice things for no reason.\n\nDecided to pay it forward by leaving a big tip at lunch. It's funny how one small act of kindness can completely change your mood and perspective on humanity. Been feeling pretty cynical lately, so this was exactly what I needed."
+    },
+    {
+      "id": 21,
+      "title": "Family Visit Planning",
+      "date": "2025-04-15",
+      "time": "20:00",
+      "content": "Finally booked that flight home for next month! Mom literally squealed when I told her, which made me feel guilty for not visiting sooner. It's been way too long since I've seen everyone.\n\nKinda nervous about going back though. Everyone's gonna want updates on my life and I'm not sure I have that much to report. \"Yeah, I have a job now and I'm still single\" doesn't exactly sound like a success story. But maybe that's enough for now.\n\nAt least I'll get some good home cooking and quality time with the family dog, who definitely missed me more than anyone else."
+    },
+    {
+      "id": 22,
+      "title": "Friendship Drama",
+      "date": "2025-04-17",
+      "time": "23:15",
+      "content": "Had this weird fight with my old college friend today over something so stupid. She made some passive aggressive comment about how I never call anymore, and I snapped back harder than I should have. Now we're both being petty and not texting each other.\n\nIt's so frustrating because she's right - I have been terrible at keeping in touch. But like, life gets busy and sometimes you just don't have the energy to maintain every relationship perfectly. That doesn't mean I care about her any less.\n\nMaybe I should just swallow my pride and apologize first. Friendships are too precious to lose over dumb misunderstandings, especially when you're both just feeling neglected and hurt."
+    },
+    {
+      "id": 23,
+      "title": "Quarter Life Crisis Vibes",
+      "date": "2025-04-20",
+      "time": "02:30",
+      "content": "Can't sleep because my brain decided 2 AM was the perfect time to have an existential crisis. Is this really what I want to be doing with my life? Am I just settling because it's comfortable and pays the bills?\n\nEveryone on social media seems to have their shit together while I'm over here questioning everything. Maybe that's just the highlight reel effect, but damn it's hard not to compare sometimes. Like, when did Sarah from high school become a successful entrepreneur with the perfect husband and adorable kids?\n\nMaybe I should have taken more risks when I was younger. Or maybe I'm exactly where I need to be and this is just normal quarter-life crisis stuff. Either way, my brain needs to chill and let me sleep."
+    },
+    {
+      "id": 24,
+      "title": "Spring Weather Mood Boost",
+      "date": "2025-04-22",
+      "time": "12:00",
+      "content": "First really warm day of spring and I'm feeling so much better about everything. Took my lunch outside and just sat in the sunshine like a lizard. There's something magical about vitamin D after months of gray weather.\n\nDecided to walk to work instead of taking the bus this morning. My legs are mad at me but my mood is significantly improved. Maybe I should make this a regular thing, at least until it gets too hot or I get too lazy.\n\nSpring always makes me feel optimistic about possibilities and new beginnings. Maybe this is my year after all."
+    },
+    {
+      "id": 25,
+      "title": "Work Anniversary",
+      "date": "2025-04-25",
+      "time": "17:00",
+      "content": "Can't believe I've been at this job for over a month now. Time flies when you're not completely miserable, I guess. Sarah mentioned something about a performance review next month which is both exciting and terrifying.\n\nFeeling pretty good about what I've accomplished so far. That project from hell is finally wrapped up and everyone seemed happy with the results. Maybe I do know what I'm doing after all, or at least I'm getting better at faking it convincingly.\n\nJessica brought cupcakes to celebrate my \"one month survival\" which was sweet. Having work friends definitely makes the job more bearable."
+    },
+    {
+      "id": 26,
+      "title": "Weekend Plans Gone Wrong",
+      "date": "2025-04-26",
+      "time": "22:00",
+      "content": "Was supposed to go to this outdoor music festival with Jessica today but it got rained out. Spent the entire day inside feeling sorry for myself instead. Sometimes when plans fall through, it hits you harder than it should.\n\nEnded up ordering way too much Chinese food and watching sad movies, which definitely didn't help my mood. Why do I do this to myself? When I'm already feeling down, I somehow manage to make it worse with my choices.\n\nTomorrow I'm gonna try to get out of this funk. Maybe a long walk or calling someone who makes me laugh. This pity party has gone on long enough."
+    },
+    {
+      "id": 27,
+      "title": "Unexpected Good News",
+      "date": "2025-04-28",
+      "time": "14:45",
+      "content": "Got an email from my landlord saying he's not raising the rent this year! Honestly was not expecting that given how crazy the housing market has been. This means I can actually start saving money instead of just barely scraping by.\n\nMight finally be able to afford that vacation I've been dreaming about, or at least build up an emergency fund like a proper adult. It's amazing how much stress you carry about money until something like this happens and you remember what it feels like to breathe normally.\n\nDefinitely calling this a win and treating myself to a nice dinner tonight. Sometimes the universe throws you a bone when you least expect it."
+    },
+    {
+      "id": 28,
+      "title": "May Day Reflections",
+      "date": "2025-05-01",
+      "time": "10:30",
+      "content": "New month, new possibilities, right? April was such a rollercoaster but I feel like I learned a lot about myself. Mainly that I'm more resilient than I give myself credit for, and that having good people around you makes everything more manageable.\n\nSetting some goals for May: be better at staying in touch with friends, save more money, maybe try that yoga class Jessica keeps talking about. Nothing too ambitious because we all know how that usually goes, but small steps in the right direction.\n\nFeeling cautiously optimistic about what's ahead. Spring energy is real and I'm here for it."
+    },
+    {
+      "id": 29,
+      "title": "Home Visit Countdown",
+      "date": "2025-05-03",
+      "time": "19:00",
+      "content": "Flight home is next week and I'm getting more excited by the day. Already planning all the food I'm gonna eat and people I wanna see. Mom's been texting me daily with updates about what she's cooking, which is both sweet and making me incredibly homesick.\n\nKinda nervous about seeing everyone though. It's weird how you can feel like a completely different person after just a few months away, but then you go home and you're immediately twelve years old again. Hope I don't regress too much into old patterns and dynamics.\n\nAt least I have some good news to share this time instead of just showing up as a hot mess looking for emotional support."
+    },
+    {
+      "id": 30,
+      "title": "Pre-Flight Anxiety",
+      "date": "2025-05-09",
+      "time": "06:00",
+      "content": "Flying out this afternoon and I'm weirdly nervous. Not about the plane - about going home. What if things feel different? What if I feel different? Change is scary even when it's good change.\n\nPacked way too much stuff as usual because I can never decide what I might need. Mom's probably gonna make fun of my overpacking skills, but whatever. Better to be prepared than sorry.\n\nOkay, time to get my shit together and head to the airport. Home, here I come."
+    },
+    {
+      "id": 31,
+      "title": "Home Sweet Home",
+      "date": "2025-05-09",
+      "time": "22:30",
+      "content": "Made it home safe and sound! Mom cried when she saw me, which made me cry, and then dad pretended he wasn't getting emotional too. The dog went absolutely insane with excitement and I'm pretty sure I'm gonna be covered in fur for the rest of my visit.\n\nEverything looks exactly the same but somehow smaller than I remembered. Funny how that works. My old room is now mom's craft room, which is fine but also slightly existentially devastating. Another reminder that I don't live here anymore.\n\nAlready stuffed myself with mom's cooking and it was even better than I remembered. Sometimes you don't realize how much you missed something until you have it again."
+    },
+    {
+      "id": 32,
+      "title": "Hometown Feels",
+      "date": "2025-05-11",
+      "time": "16:00",
+      "content": "Drove around town today and it's wild how much has changed and how much has stayed exactly the same. That coffee shop I used to study at is now a yoga studio, but the old diner still looks like it hasn't been updated since 1985.\n\nRan into my high school English teacher at the grocery store and she remembered me, which was both surprising and sweet. She asked what I was up to and for once I had a decent answer. Felt good to not be the mess I was the last time I was home.\n\nThere's something comforting about being in a place where people knew you before you knew yourself. Even if you've outgrown it, there's value in those roots."
+    },
+    {
+      "id": 33,
+      "title": "Family Dinner Drama",
+      "date": "2025-05-12",
+      "time": "21:00",
+      "content": "Had dinner with the extended family tonight and it was the usual chaos. Uncle Mike got too drunk and started his political rants, cousin Sarah announced her third pregnancy, and grandma asked me about my love life approximately seventeen times.\n\nI love my family but damn they're exhausting. Everyone has opinions about everyone else's choices and they're not shy about sharing them. At least the food was good and I got some quality time with the little kids who don't care about my career trajectory or relationship status.\n\nReminded me why I moved away in the first place, but also why I need to visit more often. Family is complicated but they're still family."
+    },
+    {
+      "id": 34,
+      "title": "Old Friends Reunion",
+      "date": "2025-05-13",
+      "time": "23:45",
+      "content": "Met up with my high school crew tonight and it was like no time had passed at all. We fell right back into our old dynamic, complete with inside jokes and embarrassing story retellings. Some friendships are just built to last, distance and time be damned.\n\nEveryone's at such different places in life now. Mark's married with a baby, Lisa's traveling the world, and Jake's still figuring things out just like me. It's reassuring that there's no right timeline for life milestones.\n\nWe stayed out way too late reminiscing and catching up. My throat hurts from laughing so much. These are the people who knew me when I thought I had everything figured out, and they still like me now that I know I don't."
+    },
+    {
+      "id": 35,
+      "title": "Leaving Is Hard",
+      "date": "2025-05-15",
+      "time": "18:00",
+      "content": "Flying back tomorrow and I'm already dreading saying goodbye. Mom's been extra clingy today, which makes me feel guilty for living so far away. Dad keeps giving me random life advice like he's storing up everything he wants to tell me for the next few months.\n\nPart of me wants to just stay and move back home, but I know that's not realistic. I've built something for myself in my current city, even if it's small and imperfect. Growing up means learning to live with the tension between where you came from and where you're going.\n\nPacked mom's leftovers and a bunch of random stuff she insisted I take back with me. At least I'll have comfort food for the next week."
+    },
+    {
+      "id": 36,
+      "title": "Back to Reality",
+      "date": "2025-05-16",
+      "time": "20:30",
+      "content": "Back in my apartment and it feels both foreign and familiar at the same time. Funny how a few days away can make you see your own space with new eyes. Maybe I should redecorate or at least clean more often.\n\nFeeling that post-vacation depression even though this wasn't really a vacation. It's always hard to transition back to regular life after being surrounded by people who love you unconditionally. Real life has more complications and responsibilities.\n\nGonna try to hold onto some of that home feeling while I readjust. Maybe call my parents more often instead of just texting. Connection is important even when it's not convenient."
+    },
+    {
+      "id": 37,
+      "title": "Work Motivation",
+      "date": "2025-05-19",
+      "time": "09:00",
+      "content": "First day back at work after the home visit and I'm feeling surprisingly motivated. Maybe being around family reminded me of my goals and why I'm working so hard to build something for myself.\n\nSarah mentioned there might be opportunities for advancement in the next quarter, which has me thinking about my long-term plans. Do I want to climb the corporate ladder here, or is this just a stepping stone to something else? Good problems to have, I guess.\n\nFor now I'm just gonna focus on doing good work and seeing where it leads. Sometimes the path reveals itself as you walk it."
+    },
+    {
+      "id": 38,
+      "title": "Dating App Success?",
+      "date": "2025-05-22",
+      "time": "22:15",
+      "content": "Had a actually decent date tonight! I know, I'm shocked too. Met this guy Aditya through that app I keep threatening to delete, and he was genuinely funny and interesting. No red flags detected so far, which feels like a miracle.\n\nWe talked for hours about everything and nothing. He didn't mention his ex once, which automatically puts him in the top 10% of dates I've had this year. We're gonna meet up again next week, fingers crossed he doesn't turn out to be secretly married or obsessed with crypto.\n\nTrying not to get my hopes up too much because dating has burned me so many times, but it's nice to remember that there are still some good ones out there."
+    },
+    {
+      "id": 39,
+      "title": "Memorial Day Weekend",
+      "date": "2025-05-24",
+      "time": "14:00",
+      "content": "Three day weekend and I actually have plans for once! Jessica invited me to a barbecue at her friend's house, and Aditya asked if I wanted to go to this outdoor market tomorrow. Look at me being all social and shit.\n\nIt's weird having multiple things to do instead of just sitting at home scrolling through Netflix. Maybe I'm finally getting the hang of this whole adult social life thing. Or maybe I'm just having a good streak that'll crash and burn next week.\n\nEither way, I'm gonna enjoy it while it lasts. Summer vibes are starting to kick in and I'm here for it."
+    },
+    {
+      "id": 40,
+      "title": "Barbecue Shenanigans",
+      "date": "2025-05-25",
+      "time": "23:00",
+      "content": "Jessica's friend's barbecue was actually fun! Met a bunch of new people and only had one awkward conversation about what I do for work. There's something about outdoor gatherings that makes everyone more relaxed and friendly.\n\nPlayed cornhole for the first time and I'm terrible at it, but whatever. The important thing is I put myself out there and didn't hide in the corner like I usually do at social events. Personal growth, baby!\n\nAte way too much potato salad and now I'm in a food coma, but it was worth it. Sometimes you need these random community moments to remind you that people are generally pretty cool when they're not stressed or rushing somewhere."
+    },
+    {
+      "id": 41,
+      "title": "Market Date Success",
+      "date": "2025-05-26",
+      "time": "19:30",
+      "content": "Second date with Aditya went really well! We spent the whole afternoon wandering around the farmers market, trying samples and people watching. He bought me this amazing homemade jam that I'm definitely gonna demolish tonight.\n\nConversation flowed naturally and there were no weird silences or moments where I questioned my life choices. He seems genuinely interested in getting to know me, not just trying to impress me or get in my pants. Novel concept, I know.\n\nTrying not to overthink it but it's hard when you've been disappointed so many times. Maybe third time's the charm? We'll see."
+    },
+    {
+      "id": 42,
+      "title": "Performance Review Prep",
+      "date": "2025-05-28",
+      "time": "18:45",
+      "content": "Performance review is next week and I'm nervous as hell. Been trying to document all my accomplishments from the past few months, but imposter syndrome is making me second-guess everything. Did I really do that well on that project or was everyone just being nice?\n\nSarah's been giving me positive feedback regularly, so logically I know I'm doing okay. But there's still that voice in my head that says I'm gonna get fired and have to move back in with my parents. Anxiety brain is so fun.\n\nGonna spend the weekend preparing talking points and trying not to psyche myself out. I've got this, right? Right."
+    },
+    {
+      "id": 43,
+      "title": "June Arrives",
+      "date": "2025-06-01",
+      "time": "11:00",
+      "content": "Can't believe it's June already. This year is flying by and I feel like I'm finally starting to hit my stride. Work is going well, I have actual friends here now, and there might be a decent guy in the picture. Look at me adulting!\n\nWeather's getting warmer and I'm already planning beach trips and outdoor adventures. Summer always makes me feel more optimistic and adventurous. Maybe I'll finally learn how to paddleboard or try that hiking group Jessica mentioned.\n\nSetting some goals for the month: nail this performance review, plan a proper vacation, and see where things go with Aditya. Reasonable expectations for once."
+    },
+    {
+      "id": 44,
+      "title": "Review Day Nerves",
+      "date": "2025-06-03",
+      "time": "08:30",
+      "content": "Performance review is this afternoon and I woke up with butterflies. Spent way too long picking out an outfit that says \"competent professional\" instead of \"person who has no idea what they're doing.\"\n\nMade a list of all my accomplishments and practiced my talking points in the mirror, which felt ridiculous but hopefully will help. Sarah's always been supportive so I don't know why I'm spiraling like this. Maybe because it's the first real feedback on whether I actually belong here.\n\nOkay, deep breaths. I've got this. Time to go show them what I'm made of."
+    },
+    {
+      "id": 45,
+      "title": "Review Results",
+      "date": "2025-06-03",
+      "time": "17:00",
+      "content": "HOLY SHIT THE REVIEW WENT AMAZING! Sarah said I exceeded expectations in multiple areas and that she's impressed with how quickly I've adapted. Even mentioned the possibility of a promotion track, which I definitely wasn't expecting.\n\nApparently that project from hell that made me question everything actually showcased exactly the kind of problem-solving skills they value. Funny how our biggest struggles often turn into our biggest strengths when viewed from the outside.\n\nCelebrating with takeout and wine tonight because I deserve it. Finally feel like I'm not just surviving but actually thriving in this job."
+    },
+    {
+      "id": 46,
+      "title": "Third Date Charm",
+      "date": "2025-06-06",
+      "time": "23:30",
+      "content": "Third date with Aditya tonight and I think I'm actually falling for this guy. We went to this little Italian place and talked until they basically had to kick us out. He makes me laugh without trying too hard, and he actually listens when I talk instead of just waiting for his turn to speak.\n\nWe kissed goodnight and it was... wow. Been a while since I felt those butterfly stomach feelings about someone. Trying not to get ahead of myself but it's hard when everything feels so natural and easy.\n\nHe texted me when he got home to make sure I made it back okay, which is such a small thing but means a lot. Maybe the universe is finally throwing me a bone in the romance department."
+    },
+    {
+      "id": 47,
+      "title": "Girl's Night Wisdom",
+      "date": "2025-06-08",
+      "time": "01:15",
+      "content": "Had girls night with Jessica and her friends and spent way too much time analyzing every detail of my situation with Aditya. They all seem to think he's a keeper based on my rambling descriptions, which is reassuring since I clearly have terrible judgment when it comes to men.\n\nWe also talked about work drama, family stuff, and whether we're too old to be staying out this late on a Sunday night. Answer: probably, but who cares. Sometimes you need to drink wine and overshare with other women who understand the struggle.\n\nFeeling grateful for female friendships and the way women support each other through all the messy parts of life. We're all just figuring it out together."
+    },
+    {
+      "id": 48,
+      "title": "Relationship Status Update",
+      "date": "2025-06-12",
+      "time": "20:00",
+      "content": "Had \"the talk\" with Aditya tonight about what we're doing here, and we're officially exclusive! Feels weird to say I have a boyfriend after being single for so long, but also really nice to have that clarity and security.\n\nHe brought it up first, which was a relief because I was definitely overthinking it. Apparently he deleted his dating apps after our second date, which is both sweet and slightly terrifying. No pressure or anything.\n\nCalled my mom to tell her and she's already planning our wedding, which is exactly what I expected. At least someone's excited about my love life."
+    },
+    {
+      "id": 49,
+      "title": "Summer Solstice Vibes",
+      "date": "2025-06-21",
+      "time": "15:30",
+      "content": "First day of summer and I'm feeling all kinds of optimistic. Everything in my life seems to be clicking into place for once - work is good, relationship is good, friendships are solid. Waiting for the other shoe to drop but trying to just enjoy the moment.\n\nAditya and I are planning a weekend trip to the beach next month, which will be our first real test of compatibility outside of dinner dates. Either we'll have an amazing time or we'll discover he's a psycho when he travels. Fingers crossed for option A.\n\nSummer always makes me feel like anything is possible. Maybe this is finally my year to stop overthinking everything and just live."
+    },
+    {
+      "id": 50,
+      "title": "Family Updates",
+      "date": "2025-06-24",
+      "time": "19:45",
+      "content": "Mom called with updates from home and it sounds like everyone's doing well. Dad's retirement is treating him well, my brother got a promotion, and even the family dog is thriving. Sometimes it's nice to hear that life goes on peacefully without drama.\n\nThey want to meet Aditya, which is both sweet and terrifying. Nothing says \"relationship pressure\" like introducing someone to your parents. But he seems excited about it, which is a good sign. Either he's genuinely interested in my family or he's a really good actor.\n\nTold them we might visit for Thanksgiving, which gave mom approximately three months to plan every detail of our stay. I love her enthusiasm even when it's overwhelming."
+    },
+    {
+      "id": 51,
+      "title": "Work Project Win",
+      "date": "2025-06-26",
+      "time": "16:20",
+      "content": "Just got assigned to lead a major project for a big client, which is both exciting and absolutely terrifying. Sarah said she specifically requested me for it, which means she really does have confidence in my abilities.\n\nFeeling that familiar imposter syndrome creeping in, but I'm trying to focus on the fact that they chose me for a reason. This could be exactly the kind of opportunity I need to prove myself and maybe get that promotion she hinted at.\n\nTime to step up and show everyone what I can do. No more playing small or doubting myself. This is my moment to shine."
+    },
+    {
+      "id": 52,
+      "title": "Beach Trip Planning",
+      "date": "2025-06-28",
+      "time": "21:00",
+      "content": "Spent the evening planning our beach weekend with Aditya and I'm getting so excited! Found this cute little Airbnb right on the water and already making lists of restaurants to try and activities to do.\n\nIt's been forever since I've had a proper vacation, even if it's just a weekend getaway. There's something about planning trips that makes you feel hopeful about the future. Like you're investing in happiness and memories instead of just surviving day to day.\n\nAditya keeps joking that he's bringing sunscreen in bulk because I'm pale as a ghost, which is unfortunately accurate. But hey, at least I won't blend in with the sand."
+    },
+    {
+      "id": 53,
+      "title": "July Goals",
+      "date": "2025-07-01",
+      "time": "10:00",
+      "content": "New month means new opportunities to not completely mess up my life! July goals: crush this work project, have an amazing beach trip, and maybe finally clean out my closet like I've been promising myself for months.\n\nFeeling pretty good about where things are heading. Six months ago I was unemployed and single, and now I have a job I actually like and a relationship that doesn't make me want to hide under my covers. Progress!\n\nSummer is in full swing and I'm ready to make the most of it. Time to live a little and stop overthinking everything."
+    },
+    {
+      "id": 54,
+      "title": "Project Pressure",
+      "date": "2025-07-03",
+      "time": "18:30",
+      "content": "This project is no joke. Client expectations are through the roof and the timeline is aggressive. Staying late again tonight trying to get ahead of things, but I'm worried I'm in over my head.\n\nTeam meeting tomorrow to discuss strategy and I need to look like I know what I'm talking about. Been researching like crazy and taking notes on everything. Fake it till you make it, right?\n\nAt least Aditya has been supportive, bringing me dinner when I'm working late and listening to me stress vent. Having someone in your corner makes all the difference when work gets overwhelming."
+    },
+    {
+      "id": 55,
+      "title": "Beach Weekend Countdown",
+      "date": "2025-07-10",
+      "time": "20:15",
+      "content": "Beach trip is this weekend and I cannot wait to get out of the city and decompress. Work has been intense lately and I need some serious R&R. Already packed way too much stuff as usual, but better safe than sorry.\n\nAditya seems just as excited as I am, which is reassuring. This will be our first real test of spending extended time together without the buffer of separate apartments to retreat to. Either we're compatible travelers or we're about to discover some deal-breakers.\n\nEither way, I'm ready for sun, sand, and not checking work emails for 48 hours. My mental health depends on it."
+    },
+    {
+      "id": 56,
+      "title": "Beach Bliss",
+      "date": "2025-07-12",
+      "time": "22:30",
+      "content": "Beach weekend was absolutely perfect! Aditya and I had such a good time just relaxing and being together without any distractions. We're definitely compatible travelers - he's laid back about plans and doesn't freak out when things don't go exactly as expected.\n\nSpent most of Saturday just laying on the beach reading and talking about random stuff. It's nice to be with someone who doesn't feel the need to fill every silence with chatter. Comfortable quiet is underrated.\n\nAlready planning our next trip because I'm apparently addicted to having things to look forward to. But honestly, having someone to make memories with makes everything more fun."
+    },
+    {
+      "id": 57,
+      "title": "Work Breakthrough",
+      "date": "2025-07-15",
+      "time": "17:00",
+      "content": "Major breakthrough on the project today! Finally found a solution to the problem that's been keeping me up at night for weeks. Sometimes you just need to step back and approach things from a completely different angle.\n\nClient loved the presentation and Sarah seemed really impressed with how I handled their questions. Maybe I'm not as hopeless at this leadership thing as I thought. Confidence is slowly building, which feels weird but good.\n\nCelebrating with a nice dinner tonight because small wins deserve recognition too."
+    },
+    {
+      "id": 58,
+      "title": "Friendship Check-in",
+      "date": "2025-07-18",
+      "time": "19:45",
+      "content": "Finally caught up with my college friend who I had that stupid fight with months ago. We both apologized and admitted we were being petty. Friendship recovered and stronger than before, which is exactly how these things should go.\n\nIt's funny how you can let pride get in the way of relationships with people you genuinely care about. Life's too short to stay mad over misunderstandings, especially when you both just want to be heard and valued.\n\nMade plans to visit each other soon because maintaining long-distance friendships takes actual effort, not just good intentions."
+    },
+    {
+      "id": 59,
+      "title": "Summer Heat Wave",
+      "date": "2025-07-22",
+      "time": "14:00",
+      "content": "It's disgustingly hot and my apartment's AC is struggling. Spent most of the day hiding indoors with all the curtains closed like a vampire. Summer is great until it's not.\n\nAditya invited me to spend the day at his place since he has better AC, which was both practical and sweet. We just hung out watching movies and eating popsicles like children. Sometimes the best dates are the ones where you do absolutely nothing productive.\n\nDefinitely investing in a better AC unit next summer because this is not sustainable."
+    },
+    {
+      "id": 60,
+      "title": "Project Completion",
+      "date": "2025-07-25",
+      "time": "16:30",
+      "content": "WE DID IT! Project is officially complete and the client is thrilled. All those late nights and stress spirals were worth it in the end. Team celebration drinks tonight because we actually pulled this off.\n\nSarah pulled me aside to say she was impressed with my leadership throughout the project. Apparently I handled the pressure better than she expected, which is nice to hear since I felt like I was drowning half the time.\n\nFeeling proud of what we accomplished and grateful for a team that had my back when things got complicated. Maybe I am cut out for this whole career thing after all."
+    },
+    {
+      "id": 61,
+      "title": "Relationship Milestone",
+      "date": "2025-07-28",
+      "time": "21:00",
+      "content": "Aditya and I said \"I love you\" tonight and it felt so natural and right. We were just hanging out watching TV and it slipped out, and then we both started laughing because we'd both been thinking it for weeks.\n\nIt's weird how scary those three words can be until you say them and realize they're just the truth. I do love him - the way he makes me coffee in the morning, how he listens to my work rants, the way he makes even boring errands fun.\n\nFeeling grateful and slightly terrified because vulnerability is scary but worth it when it's with the right person."
+    },
+    {
+      "id": 62,
+      "title": "August Planning",
+      "date": "2025-08-01",
+      "time": "11:30",
+      "content": "August is here and I'm feeling optimistic about what's ahead. Work is going well, relationship is solid, and I actually have a social life now. Look at me being a functional adult with a balanced life!\n\nPlanning a camping trip with Jessica and some other friends for later this month. I'm not exactly outdoorsy but I'm willing to try new things. Worst case scenario, I'll have some funny stories about my camping disasters.\n\nAlso thinking about signing up for that pottery class I've been eyeing for months. Maybe it's time to pick up a new hobby that doesn't involve staring at screens."
+    },
+    {
+      "id": 63,
+      "title": "Promotion Possibility",
+      "date": "2025-08-05",
+      "time": "18:00",
+      "content": "Sarah mentioned there's going to be a senior position opening up in September and asked if I'd be interested in applying. HELL YES I would be interested! Still can't believe my career is actually progressing instead of just existing.\n\nGonna spend the next few weeks preparing my application and gathering references. This could be exactly the opportunity I need to really establish myself here and prove I'm not just lucky but actually good at this job.\n\nTrying not to get too ahead of myself but it's hard not to daydream about what this could mean for my future. Financial stability and career growth? Who is this person I've become?"
+    },
+    {
+      "id": 64,
+      "title": "Family Visit Planning",
+      "date": "2025-08-08",
+      "time": "20:30",
+      "content": "Booked flights to bring Aditya home for a weekend next month and I'm nervous as hell. Parents meeting the boyfriend is such a big step, but we've been together long enough that it feels like the natural progression.\n\nMom's already planning the entire weekend and asking about his food preferences. Dad's probably sharpening his interrogation skills as we speak. Aditya seems genuinely excited to meet them, which either means he's serious about us or he has no idea what he's signing up for.\n\nAt least the dog will love him immediately, so he'll have one ally in the house."
+    },
+    {
+      "id": 65,
+      "title": "Camping Adventure Prep",
+      "date": "2025-08-12",
+      "time": "19:00",
+      "content": "Camping trip is this weekend and I'm equal parts excited and terrified. Jessica made me a packing list because apparently I can't be trusted to remember essentials like bug spray and extra socks.\n\nBought a bunch of outdoor gear that I'll probably never use again, but at least I'll look like I know what I'm doing. Aditya thinks it's hilarious that I'm approaching camping like a military operation, but preparation is how anxious people survive new experiences.\n\nWeather forecast looks good so hopefully we won't be stuck in tents during a thunderstorm. That would definitely test my newfound adventurous spirit."
+    },
+    {
+      "id": 66,
+      "title": "Camping Survival",
+      "date": "2025-08-14",
+      "time": "21:45",
+      "content": "I SURVIVED CAMPING! And actually had fun, which is shocking. Turns out sleeping under the stars is pretty magical when you're not worried about serial killers lurking in the woods. Who knew?\n\nThe group was awesome and everyone was patient with my city girl questions about basic outdoor survival. We hiked, made s'mores, and told stories around the campfire like something out of a movie. Felt weirdly connected to nature and humanity at the same time.\n\nDefinitely doing this again, but maybe with a slightly better sleeping pad because my back is not happy with me right now."
+    },
+    {
+      "id": 67,
+      "title": "Pottery Class Disaster",
+      "date": "2025-08-17",
+      "time": "20:15",
+      "content": "First pottery class tonight and I am spectacularly terrible at it. My bowl looked more like abstract art than functional pottery. The instructor was very diplomatically encouraging, but I could see the other students trying not to laugh.\n\nBut you know what? I had fun even though I suck at it. There's something meditative about working with clay and trying to create something with your hands. Plus it's nice to be bad at something without it affecting my job or relationships.\n\nGonna keep going because everyone has to start somewhere, right? Maybe by the end of the class I'll have made something that vaguely resembles a mug."
+    },
+    {
+      "id": 68,
+      "title": "Promotion Application",
+      "date": "2025-08-20",
+      "time": "16:00",
+      "content": "Submitted my promotion application today and now the waiting game begins. Put together what I think is a strong case for why I deserve this opportunity, but you never know how these things will go.\n\nSarah has been supportive throughout the process and even helped me refine my application. Having a manager who actually advocates for your growth is such a game changer. Hope I don't disappoint her confidence in me.\n\nTrying not to obsess over it but it's hard when it could significantly change my career trajectory. Whatever happens, I'm proud of how far I've come."
+    },
+    {
+      "id": 69,
+      "title": "Pre-Visit Anxiety",
+      "date": "2025-08-23",
+      "time": "22:00",
+      "content": "Flying home with Aditya tomorrow and I'm having pre-visit anxiety about how everything will go. What if my parents don't like him? What if he doesn't like them? What if everyone's weird and awkward the whole time?\n\nAditya keeps reassuring me that it'll be fine and that parents usually like him. His confidence is both comforting and slightly annoying. Easy for him to say - he's not the one whose mother will inevitably show embarrassing baby photos.\n\nAt least it's only a weekend. How much damage can really be done in 48 hours? Don't answer that."
+    },
+    {
+      "id": 70,
+      "title": "Family Approval",
+      "date": "2025-08-25",
+      "time": "20:00",
+      "content": "The family visit went amazingly well! Aditya charmed everyone, including my usually skeptical father. They spent an hour talking about baseball statistics while I helped mom in the kitchen, which felt weirdly domestic and normal.\n\nMom pulled me aside to say she really likes him and can see why I'm happy. Dad's seal of approval was asking Aditya about his retirement savings plan, which is dad-speak for \"you're acceptable for my daughter.\" Even the dog was obsessed with him.\n\nFeeling relieved and happy that two important parts of my life mesh well together. Aditya said he can see where I get my personality from, which could be either a compliment or an insult but I'm choosing to take it positively."
+    },
+    {
+      "id": 71,
+      "title": "September Possibilities",
+      "date": "2025-09-01",
+      "time": "09:00",
+      "content": "September is here and it feels like a month of possibilities. Promotion decision should come this week, and Aditya and I have been talking about maybe moving in together. Big life changes potentially on the horizon.\n\nFeeling cautiously optimistic but also terrified of getting my hopes up too high. This year has been so much better than I expected that part of me is waiting for something to go wrong. Anxiety brain is fun like that.\n\nBut maybe it's okay to just enjoy the good things without constantly bracing for disaster. Maybe this is what having your life together actually feels like."
+    },
+    {
+      "id": 72,
+      "title": "Promotion News",
+      "date": "2025-09-03",
+      "time": "15:30",
+      "content": "I GOT THE PROMOTION! Still processing the news but Sarah called me into her office this morning with the official offer. More money, more responsibility, better title - everything I was hoping for.\n\nApparently the decision was unanimous among the leadership team, which feels incredible after all the imposter syndrome struggles. Maybe I really do belong here and deserve good things happening to me.\n\nCelebrating tonight with Aditya and the work crew. This calls for champagne and probably way too much excitement texting to everyone I know."
+    },
+    {
+      "id": 73,
+      "title": "Moving In Discussion",
+      "date": "2025-09-06",
+      "time": "21:30",
+      "content": "Had a long talk with Aditya about moving in together and we're both excited about the idea. His lease is up in November and mine renews in January, so timing could work out perfectly if we find a place we both love.\n\nIt's scary taking that next step but also feels natural. We basically live together half the time anyway, and it would be nice to have a space that's truly ours instead of bouncing between apartments.\n\nStarted looking at places online and holy shit rent is expensive. But with my promotion raise, we might actually be able to afford something decent together. Adult milestones keep happening whether I feel ready or not."
+    },
+    {
+      "id": 74,
+      "title": "Pottery Progress",
+      "date": "2025-09-08",
+      "time": "19:00",
+      "content": "Made something that actually resembles a bowl in pottery class tonight! Still not winning any awards but I'm definitely improving. The instructor said I'm getting the hang of centering the clay, which is apparently the hardest part.\n\nThere's something really satisfying about creating something tangible with your hands after spending all day working on computers. Plus it's forced me to be okay with imperfection, which is good life practice.\n\nThinking about signing up for the intermediate class next session. Look at me sticking with hobbies like a real person with interests and skills."
+    },
+    {
+      "id": 75,
+      "title": "Apartment Hunting",
+      "date": "2025-09-11",
+      "time": "18:45",
+      "content": "Spent the weekend looking at apartments with Aditya and it's harder than I expected to find something we both love in our budget. Turns out we have different priorities - he cares about parking and I care about natural light and kitchen space.\n\nViewed some real dumps that were somehow still overpriced, and a few decent places that had competition from other couples. Housing market is brutal right now but we're not giving up.\n\nAt least the process is showing us how well we communicate and compromise with each other. No major fights yet, which feels like a good sign for living together."
+    },
+    {
+      "id": 76,
+      "title": "Work Adjustment",
+      "date": "2025-09-14",
+      "time": "16:00",
+      "content": "First week in the new position and it's definitely an adjustment. More meetings, more decisions to make, more people looking to me for answers. Imposter syndrome is trying to make a comeback but I'm fighting it off.\n\nNew team seems good so far, though there are definitely some personalities to navigate. Leadership is different when you can't just focus on your own work anymore. Learning curve is steep but I'm determined to figure it out.\n\nSarah's been checking in regularly which I appreciate. Having mentorship makes the transition less terrifying."
+    },
+    {
+      "id": 77,
+      "title": "Perfect Apartment Find",
+      "date": "2025-09-17",
+      "time": "22:00",
+      "content": "WE FOUND THE PERFECT APARTMENT! Two bedrooms, great kitchen, tons of light, and it's actually in our budget. Applied immediately before someone else could snatch it up. Fingers crossed we get approved.\n\nAditya and I both had the same reaction when we walked in - this could actually be home. Already planning how we'd arrange furniture and which room would be the office. Getting ahead of myself but I can't help it.\n\nIf we get this place, we'll be moving in together in November. Holy shit this is really happening. Excited and terrified in equal measure."
+    }
+  ]
+}

@@ -2,6 +2,9 @@ import { Navbar } from '../../components/Navbar';
 import './Dashboard.css'
 import dayjs from 'dayjs';
 import { MonthCard } from './MonthCard';
+import { TodayDate } from './TodayDate';
+import { QuoteCard } from './QuoteCard';
+import { MoodTracker } from './MoodTracker';
 
 export const Dashboard = () => {
 
@@ -20,18 +23,12 @@ export const Dashboard = () => {
                     </div>
 
                     <div className="features-flex">
-                        <div className='white-box box-1'>
-
-                        </div>
+                        
+                        <QuoteCard />
 
                         <div className='right-boxes'>
-                            <div className='white-box box-2'>
-
-                            </div>
-
-                            <div className='white-box box-3'>
-
-                            </div>
+                            <TodayDate />
+                            <MoodTracker />
                         </div>
                     </div>
                 </div>
