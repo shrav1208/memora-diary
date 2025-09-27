@@ -3,7 +3,7 @@
   top: 0;                  /* stick to top */
   left: 50%;               /* move to center of viewport */
   transform: translateX(-50%);  /* pull back by half width */
-  z-index: 1000;           /* ensure it stays above content */
+  z-index: 10000;           /* ensure it stays above content */
   
     display: flex;
     flex-direction: row;

@@ -69,14 +69,6 @@ body {
     margin: 0px 10px;
 }
 
-.plus-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-}
-
 .plus {
     position: absolute;
     top: 50%;

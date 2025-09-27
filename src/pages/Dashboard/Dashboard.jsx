@@ -8,7 +8,24 @@ import { MoodTracker } from './MoodTracker';
 import data from '../../diary_entries_2025.json';
 import plusIcon from '../../assets/plus-icon.svg'
 
+import { useState } from "react";
+import { PopupInput } from "../../components/PopupInput";
+
 export const Dashboard = () => {
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleButtonClick = () => {
+        setIsPopupOpen(true); // open popup on button click
+    };
+
+    const handleClose = () => {
+        setIsPopupOpen(false); // close popup
+    };
+
+    const handleSubmit = (value) => {
+        console.log("User input:", value); // handle submitted value
+    };
 
     const months = Array.from({ length: 12 }, (_, i) =>
         dayjs().month(i).format("MMM") // "Jan", "Feb", etc.
@@ -31,16 +48,16 @@ export const Dashboard = () => {
                     <div className="name-flex">
                         <div className='left-half'>
                             <h1 className="name">Shravani's Diary</h1>
-                            <div className='plus-icon'>
+                            <div className='plus-icon' onClick={handleButtonClick}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="58"
                                     height="58"
                                     viewBox="0 0 58 58"
                                     fill="none"
-                                    overflow="visible"   // ✅ prevents clipping
+                                    overflow="visible"   // prevents clipping
                                 >
-                                    <foreignObject x="-197.3" y="-197.3" width="452.6" height="452.6">
+                                    <foreignObject x="0" y="0" width="58" height="58">
                                         <div
                                             xmlns="http://www.w3.org/1999/xhtml"
                                             style={{
@@ -104,10 +121,6 @@ export const Dashboard = () => {
                                 </svg>
                                 <img src={plusIcon} className='plus' />
                             </div>
-
-
-
-
                         </div>
                         <input className='search-box' placeholder="Search your memories..." />
                     </div>
@@ -135,6 +148,12 @@ export const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <PopupInput
+                                isOpen={isPopupOpen}
+                                onClose={handleClose}
+                                onSubmit={handleSubmit}
+                            />
         </>
     );
 }
