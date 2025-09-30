@@ -4,13 +4,14 @@ import './App.css'
 import { Signup } from './pages/Onboarding/Signup';
 import { Landing } from './pages/Landing/Landing';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { FullscreenEditor } from './pages/FullscreenEditor';
 
 function App() {
 
 
   return (
     <>
-      <Dashboard />
+      <FullscreenEditor />
       {/* <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/login' element={<Login />} />

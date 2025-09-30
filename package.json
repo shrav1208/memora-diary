@@ -10,6 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^6.3.0",
+    "@tiptap/extension-color": "^3.6.2",
+    "@tiptap/extension-highlight": "^3.6.2",
+    "@tiptap/extension-text-style": "^3.6.2",
+    "@tiptap/extension-underline": "^3.6.2",
+    "@tiptap/react": "^3.6.2",
+    "@tiptap/starter-kit": "^3.6.2",
     "dayjs": "^1.11.18",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
