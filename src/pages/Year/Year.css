@@ -1,0 +1,67 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* horizontal centering */
+    align-items: center;
+    /* vertical centering */
+
+    font-family: Inter;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    background-image: url("dashboard-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.container {
+    display: flex;
+    width: 1040px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 134px;
+}
+
+.year-component {
+    display: flex;
+    height: 313px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.year {
+    color: #343434;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.months-collection {
+    display: grid;
+    width: 1040px;
+    height: 260px;
+    row-gap: 20px;
+    column-gap: 20px;
+    flex-shrink: 0;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}

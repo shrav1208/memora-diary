@@ -1,0 +1,87 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* horizontal centering */
+    align-items: center;
+    /* vertical centering */
+
+    font-family: Inter;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    background-image: url("dashboard-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.container {
+    display: flex;
+    width: 1040px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 134px;
+}
+
+.day-component {
+    display: flex;
+width: 1040px;
+flex-direction: column;
+align-items: flex-start;
+gap: 24px;
+}
+
+.month {
+    color: #343434;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.year-month {
+    color: #343434;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.entries-wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 25px;
+align-self: stretch;
+
+margin-bottom: 50px;
+}
+
+.no-entry {
+color: #343434a4;
+text-align: center;
+font-family: Inter;
+font-size: 32px;
+font-style: italic;
+font-weight: 100;
+line-height: normal;
+align-self: center;
+margin: 100px 0;
+}
+
+

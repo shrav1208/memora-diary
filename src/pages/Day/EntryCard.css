@@ -1,0 +1,88 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.entry-card {
+    width: 1040px;
+    height: 163px;
+    flex-shrink: 0;
+
+    border-radius: 24px;
+    background: #FFF;
+
+    /* primary-shadow */
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 27px;
+
+    padding: 0 28px;
+}
+
+.entry-time {
+    width: 111px;
+    flex-shrink: 0;
+    color: #343434;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.vertical-separator {
+    width: 1px;
+    height: 163px;
+    background: #CFCFCF;
+}
+
+.entry-content {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.entry-title {
+    align-self: stretch;
+    color: #343434;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+
+}
+
+.entry-text {
+    align-self: stretch;
+    color: #343434;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+    height: 100px;
+    /* limit height */
+    overflow: hidden;
+    /* hide excess text */
+    position: relative;
+
+    /* apply gradient mask */
+    /* Gradient fade mask */
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+
+    mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}

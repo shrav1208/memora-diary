@@ -1,0 +1,123 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* horizontal centering */
+    align-items: center;
+    /* vertical centering */
+
+    font-family: Inter;
+    position: relative;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    background-image: url("about-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.container {
+    display: flex;
+    width: 1040px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 134px;
+}
+
+.about-container {
+    display: flex;
+    width: 1040px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.about-content {
+    display: flex;
+    width: 700px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.developer-heading {
+    align-self: stretch;
+    color: #000;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.developer-info {
+    align-self: stretch;
+    color: #343434;
+    text-align: justify;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.developer-image {
+    display: flex;
+    padding: 78px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.developer-image img {
+    width: 350px;
+    /* height: 376px; */
+
+    border-radius: 20px;
+
+    /* primary-shadow */
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.back-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+
+    bottom: 40px;
+    /* positions it from the bottom */
+    left: 40px;
+    /* keeps it aligned to the left side */
+
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    border-radius: 50%;
+
+    border: #343434 solid 2px;
+}
+
