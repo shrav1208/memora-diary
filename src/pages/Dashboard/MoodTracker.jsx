@@ -8,15 +8,15 @@ import {
     ResponsiveContainer
 } from "recharts";
 import generateMoodData from "./generateMoodData";
-import './MoodTracker.css'
+import styles from './MoodTracker.module.css'
 
 export const MoodTracker = () => {
     const moodData = generateMoodData();
 
     return (
-        <div className="mood-card">
-            <p className="mood-heading">Mood Tracker</p>
-            <div className="chart-wrapper">
+        <div className={styles['mood-card']}>
+            <p className={styles['mood-heading']}>Mood Tracker</p>
+            <div className={styles['chart-wrapper']}>
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
                         data={moodData}

@@ -1,10 +1,10 @@
-import './MonthCard.css'
+import styles from './MonthCard.module.css'
 
 export const MonthCard = ({ month, count }) => {
     return (
-        <div className={count === 0 ? 'month-card' : 'month-card-exist'}>
-            <p className={count === 0 ? 'month-heading' : 'month-heading-exist'}>{month}</p>
-            <p className={count === 0 ? 'count' : 'count-exist'}>{count}</p>
+        <div className={styles[`${count === 0 ? 'month-card' : 'month-card-exist'}`]}>
+            <p className={styles[`${count === 0 ? 'month-heading' : 'month-heading-exist'}`]}>{month}</p>
+            <p className={styles[`${count === 0 ? 'count' : 'count-exist'}`]}>{count}</p>
         </div>
     );
 }

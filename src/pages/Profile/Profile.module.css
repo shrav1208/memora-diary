@@ -1,0 +1,205 @@
+.container {
+    display: flex;
+    width: 1040px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 134px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.back-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+
+    bottom: 40px;
+    /* positions it from the bottom */
+    left: 40px;
+    /* keeps it aligned to the left side */
+
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    border-radius: 50%;
+
+    border: #343434 solid 2px;
+}
+
+.content-container {
+    display: flex;
+    width: 1057px;
+    height: 619px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 92px;
+    flex-shrink: 0;
+}
+
+.profile-heading {
+    align-self: stretch;
+    color: #000;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.info-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 207px;
+    align-self: stretch;
+}
+
+.profile-input-fields {
+    display: flex;
+    width: 333px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19px;
+}
+
+.profile-image-edit {
+    display: flex;
+    width: 275px;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}
+
+.profile-img {
+    width: 275px;
+height: 275px;
+border-radius: 50%;
+/* primary-shadow */
+box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.profile-input-fields p {
+    color: #000;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.vertical-inputs {
+   display: flex;
+width: 333px;
+flex-direction: column;
+align-items: flex-start;
+gap: 19px;
+}
+
+.vertical-inputs p {
+    color: #000;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+.input-vertical {
+    width: 333px;
+height: 36px;
+flex-shrink: 0;
+
+border-radius: 24px;
+border: 1px solid #000;
+background: rgba(249, 253, 255, 0.31);
+box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(75.1500015258789px);
+
+color: #343434;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+
+padding: 0px 15px;
+}
+
+.horizontal-inputs {
+   display: flex;
+width: 333px;
+justify-content: space-between;
+align-items: center;
+}
+
+.input-horizontal {
+    width: 80px;
+height: 36px;
+flex-shrink: 0;
+
+border-radius: 24px;
+border: 1px solid #000;
+background: rgba(249, 253, 255, 0.31);
+box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(75.1500015258789px);
+
+text-align: center;
+
+color: #343434;
+text-align: center;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.horizontal-inputs p {
+    color: #000;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+.input-section {
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 6px;
+}
+
+.input-section-horizontal {
+    display: flex;
+align-items: center;
+gap: 9px;
+}
+
+.inputs {
+    display: flex;
+align-items: flex-start;
+align-content: flex-start;
+gap: 40px 0;
+align-self: stretch;
+flex-wrap: wrap;
+}
+
+.profile-image-edit p {
+    color: #343434;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}

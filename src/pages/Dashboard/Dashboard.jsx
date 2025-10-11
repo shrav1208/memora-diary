@@ -1,14 +1,20 @@
 import { Navbar } from '../../components/Navbar';
-import './Dashboard.css'
+import styles from './Dashboard.module.css'
 import { TodayDate } from './TodayDate';
 import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
 import plusIcon from '../../assets/plus-icon.svg'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 
 export const Dashboard = () => {
+    useEffect(() => {
+        document.body.className = 'dashboard-body';
+        return () => {
+            document.body.className = ''; // cleanup when leaving page
+        };
+    }, []);
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -28,11 +34,11 @@ export const Dashboard = () => {
     return (
         <>
 
-            <div className="dashboard-header">
-                <div className="name-flex">
-                    <div className='left-half'>
-                        <h1 className="name">Shravani's Diary</h1>
-                        <div className='plus-icon' onClick={handleButtonClick}>
+            <div className={styles['dashboard-header']}>
+                <div className={styles['name-flex']}>
+                    <div className={styles['left-half']}>
+                        <h1 className={styles['name']}>Shravani's Diary</h1>
+                        <div className={styles['plus-icon']} onClick={handleButtonClick}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="58"
@@ -103,17 +109,17 @@ export const Dashboard = () => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <img src={plusIcon} className='plus' />
+                            <img src={plusIcon} className={styles['plus']} />
                         </div>
                     </div>
-                    <input className='search-box' placeholder="Search your memories..." />
+                    <input className={styles['search-box']} placeholder="Search your memories..." />
                 </div>
 
-                <div className="features-flex">
+                <div className={styles['features-flex']}>
 
                     <QuoteCard />
 
-                    <div className='right-boxes'>
+                    <div className={styles['right-boxes']}>
                         <TodayDate />
                         <MoodTracker />
                     </div>

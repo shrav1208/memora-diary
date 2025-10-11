@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./FullscreenEditor.css";
+import styles from './FullscreenEditor.module.css';
 import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
@@ -8,6 +8,13 @@ import { Navbar } from "../components/Navbar";
 // minor changes remaining - title input sizing errors during responsiveness
 
 export const FullscreenEditor = () => {
+    useEffect(() => {
+    document.body.className = 'fullscreen-body';
+    return () => {
+      document.body.className = ''; // cleanup when leaving page
+    };
+  }, []);
+
     const [inputTitle, setInputTitle] = useState("");
     const [inputText, setInputText] = useState("");
     //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
@@ -37,23 +44,23 @@ export const FullscreenEditor = () => {
     return (
         <>
             <Navbar />
-            <form className="fullscreen-editor-form">
+            <form className={styles['fullscreen-editor-form']}>
                 {/* Title + Date */}
-                <div className="date-and-expand">
+                <div className={styles['date-and-expand']}>
                     <textarea
                         ref={textareaRef}
-                        className="input-title-fullscreen"
+                        className={styles['input-title-fullscreen']}
                         value={inputTitle}
                         onChange={(e) => setInputTitle(e.target.value)}
                         spellCheck={false}
                         placeholder="Title"
                     />
-                    <div className="display-date">{displayDate}</div>
+                    <div className={styles['display-date']}>{displayDate}</div>
                 </div>
 
                 {/* TinyMCE Editor */}
                 <Editor
-                    className="editor-window"
+                    className={styles['editor-window']}
                     apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
                     value={inputText}
                     onInit={(evt, editor) => (editorRef.current = editor)}
@@ -83,19 +90,19 @@ export const FullscreenEditor = () => {
                 />
 
                 {/* Custom Toolbar */}
-                <div className="custom-toolbar">
+                <div className={styles['custom-toolbar']}>
                     {/* Bold */}
                     <button type="button" onClick={() => runCommand("Bold")}>
-                        <span className="toolbar-icon">B</span>
+                        <span className={styles['toolbar-icon']}>B</span>
                     </button>
 
                     {/* Italic */}
                     <button type="button" onClick={() => runCommand("Italic")}>
-                        <span className="toolbar-icon italic">I</span>
+                        <span className={styles['toolbar-icon italic']}>I</span>
                     </button>
 
                     {/* Tick Button */}
-                    <div className="okay-button">
+                    <div className={styles['okay-button']}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="68"
@@ -148,29 +155,29 @@ export const FullscreenEditor = () => {
                             </defs>
                         </svg>
 
-                        <img src={tickmark} className="small-tick" alt="ok" />
+                        <img src={tickmark} className={styles['small-tick" alt="ok']} />
                     </div>
 
                     {/* Underline */}
                     <button type="button" onClick={() => runCommand("Underline")}>
-                        <span className="toolbar-icon underline">U</span>
+                        <span className={styles['toolbar-icon underline']}>U</span>
                     </button>
 
                     {/* Text Color */}
-                    {/* <div className="color-picker">
+                    {/* <div className={styles['color-picker']}>
                         <button
                             type="button"
-                            className="color-btn"
+                            className={styles['color-btn']}
                             style={{ color: textColor }}
                         >
                             Aa
                         </button>
-                        <div className="color-options">
+                        <div className={styles['color-options']}>
                             {["#343434", "#FF595E", "#FFCA3A", "#8AC926", "#1982C4"].map(
                                 (color) => (
                                     <span
                                         key={color}
-                                        className="color-circle"
+                                        className={styles['color-circle']}
                                         style={{ backgroundColor: color }}
                                         onClick={() => {
                                             setTextColor(color);
@@ -183,21 +190,21 @@ export const FullscreenEditor = () => {
                     </div> */}
 
                     {/* Highlight Color */}
-                    <div className="color-picker">
+                    <div className={styles['color-picker']}>
                         <button
                             type="button"
-                            className="color-btn"
+                            className={styles['color-btn']}
                             style={{
                                 backgroundColor: activeHighlight || "transparent", // show selected highlight color
                             }}
                         >
-                            <span className="highlight-btn">Aa</span>
+                            <span className={styles['highlight-btn']}>Aa</span>
                         </button>
-                        <div className="color-options">
+                        <div className={styles['color-options']}>
                             {["#fbf8cc", "#ffc8dd", "#bde0fe", "#d3fac7"].map((color) => (
                                 <span
                                     key={color}
-                                    className="color-circle"
+                                    className={styles['color-circle']}
                                     style={{ backgroundColor: color }}
                                     onClick={() => {
                                         if (activeHighlight === color) {

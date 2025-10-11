@@ -1,11 +1,18 @@
 import data from '../../diary_entries_2025.json';
 import dayjs from 'dayjs';
-import './Month.css'
+import styles from './Month.module.css'
 import { Navbar } from '../../components/Navbar';
 import { Dashboard } from '../Dashboard/Dashboard';
 import { DayCard } from './DayCard'
+import { useEffect } from 'react';
 
 export const Month = ({ selectedMonth }) => {
+    useEffect(() => {
+        document.body.className = 'month-body';
+        return () => {
+            document.body.className = ''; // cleanup when leaving page
+        };
+    }, []);
 
     // Get number of days in the chosen month (e.g., 28/30/31)
     const daysInMonth = dayjs().month(selectedMonth).daysInMonth();
@@ -36,15 +43,15 @@ export const Month = ({ selectedMonth }) => {
     return (
         <>
             <Navbar />
-            <div className="container">
+            <div className={styles['container']}>
                 <Dashboard />
-                <div className="month-component">
+                <div className={styles['month-component']}>
 
-                    <p className='month'>
-                        <span className='year-month'>2025</span>{dayjs().month(selectedMonth).format(" MMMM")}
+                    <p className={styles['month']}>
+                        <span className={styles['year-month']}>2025</span>{dayjs().month(selectedMonth).format(" MMMM")}
                     </p>
 
-                    <div className='weekdays'>
+                    <div className={styles['weekdays']}>
                         <p>S</p>
                         <p>M</p>
                         <p>T</p>
@@ -54,12 +61,12 @@ export const Month = ({ selectedMonth }) => {
                         <p>S</p>
                     </div>
 
-                    <div className='days-collection'>
+                    <div className={styles['days-collection']}>
                         {allDays.map((day, index) =>
                             day ? (
                                 <DayCard day={day} key={index} count={counts[day - 1]} />
                             ) : (
-                                <div key={index} className="empty-day" /> // blank placeholder
+                                <div key={index} className={styles['empty-day']} /> // blank placeholder
                             )
                         )}
                     </div>

@@ -1,0 +1,104 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* horizontal centering */
+    align-items: center;
+    /* vertical centering */
+    font-family: Inter;
+}
+
+p {
+    margin: 0;
+}
+
+.about-body {
+    position: relative;
+    background-image: url("about-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.fullscreen-body {
+    background-image: url("editor-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+     background-attachment: fixed;
+}
+
+.dashboard-body {
+    background-image: url("dashboard-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.day-body, .month-body, .year-body {
+    background-image: url("dashboard-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.login-body, .signup-body {
+    background-image: url("login-signup-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+    
+}
+
+.profile-body {
+    background-image: url("profile-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}
+
+.landing-body {
+    background-image: url("landing-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+    
+}
+
+.month-body {
+    background-image: url("dashboard-bg.png");
+    background-repeat: no-repeat;
+    /* prevents tiling */
+    background-size: cover;
+    /* makes it fill the screen */
+    background-position: center;
+    /* centers the image */
+
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./PopupInput.css";
+import styles from './PopupInput.module.css';
 import tickmark from '../assets/tickmark.svg'
 import dayjs from "dayjs";
 import expandButton from '../assets/expand.svg'
@@ -20,11 +20,11 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
     if (!isOpen) return null; // hide popup when not open
 
     return (
-        <div className="popup-overlay">
-            <div className="popup-box">
+        <div className={styles['popup-overlay']}>
+            <div className={styles['popup-box']}>
                 <form onSubmit={handleSubmit}>
                     <input
-                        className="input-title"
+                        className={styles['input-title']}
                         type="text"
                         value={inputTitle}
                         onChange={(e) => setInputTitle(e.target.value)}
@@ -33,7 +33,7 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
                     />
 
                     <textarea
-                        className="input-text"
+                        className={styles['input-text']}
                         type="text"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
@@ -41,12 +41,12 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
                         placeholder="What's on your mind..."
                     />
 
-                    <div className="date-and-expand">
-                            <div className="display-date">
+                    <div className={styles['date-and-expand']}>
+                            <div className={styles['display-date']}>
                                 {displayDate}
                             </div>
 
-                            <div className="expand-button">
+                            <div className={styles['expand-button']}>
                                 <img src={expandButton} alt="expand" />
                             </div>
                 </div>
@@ -55,7 +55,7 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
 
             </div>
 
-            <div className='okay-button' onClick={onClose}>
+            <div className={styles['okay-button']} onClick={onClose}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="58"
@@ -126,7 +126,7 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
                         </linearGradient>
                     </defs>
                 </svg>
-                <img src={tickmark} className='tick' />
+                <img src={tickmark} className={styles['tick']} />
             </div>
 
         </div>

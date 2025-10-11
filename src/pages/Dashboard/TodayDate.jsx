@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import './TodayDate.css';
+import styles from './TodayDate.module.css';
 
 export const TodayDate = () => {
 
@@ -8,13 +8,13 @@ export const TodayDate = () => {
     const day = dayjs().format("dddd").toUpperCase();
     
     return (
-        <div className="date-card">
-            <div className="date-box">
-                <p className="today">Today</p>
-                <div className="date-text">
-                    <p className="date-day">{day}</p>
-                    <p className="date-day-month">{dayMonth}</p>
-                    <p className="date-year">{year}</p>
+        <div className={styles['date-card']}>
+            <div className={styles['date-box']}>
+                <p className={styles['today']}>Today</p>
+                <div className={styles['date-text']}>
+                    <p className={styles['date-day']}>{day}</p>
+                    <p className={styles['date-day-month']}>{dayMonth}</p>
+                    <p className={styles['date-year']}>{year}</p>
                 </div>
             </div>
         </div>

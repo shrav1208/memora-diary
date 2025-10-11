@@ -1,31 +1,3 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    /* horizontal centering */
-    align-items: center;
-    /* vertical centering */
-
-    font-family: Inter;
-}
-
-p {
-    margin: 0;
-}
-
-body {
-    background-image: url("dashboard-bg.png");
-    background-repeat: no-repeat;
-    /* prevents tiling */
-    background-size: cover;
-    /* makes it fill the screen */
-    background-position: center;
-    /* centers the image */
-
-}
-
 .container {
     display: flex;
     width: 1040px;
