@@ -5,8 +5,9 @@ import { Navbar } from '../../components/Navbar';
 import { Dashboard } from '../Dashboard/Dashboard';
 import { MonthCard } from '../Year/MonthCard';
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 
-export const Year = () => {
+export const Year = ({ setSelectedMonth, setSelectedDay }) => {
     useEffect(() => {
         document.body.className = 'year-body';
         return () => {
@@ -27,12 +28,16 @@ export const Year = () => {
         counts[monthIndex] += 1;
     });
 
+      const handleMonth = (monthSelected) => {
+            setSelectedMonth(monthSelected);
+    }
+
     return (
         <>
 
             <Navbar />
             <div className={styles['container']}>
-                <Dashboard />
+                <Dashboard setFromLanding={false} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>
                 <div className={styles['year-component']}>
                     <p className={styles['year']}>
                         2025
@@ -40,7 +45,7 @@ export const Year = () => {
 
                     <div className={styles['months-collection']}>
                         {months.map((month, index) => (
-                            <MonthCard month={month} key={index} count={counts[index]} />
+                            <Link to='/month' onClick={() => handleMonth(index)} key={index} ><MonthCard month={month} count={counts[index]} /></Link>
                         ))}
                     </div>
                 </div>

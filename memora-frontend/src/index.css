@@ -8,10 +8,15 @@ body {
     align-items: center;
     /* vertical centering */
     font-family: Inter;
+    background-attachment: fixed;
 }
 
 p {
     margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .about-body {
@@ -37,17 +42,6 @@ p {
      background-attachment: fixed;
 }
 
-.dashboard-body {
-    background-image: url("dashboard-bg.png");
-    background-repeat: no-repeat;
-    /* prevents tiling */
-    background-size: cover;
-    /* makes it fill the screen */
-    background-position: center;
-    /* centers the image */
-
-}
-
 .day-body, .month-body, .year-body {
     background-image: url("dashboard-bg.png");
     background-repeat: no-repeat;
@@ -56,7 +50,7 @@ p {
     /* makes it fill the screen */
     background-position: center;
     /* centers the image */
-
+    background-attachment: fixed;
 }
 
 .login-body, .signup-body {
@@ -92,13 +86,13 @@ p {
     
 }
 
-.month-body {
-    background-image: url("dashboard-bg.png");
-    background-repeat: no-repeat;
-    /* prevents tiling */
-    background-size: cover;
-    /* makes it fill the screen */
-    background-position: center;
-    /* centers the image */
-
+.day-body,
+.month-body,
+.year-body,
+.about-body,
+.profile-body {
+  display: block; /* overrides body's flex centering */
+  justify-content: unset;
+  align-items: unset;
+  padding: 134px 0;
 }

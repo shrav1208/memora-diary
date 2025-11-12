@@ -5,8 +5,10 @@ import { Navbar } from '../../components/Navbar';
 import { Dashboard } from '../Dashboard/Dashboard';
 import { DayCard } from './DayCard'
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 
-export const Month = ({ selectedMonth }) => {
+export const Month = ({ selectedMonth, setSelectedDay }) => {
+    console.log(selectedMonth);
     useEffect(() => {
         document.body.className = 'month-body';
         return () => {
@@ -40,6 +42,10 @@ export const Month = ({ selectedMonth }) => {
         }
     });
 
+    const handleDay = (day) => {
+        setSelectedDay(day);
+    }
+
     return (
         <>
             <Navbar />
@@ -64,7 +70,7 @@ export const Month = ({ selectedMonth }) => {
                     <div className={styles['days-collection']}>
                         {allDays.map((day, index) =>
                             day ? (
-                                <DayCard day={day} key={index} count={counts[day - 1]} />
+                                <Link to='/day' onClick={() => handleDay(day)} key={index} ><DayCard day={day} count={counts[day - 1]} /></Link>
                             ) : (
                                 <div key={index} className={styles['empty-day']} /> // blank placeholder
                             )

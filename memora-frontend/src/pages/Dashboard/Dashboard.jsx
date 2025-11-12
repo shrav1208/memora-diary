@@ -4,11 +4,12 @@ import { TodayDate } from './TodayDate';
 import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
 import plusIcon from '../../assets/plus-icon.svg'
+import dayjs from 'dayjs';
 
 import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 
-export const Dashboard = () => {
+export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFromLanding }) => {
     useEffect(() => {
         document.body.className = 'dashboard-body';
         return () => {
@@ -18,8 +19,17 @@ export const Dashboard = () => {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+     useEffect(() => {
+        if (fromLanding) {
+            setIsPopupOpen(true);
+            setFromLanding(false);
+        }
+    }, [fromLanding, setFromLanding]);
+
     const handleButtonClick = () => {
         setIsPopupOpen(true); // open popup on button click
+         setSelectedDay(dayjs().date());
+        setSelectedMonth(dayjs().month());
     };
 
     const handleClose = () => {

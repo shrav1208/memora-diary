@@ -1,8 +1,10 @@
 import styles from './Landing.module.css'
 import { Navbar } from '../../components/Navbar';
 import { useEffect } from 'react';
+import { Link } from 'react-router';
+import dayjs from 'dayjs';
 
-export const Landing = () => {
+export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
     useEffect(() => {
         document.body.className = 'landing-body';
         return () => {
@@ -10,15 +12,26 @@ export const Landing = () => {
         };
     }, []);
 
+    const handleClickEvent = () => {
+        setFromLanding(true);
+        setSelectedMonth(dayjs().month());
+        setSelectedDay(dayjs().date());
+    }
+
     return (
         <>
             <Navbar />
             <div className={styles['container']}>
 
-                <button className={styles['big-inviting-button']}>
-                    <p className={styles['inner-text']}>What's on your <span className={styles['mind']}>mind</span> today?</p>
-                    <p className={styles['inner-subtitle']}>Tap to start typing...</p>
+                <Link to='/day'>
+                <button 
+                    className={styles['big-inviting-button']}
+                    onClick={handleClickEvent}
+                >
+                    <span className={styles['inner-text']}>What's on your <span className={styles['mind']}>mind</span> today?</span>
+                    <span className={styles['inner-subtitle']}>Tap to start typing...</span>
                 </button>
+                </Link>
                 <div className={styles['or-divider']}>
                     <div className={styles['line']}></div>
                     <p className={styles['or-text']}>or</p>
