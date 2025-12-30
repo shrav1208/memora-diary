@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from './PopupInput.module.css';
 import tickmark from '../assets/tickmark.svg'
 import dayjs from "dayjs";
-import expandButton from '../assets/expand.svg'
+import expandButton from '../assets/expand.svg';
+import { Link } from 'react-router';
 
 export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
     const [inputTitle, setInputTitle] = useState("");
@@ -47,7 +48,7 @@ export const PopupInput = ({ isOpen, onClose, onSubmit }) => {
                             </div>
 
                             <div className={styles['expand-button']}>
-                                <img src={expandButton} alt="expand" />
+                                <Link to="/fullscreen-editor"><img src={expandButton} alt="expand" /></Link>
                             </div>
                 </div>
 
