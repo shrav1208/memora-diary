@@ -1,14 +1,61 @@
 import { useEffect } from 'react';
 import styles from './Login.module.css';
-import { Link } from 'react-router';
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const Login = () => {
-      useEffect(() => {
-    document.body.className = 'login-body';
-    return () => {
-      document.body.className = ''; // cleanup when leaving page
-    };
-  }, []);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.className = 'login-body';
+        return () => {
+            document.body.className = ''; // cleanup when leaving page
+        };
+    }, []); 
+
+    const [usernameInput, setUsernameInput] = useState('');
+    const [passwordInput, setPasswordInput] = useState('');
+
+    function saveUsernameInput(event){
+        setUsernameInput(event.target.value);
+    }
+
+    function savePasswordInput(event){
+        setPasswordInput(event.target.value);
+    }
+
+    async function sendCredentials(event){
+
+        event.preventDefault();
+
+        // if(usernameInput === '' || passwordInput === '') return
+        
+        // alert(`username: ${usernameInput} password: ${passwordInput}`)
+
+        try{
+            const res = await axios.post('/api/login', {
+                username: usernameInput,
+                password: passwordInput,
+            });
+            console.log(res.data)
+            if(res.data.success){
+                setUsernameInput('')
+                setPasswordInput('')
+                navigate("/landing", {replace: true});
+            }
+        }catch(err){
+            if(err.response){
+                alert(err.response.data.message)
+            }
+            else{
+                console.log(err)
+            alert("Server error");
+            }
+        }        
+    }
+
     return (
         <>
             <div className={styles['container']}>
@@ -21,17 +68,38 @@ export const Login = () => {
                     <p className={styles['subtitle']}>a diary that listens</p>
                 </div>
 
-                <div className={styles['input-fields']}>
-                    <input type="text" className={styles['input']} placeholder='Enter username' />
-                    <input type="text" className={styles['input']} placeholder='Enter password' />
+                <form className={styles['input-fields']} onSubmit={sendCredentials}>
+
+                    <input 
+                        type="text" 
+                        className={styles['input']} 
+                        placeholder='Enter username' 
+                        onChange={saveUsernameInput}
+                        value={usernameInput}
+                    />
+
+                    <input 
+                        type="password" 
+                        className={styles['input']} 
+                        placeholder='Enter password' 
+                        onChange={savePasswordInput}
+                        value={passwordInput}
+                    />
+
                     <label className={styles['remember-checkbox']}>
                         <input id={styles['remember-check']} type="checkbox" />
                         <span className={styles['checkmark']}></span>
                         Remember me
                     </label>
-                    <button className={styles['login-button']}>Login</button>
+
+                    <button 
+                        type = "submit"
+                        className={styles['login-button']}
+                    >Login</button>
+
                     <p className={styles['link-to-signup-p']}>Click here to <Link to='/signup'>Sign up</Link></p>
-                </div>
+
+                </form>
             </div>
         </>
     )

@@ -37,9 +37,11 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
                     <p className={styles['or-text']}>or</p>
                     <div className={styles['line']}></div>
                 </div>
+                <Link to = '/year'>
                 <button className={styles['go-to-dashboard']}>
                     Go to my Dashboard
                 </button>
+                </Link>
             </div>
         </>
     );
