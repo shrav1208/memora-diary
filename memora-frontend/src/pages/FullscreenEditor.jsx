@@ -4,16 +4,17 @@ import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
+import { Link } from "react-router";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
 export const FullscreenEditor = () => {
     useEffect(() => {
-    document.body.className = 'fullscreen-body';
-    return () => {
-      document.body.className = ''; // cleanup when leaving page
-    };
-  }, []);
+        document.body.className = 'fullscreen-body';
+        return () => {
+            document.body.className = ''; // cleanup when leaving page
+        };
+    }, []);
 
     const [inputTitle, setInputTitle] = useState("");
     const [inputText, setInputText] = useState("");
@@ -74,18 +75,18 @@ export const FullscreenEditor = () => {
                         placeholder: "Pour your heart out here...",
                         plugins: "lists link code",
                         content_style: `
-              body {
-                font-family: 'Inter', sans-serif;
-                text-align: justify;
-                font-size: 24px;
-                font-style: normal;
-                font-weight: 300;
-                line-height: normal;
-                outline: none !important;
-                border: none !important;
-                box-shadow: none !important;
-              }
-            `,
+                                        body {
+                                            font-family: 'Inter', sans-serif;
+                                            text-align: justify;
+                                            font-size: 24px;
+                                            font-style: normal;
+                                            font-weight: 300;
+                                            line-height: normal;
+                                            outline: none !important;
+                                            border: none !important;
+                                            box-shadow: none !important;
+                                        }
+                                        `,
                     }}
                 />
 
@@ -102,6 +103,7 @@ export const FullscreenEditor = () => {
                     </button>
 
                     {/* Tick Button */}
+                    <Link to="/day">
                     <div className={styles['okay-button']}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -155,8 +157,9 @@ export const FullscreenEditor = () => {
                             </defs>
                         </svg>
 
-                        <img src={tickmark} className={styles['small-tick" alt="ok']} />
+                        <img src={tickmark} className={styles['small-tick']} alt="ok" />
                     </div>
+                    </Link>
 
                     {/* Underline */}
                     <button type="button" onClick={() => runCommand("Underline")}>
