@@ -16,7 +16,7 @@ mongoose.connect(mongoURL)
 .then(()=>console.log("MongoDB connected succeessfully"))
 .catch((err=>console.log("MongoDB connection error ", err)))
 
-app.use('/api', loginRoutes)
+app.use('/api/login', loginRoutes)
 
 app.get('/api/test', (req, res)=>{
     res.send('success')
