@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Signup.module.css';
 import { Link } from 'react-router';
 
@@ -9,6 +9,12 @@ export const Signup = () => {
             document.body.className = ''; // cleanup when leaving page
         };
     }, []);
+
+    const [placeHolder, setPlaceHolder] = useState('');
+
+    const placeholderFunction = () => {
+
+    };
 
     return (
         <>
@@ -21,18 +27,55 @@ export const Signup = () => {
 
                     <p className={styles['subtitle']}>a diary that listens</p>
                 </div>
-                <div className={styles['input-fields']}>
-                    <input type="text" className={styles['input']} placeholder='Enter username' />
-                    <input type="text" className={styles['input']} placeholder='Enter password' />
-                    <input type="text" className={styles['input']} placeholder='Confirm password' />
-                    <label className={styles['remember-checkbox']}>
-                        <input id={styles['remember-check']} type="checkbox" />
-                        <span className={styles['checkmark']}></span>
-                        Remember me
-                    </label>
-                    <Link to='/landing'><button className={styles['login-button']}>Sign up</button></Link>
-                    <p className={styles['link-to-signup-p']}>Click here to <Link to='/login'>Login</Link></p>
-                </div>
+
+                <form className={styles['input-fields']} onSubmit={placeholderFunction}>
+                
+                                    <input 
+                                        type="text" 
+                                        className={styles['input']} 
+                                        placeholder='Enter username' 
+                                        onChange={placeholderFunction}
+                                        value={placeHolder}
+                                    />
+
+                                    <input 
+                                        type="text" 
+                                        className={styles['input']} 
+                                        placeholder='Enter first name' 
+                                        onChange={placeholderFunction}
+                                        value={placeHolder}
+                                    />
+                
+                                    <input 
+                                        type="password" 
+                                        className={styles['input']} 
+                                        placeholder='Enter password' 
+                                        onChange={placeholderFunction}
+                                        value={placeHolder}
+                                    />
+
+                                    <input 
+                                        type="password" 
+                                        className={styles['input']} 
+                                        placeholder='Confirm password' 
+                                        onChange={placeholderFunction}
+                                        value={placeHolder}
+                                    />
+                
+                                    <label className={styles['remember-checkbox']}>
+                                        <input id={styles['remember-check']} type="checkbox" />
+                                        <span className={styles['checkmark']}></span>
+                                        Remember me
+                                    </label>
+                
+                                    <button 
+                                        type = "submit"
+                                        className={styles['login-button']}
+                                    >Sign up</button>
+                
+                                    <p className={styles['link-to-signup-p']}>Click here to <Link to='/login'>Login</Link></p>
+                
+                                </form>
             </div>
         </>
     )
