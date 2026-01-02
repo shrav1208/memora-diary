@@ -200,3 +200,14 @@
     font-weight: 200;
     line-height: normal;
 }
+
+.error-text {
+    color: #fd2020;
+    font-size: 0.85rem;
+    /* margin-top: 6px; */
+}
+
+.login-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
