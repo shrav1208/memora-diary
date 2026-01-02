@@ -120,7 +120,7 @@ export const Signup = () => {
                         value={nameInput}
                     />
 
-                    <div className='password-input'> 
+                    <div className={styles['password-input']}> 
                         <input
                             type={showPassword ? "text" : "password"}
                             className={styles['input']}
@@ -139,7 +139,7 @@ export const Signup = () => {
                         </button>
                     </div>
 
-                    <div className='password-input'>
+                    <div className={styles['password-input']}>
 
                         <input
                             type={showConfirm ? "text" : "password"}

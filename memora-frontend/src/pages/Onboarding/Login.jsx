@@ -4,6 +4,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
+import show from "../../assets/show.png";
+import hide from "../../assets/hide.png";
+
 export const Login = () => {
 
     const navigate = useNavigate();
@@ -13,47 +16,49 @@ export const Login = () => {
         return () => {
             document.body.className = ''; // cleanup when leaving page
         };
-    }, []); 
+    }, []);
 
     const [usernameInput, setUsernameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
-    function saveUsernameInput(event){
+    const [showPassword, setShowPassword] = useState(false);
+
+    function saveUsernameInput(event) {
         setUsernameInput(event.target.value);
     }
 
-    function savePasswordInput(event){
+    function savePasswordInput(event) {
         setPasswordInput(event.target.value);
     }
 
-    async function sendCredentials(event){
+    async function sendCredentials(event) {
 
         event.preventDefault();
 
         // if(usernameInput === '' || passwordInput === '') return
-        
+
         // alert(`username: ${usernameInput} password: ${passwordInput}`)
 
-        try{
+        try {
             const res = await axios.post('/api/login', {
                 username: usernameInput,
                 password: passwordInput,
             });
             console.log(res.data)
-            if(res.data.success){
+            if (res.data.success) {
                 setUsernameInput('')
                 setPasswordInput('')
-                navigate("/landing", {replace: true});
+                navigate("/landing", { replace: true });
             }
-        }catch(err){
-            if(err.response){
+        } catch (err) {
+            if (err.response) {
                 alert(err.response.data.message)
             }
-            else{
+            else {
                 console.log(err)
-            alert("Server error");
+                alert("Server error");
             }
-        }        
+        }
     }
 
     return (
@@ -70,21 +75,31 @@ export const Login = () => {
 
                 <form className={styles['input-fields']} onSubmit={sendCredentials}>
 
-                    <input 
-                        type="text" 
-                        className={styles['input']} 
-                        placeholder='Enter username' 
+                    <input
+                        type="text"
+                        className={styles['input']}
+                        placeholder='Enter username'
                         onChange={saveUsernameInput}
                         value={usernameInput}
                     />
 
-                    <input 
-                        type="password" 
-                        className={styles['input']} 
-                        placeholder='Enter password' 
-                        onChange={savePasswordInput}
-                        value={passwordInput}
-                    />
+                    <div className={styles['password-input']}>
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className={styles['input']}
+                            placeholder='Enter password'
+                            onChange={savePasswordInput}
+                            value={passwordInput}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className={styles['show-hide']}
+
+                        >
+                            {showPassword ? <img src={hide} className={styles['show-hide-icons']} /> : <img src={show} className={styles['show-hide-icons']} />}
+                        </button>
+                    </div>
 
                     <label className={styles['remember-checkbox']}>
                         <input id={styles['remember-check']} type="checkbox" />
@@ -92,8 +107,8 @@ export const Login = () => {
                         Remember me
                     </label>
 
-                    <button 
-                        type = "submit"
+                    <button
+                        type="submit"
                         className={styles['login-button']}
                     >Login</button>
 
