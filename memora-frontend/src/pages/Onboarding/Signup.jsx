@@ -3,6 +3,9 @@ import styles from './Signup.module.css';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
 
+import show from "../../assets/show.png";
+import hide from "../../assets/hide.png";
+
 export const Signup = () => {
     const navigate = useNavigate();
 
@@ -21,6 +24,9 @@ export const Signup = () => {
 
     // validation state
     const [passwordError, setPasswordError] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     // confirm password validation
     useEffect(() => {
@@ -114,21 +120,43 @@ export const Signup = () => {
                         value={nameInput}
                     />
 
-                    <input
-                        type="password"
-                        className={styles['input']}
-                        placeholder='Enter password'
-                        onChange={savePasswordInput}
-                        value={createPasswordInput}
-                    />
+                    <div className='password-input'> 
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className={styles['input']}
+                            placeholder='Enter password'
+                            onChange={savePasswordInput}
+                            value={createPasswordInput}
+                        />
 
-                    <input
-                        type="password"
-                        className={styles['input']}
-                        placeholder='Confirm password'
-                        onChange={savePassConfirmInput}
-                        value={confirmPasswordInput}
-                    />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className={styles['show-hide']}
+                            
+                        >
+                            {showPassword ? <img src={hide} className={styles['show-hide-icons']} /> : <img src={show} className={styles['show-hide-icons']} />}
+                        </button>
+                    </div>
+
+                    <div className='password-input'>
+
+                        <input
+                            type={showConfirm ? "text" : "password"}
+                            className={styles['input']}
+                            placeholder='Confirm password'
+                            onChange={savePassConfirmInput}
+                            value={confirmPasswordInput}
+                        />
+
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirm(!showConfirm)}
+                            className={styles['show-hide']}
+                        >
+                            {showConfirm ? <img src={hide} className={styles['show-hide-icons']} /> : <img src={show} className={styles['show-hide-icons']} />}
+                        </button>
+                    </div>
 
                     {passwordError && (
                         <p className={styles['error-text']}>{passwordError}</p>
@@ -144,12 +172,14 @@ export const Signup = () => {
                         type="submit"
                         className={styles['login-button']}
                         disabled={
-                        !newUsernameInput ||
-                        !createPasswordInput ||
-                        !confirmPasswordInput ||
-                        passwordError
+                            !newUsernameInput ||
+                            !createPasswordInput ||
+                            !confirmPasswordInput ||
+                            passwordError
                         }
-                    >Sign up</button> 
+                    >Sign up
+
+                    </button>
                     {/* disables button if username or password is missing, OR password mismatch occurs */}
 
                     <p className={styles['link-to-signup-p']}>Click here to <Link to='/login'>Login</Link></p>

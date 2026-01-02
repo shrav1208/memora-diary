@@ -208,6 +208,20 @@
 }
 
 .login-button:disabled {
-    opacity: 0.3;
     cursor: not-allowed;
+}
+
+.password-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.show-hide {
+    border: none;
+    background: transparent;
+}
+
+.show-hide-icons {
+    height: 30px;
+    width: 30px;
 }
