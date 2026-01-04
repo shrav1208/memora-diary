@@ -3,6 +3,7 @@ import { Navbar } from '../../components/Navbar';
 import { useEffect } from 'react';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
+import { LogoutButton } from '../../components/LogoutButton';
 
 export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
     useEffect(() => {
@@ -16,6 +17,10 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
         setFromLanding(true);
         setSelectedMonth(dayjs().month());
         setSelectedDay(dayjs().date());
+    }
+
+    const handleLogout = () => {
+        // logout functionality here
     }
 
     return (
@@ -42,6 +47,8 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
                     Go to my Dashboard
                 </button>
                 </Link>
+
+                <LogoutButton onClick={handleLogout}/>
             </div>
         </>
     );
