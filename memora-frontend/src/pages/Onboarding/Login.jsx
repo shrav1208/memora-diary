@@ -43,7 +43,8 @@ export const Login = () => {
             const res = await axios.post('/api/login', {
                 username: usernameInput,
                 password: passwordInput,
-            });
+            }, { withCredentials: true }
+            );
             console.log(res.data)
             if (res.data.success) {
                 setUsernameInput('')

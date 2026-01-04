@@ -42,6 +42,8 @@ router.post('/', loginLimiter, async(req, res)=>{
             });
         }
         
+        req.session.userID = user._id;
+
         return res.status(200).json({ 
         success: true, 
         message: 'Successfully logged in' 

@@ -11,7 +11,7 @@ import signupRoutes from './Routes/Signup.routes.js';
 import sessionConfig from './Config/Session.js';
 
 const app = express();
-const port = process.env.PORT;
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,9 +21,7 @@ app.use(sessionConfig);
 app.use('/api/login', loginRoutes);
 app.use('/api/signup', signupRoutes);
 
-const mongoURL = process.env.MONGO_URL;
-
-mongoose.connect(mongoURL)
+mongoose.connect("mongodb://127.0.0.1:27017/test")
 .then(()=>console.log("MongoDB connected succeessfully"))
 .catch((err=>console.log("MongoDB connection error ", err)));
 
