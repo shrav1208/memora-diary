@@ -3,13 +3,14 @@ import styles from './Login.module.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
+import { useAuth } from '../../context/AuthContext';
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const { setUser } = useAuth();
 
     useEffect(() => {
         document.body.className = 'login-body';
@@ -43,11 +44,15 @@ export const Login = () => {
             const res = await axios.post('/api/login', {
                 username: usernameInput,
                 password: passwordInput,
-            });
-            console.log(res.data)
+            }, { withCredentials: true }
+            );
+            // console.log(res.data)
             if (res.data.success) {
                 setUsernameInput('')
                 setPasswordInput('')
+                
+                const meRes = await axios.get("/api/auth/me");
+                setUser(meRes.data.user);
                 navigate("/landing", { replace: true });
             }
         } catch (err) {

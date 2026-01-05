@@ -15,6 +15,13 @@ const fakeHash = "$2b$10$TOuIZcBAgJzMFJy6R/zN2.g7e8gKSpDhX335Q5M39ortaP5sQFNSC"
 
 router.post('/', loginLimiter, async(req, res)=>{
     try{
+        
+        if (req.session.userID) {
+            return res.status(400).json({
+                message: "Already logged in"
+            });
+        }
+
         // console.log(req.body)
         const {username, password} = req.body;
 
@@ -42,6 +49,8 @@ router.post('/', loginLimiter, async(req, res)=>{
             });
         }
         
+        req.session.userID = user._id;
+
         return res.status(200).json({ 
         success: true, 
         message: 'Successfully logged in' 

@@ -55,6 +55,8 @@ router.post("/", async(req, res)=>{
         });
         await user.save();
 
+        req.session.userID = user._id;
+
         return res.status(201).json({
             success: true,
             message: "User created successfully",
