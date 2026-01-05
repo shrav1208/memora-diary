@@ -5,11 +5,13 @@ import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
 import plusIcon from '../../assets/plus-icon.svg'
 import dayjs from 'dayjs';
-
+import axios from 'axios';
 import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
+import { Link } from 'react-router-dom';
 
 export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFromLanding }) => {
+
     useEffect(() => {
         document.body.className = 'dashboard-body';
         return () => {
@@ -18,8 +20,22 @@ export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFr
     }, []);
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [name, setName] = useState('');
 
-     useEffect(() => {
+    useEffect(()=>{
+        (async()=>{
+            try{
+                const res = await axios.get('/api/dashboard', { withCredentials: true });
+                // console.log(res.data);
+                setName(res.data.user.name);
+            }catch(err){
+                console.error(err.message);
+            }
+            
+        })();
+    }, [])
+
+    useEffect(() => {
         if (fromLanding) {
             setIsPopupOpen(true);
             setFromLanding(false);
@@ -28,7 +44,7 @@ export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFr
 
     const handleButtonClick = () => {
         setIsPopupOpen(true); // open popup on button click
-         setSelectedDay(dayjs().date());
+        setSelectedDay(dayjs().date());
         setSelectedMonth(dayjs().month());
     };
 
@@ -47,7 +63,7 @@ export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFr
             <div className={styles['dashboard-header']}>
                 <div className={styles['name-flex']}>
                     <div className={styles['left-half']}>
-                        <h1 className={styles['name']}>Shravani's Diary</h1>
+                        <h1 className={styles['name']}>{name}'s diary</h1>
                         <div className={styles['plus-icon']} onClick={handleButtonClick}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

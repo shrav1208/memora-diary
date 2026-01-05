@@ -4,8 +4,13 @@ import { useEffect } from 'react';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
 import { LogoutButton } from '../../components/LogoutButton';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.body.className = 'landing-body';
         return () => {
@@ -19,9 +24,16 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
         setSelectedDay(dayjs().date());
     }
 
-    const handleLogout = () => {
-        // logout functionality here
-    }
+    const handleLogout = async () => {
+        try {
+            await axios.post('/api/logout', {}, { withCredentials: true });
+        }catch (err) {
+            console.error("Logout failed:", err);
+        } finally {
+            navigate('/login', { replace: true });
+        }
+    };
+
 
     return (
         <>

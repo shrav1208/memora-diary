@@ -13,7 +13,7 @@ export default session({
     saveUninitialized: false, //create sessions for anonymous users who are not logged in (false)
 
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
+        mongoUrl: "mongodb://127.0.0.1:27017/test",
         collectionName: "sessions",
         ttl: 60*60*24, //seconds (1 day expiry)
     }),
