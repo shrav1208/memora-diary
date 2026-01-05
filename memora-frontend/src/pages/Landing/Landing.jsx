@@ -6,10 +6,12 @@ import dayjs from 'dayjs';
 import { LogoutButton } from '../../components/LogoutButton';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
 
     const navigate = useNavigate();
+    const { setUser } = useAuth();
 
     useEffect(() => {
         document.body.className = 'landing-body';
@@ -27,10 +29,10 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
     const handleLogout = async () => {
         try {
             await axios.post('/api/logout', {}, { withCredentials: true });
+            setUser(null);
+            navigate('/login', { replace: true });
         }catch (err) {
             console.error("Logout failed:", err);
-        } finally {
-            navigate('/login', { replace: true });
         }
     };
 

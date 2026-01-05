@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { About } from './pages/About/About';
 import { Profile } from './pages/Profile/Profile';
 import dayjs from 'dayjs';
+import ProtectedRoute from './routes/ProtectedRoute';
+import PublicRoute from './routes/PublicRoute';
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
@@ -25,17 +27,63 @@ function App() {
   return (
     <>
     {/* <Day selectedDay={selectedDate}/> */}
-     <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/landing' element={<Landing setFromLanding={setFromLanding} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay} />} />
-        <Route path='/fullscreen-editor' element={<FullscreenEditor />} />
-        <Route path='/year' element={<Year setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>} />
-        <Route path='/month' element={<Month selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>} />
-        <Route path='/day' element={<Day selectedMonth={selectedMonth} selectedDay={selectedDay} fromLanding={fromLanding} setFromLanding={setFromLanding} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>} />
-        <Route path='/about' element={<About />} />
-        <Route path='/profile' element={<Profile />} />
+    <Routes>
+        <Route path='/' element={
+          <PublicRoute> 
+            <Login /> 
+          </PublicRoute>}
+        />
+
+        <Route path='/login' element={
+          <PublicRoute> 
+            <Login /> 
+          </PublicRoute>}
+        />
+
+        <Route path='/signup' element={
+          <PublicRoute> 
+            <Signup /> 
+          </PublicRoute>} 
+        />
+
+        <Route path='/landing' element={
+          <ProtectedRoute>
+            <Landing setFromLanding={setFromLanding} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay} />
+          </ProtectedRoute>} 
+        />
+
+        <Route path='/fullscreen-editor' element={
+          <ProtectedRoute>
+            <FullscreenEditor />
+          </ProtectedRoute>} 
+        />
+
+        <Route path='/year' element={
+          <ProtectedRoute>
+            <Year setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>
+          </ProtectedRoute>} 
+        />
+        
+        <Route path='/month' element={
+          <ProtectedRoute> 
+            <Month selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>
+          </ProtectedRoute>}
+        />
+
+        <Route path='/day' element={
+          <ProtectedRoute> 
+            <Day selectedMonth={selectedMonth} selectedDay={selectedDay} fromLanding={fromLanding} setFromLanding={setFromLanding} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay}/>
+          </ProtectedRoute>}
+        />
+
+        <Route path='/about' element={<About />}/>
+
+        <Route path='/profile' element={
+          <ProtectedRoute> 
+            <Profile /> 
+          </ProtectedRoute>}
+        />
+
       </Routes>
     </>
   )

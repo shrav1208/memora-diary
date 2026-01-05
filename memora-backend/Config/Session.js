@@ -7,7 +7,7 @@ import MongoStore from 'connect-mongo';
 export default session({
     name: "mem-session-id", //cookie name
 
-    secret: process.env.SESSION_SECRET, //signing key
+    secret: "VA8u84c9DFrumqSSBD8urB8FuuGm8rM84FyqFMBtc9mMBx4A", //signing key
 
     resave: false, //re save session on every request (false)
     saveUninitialized: false, //create sessions for anonymous users who are not logged in (false)

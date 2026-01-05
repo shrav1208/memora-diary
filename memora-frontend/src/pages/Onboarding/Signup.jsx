@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import styles from './Signup.module.css';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
-
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
+import { useAuth } from '../../context/AuthContext';
+
 
 export const Signup = () => {
+
     const navigate = useNavigate();
+    const { setUser } = useAuth();
 
     useEffect(() => {
         document.body.className = 'signup-body';
@@ -77,6 +80,9 @@ export const Signup = () => {
                 setNameInput('');
                 setCreatePasswordInput('');
                 setConfirmPasswordInput('');
+                
+                const meRes = await axios.get("/api/auth/me");
+                setUser(meRes.data.user);
                 navigate("/landing", { replace: true });
             }
         } catch (err) {
