@@ -1,11 +1,8 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 
 export default session({
-    name: "mem-session-id", //cookie name
+    name: "memora-session-id", //cookie name
 
     secret: "VA8u84c9DFrumqSSBD8urB8FuuGm8rM84FyqFMBtc9mMBx4A", //signing key
 
