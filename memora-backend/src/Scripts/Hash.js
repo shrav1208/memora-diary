@@ -1,3 +1,5 @@
+//Script to hash un-hashed passwords in db
+
 import bcrypt from "bcrypt"
 import User from "../Models/User.js"
 import mongoose from "mongoose";

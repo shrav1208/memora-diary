@@ -1,19 +1,9 @@
-import express from 'express';
 import User from '../Models/User.js';
 import bcrypt from "bcrypt";
-import rateLimit from "express-rate-limit";
-
-const router = express.Router();
-
-const loginLimiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    max: 100, // limit each IP to 100 requests
-    message: "Too many login attempts, please try again later"
-});
 
 const fakeHash = "$2b$10$TOuIZcBAgJzMFJy6R/zN2.g7e8gKSpDhX335Q5M39ortaP5sQFNSC"
 
-router.post('/', loginLimiter, async(req, res)=>{
+export const login = async(req, res)=>{
     try{
         
         if (req.session.userID) {
@@ -64,6 +54,4 @@ router.post('/', loginLimiter, async(req, res)=>{
         });
     }
     
-});
-
-export default router;
+};

@@ -1,10 +1,7 @@
-import express from 'express';
 import User from '../Models/User.js';
 import bcrypt from 'bcrypt';
 
-const router = express.Router();
-
-router.post("/", async(req, res)=>{
+export const signup = async(req, res)=>{
     try{
         const {username, password, name} = req.body;
 
@@ -12,14 +9,14 @@ router.post("/", async(req, res)=>{
             return res.status(400).json({
                 success: false,
                 message: "Please enter all Fields!"
-            })
+            });
         }
 
         if(password.trim().length < 6){
             return res.status(400).json({
                 success: false,
                 message: "Password must be at least 6 characters!"
-            })
+            });
         }
 
         const normalizedUsername = username.trim().toLowerCase();
@@ -67,9 +64,7 @@ router.post("/", async(req, res)=>{
         console.error("Signup error:", err);
         return res.status(500).json({
             success: false,
-            message: "Server error" + err.message,
+            message: "Server error",
         });
     }
-})
-
-export default router;
+};
