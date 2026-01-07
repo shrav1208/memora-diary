@@ -17,7 +17,7 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
     useEffect(()=>{
         (async()=>{
             try{
-                const res = await axios.get('/api/dashboard', { withCredentials: true });
+                const res = await axios.get('/api/read/user', { withCredentials: true });
                 // console.log(res.data);
                 setName(res.data.user.name);
             }catch(err){
