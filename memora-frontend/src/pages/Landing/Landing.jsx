@@ -42,7 +42,7 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
             <Navbar />
             <div className={styles['container']}>
 
-                <Link to='/day'>
+                <Link to='/dashboard/day'>
                 <button 
                     className={styles['big-inviting-button']}
                     onClick={handleClickEvent}
@@ -56,7 +56,7 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
                     <p className={styles['or-text']}>or</p>
                     <div className={styles['line']}></div>
                 </div>
-                <Link to = '/year'>
+                <Link to = '/dashboard/year'>
                 <button className={styles['go-to-dashboard']}>
                     Go to my Dashboard
                 </button>

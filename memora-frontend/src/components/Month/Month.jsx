@@ -1,20 +1,11 @@
 import data from '../../diary_entries_2025.json';
 import dayjs from 'dayjs';
 import styles from './Month.module.css'
-import { Navbar } from '../../components/Navbar';
-import { Dashboard } from '../Dashboard/Dashboard';
 import { DayCard } from './DayCard'
-import { useEffect } from 'react';
 import { Link } from 'react-router';
 
 export const Month = ({ selectedMonth, setSelectedDay }) => {
     console.log(selectedMonth);
-    useEffect(() => {
-        document.body.className = 'month-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
 
     // Get number of days in the chosen month (e.g., 28/30/31)
     const daysInMonth = dayjs().month(selectedMonth).daysInMonth();
@@ -48,9 +39,7 @@ export const Month = ({ selectedMonth, setSelectedDay }) => {
 
     return (
         <>
-            <Navbar />
-            <div className={styles['container']}>
-                <Dashboard />
+            {/* <div className={styles['container']}> */}
                 <div className={styles['month-component']}>
 
                     <p className={styles['month']}>
@@ -70,14 +59,14 @@ export const Month = ({ selectedMonth, setSelectedDay }) => {
                     <div className={styles['days-collection']}>
                         {allDays.map((day, index) =>
                             day ? (
-                                <Link to='/day' onClick={() => handleDay(day)} key={index} ><DayCard day={day} count={counts[day - 1]} /></Link>
+                                <Link to="/dashboard/day" onClick={() => handleDay(day)} key={index} ><DayCard day={day} count={counts[day - 1]} /></Link>
                             ) : (
                                 <div key={index} className={styles['empty-day']} /> // blank placeholder
                             )
                         )}
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     );
 };
