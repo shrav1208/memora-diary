@@ -5,7 +5,11 @@ import loginRoutes from './Routes/Login.routes.js';
 import signupRoutes from './Routes/Signup.routes.js';
 import logoutRoutes from './Routes/Logout.routes.js';
 import authRoutes from './Routes/Auth.routes.js';
-import dashboardRoutes from './Routes/Dashboard.routes.js';
+import createRoutes from './Routes/Create.routes.js';
+import readUserRoutes from './Routes/ReadUser.routes.js';
+import readPostRoutes from './Routes/ReadPosts.routes.js';
+import updatePostRoutes from './Routes/UpdatePost.routes.js';
+import deletePostRoutes from './Routes/DeletePost.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -33,7 +37,11 @@ app.use('/api/auth', authRoutes);
 
 //CRUD
 
-app.use('/api/dashboard', requireAuth, dashboardRoutes);
+app.use('/api/create', requireAuth, createRoutes);
+app.use('/api/read/user', requireAuth, readUserRoutes);
+app.use('/api/read/post', requireAuth, readPostRoutes);
+app.use('/api/update/post', requireAuth, updatePostRoutes);
+app.use('/api/delete/post', requireAuth, deletePostRoutes);
 
 //Test
 
