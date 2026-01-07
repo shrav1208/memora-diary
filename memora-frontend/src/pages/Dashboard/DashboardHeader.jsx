@@ -1,5 +1,4 @@
-import { Navbar } from '../../components/Navbar';
-import styles from './Dashboard.module.css'
+import styles from './DashboardHeader.module.css'
 import { TodayDate } from './TodayDate';
 import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
@@ -10,14 +9,7 @@ import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 import { Link } from 'react-router-dom';
 
-export const Dashboard = ({ setSelectedMonth, setSelectedDay, fromLanding, setFromLanding }) => {
-
-    useEffect(() => {
-        document.body.className = 'dashboard-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
+export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding, setFromLanding }) => {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [name, setName] = useState('');
