@@ -5,16 +5,13 @@ import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
 import { Link } from "react-router";
+import { useBodyClass } from "../utils/useBodyClass";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
 export const FullscreenEditor = () => {
-    useEffect(() => {
-        document.body.className = 'fullscreen-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
+
+    useBodyClass('fullscreen-body');
 
     const [inputTitle, setInputTitle] = useState("");
     const [inputText, setInputText] = useState("");
@@ -103,7 +100,7 @@ export const FullscreenEditor = () => {
                     </button>
 
                     {/* Tick Button */}
-                    <Link to="/day">
+                    <Link to="/dashboard/day">
                     <div className={styles['okay-button']}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

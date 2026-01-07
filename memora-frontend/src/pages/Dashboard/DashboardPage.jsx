@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import { DashboardHeader } from './DashboardHeader';
 import { useEffect } from 'react';
 import styles from './DashboardPage.module.css';
+import { useBodyClass } from '../../utils/useBodyClass';
 
 export const DashboardPage = ({
   selectedMonth,
@@ -13,10 +14,7 @@ export const DashboardPage = ({
   setFromLanding,
 }) => {
 
-  useEffect(() => {
-    document.body.className = 'day-body'; // shared bg
-    return () => document.body.className = '';
-  }, []);
+  useBodyClass('day-body');
 
   return (
     <>

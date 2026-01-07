@@ -1,0 +1,98 @@
+.container {
+    display: flex;
+    width: 190px;
+    height: 198px;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+
+    border-radius: 33px;
+    border: 1px solid #FFF;
+    background: linear-gradient(116deg, rgba(255, 255, 255, 0.45) 11.18%, rgba(255, 255, 255, 0.12) 84.34%);
+    box-shadow: 0 2px 10.5px -1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(30px);
+    
+    position: relative;
+    top: 43px;
+    right: 16px;
+}
+
+.user-information {
+    display: flex;
+    width: 65px;
+    height: 82px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.user-profile-photo {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+}
+
+.name {
+    align-self: stretch;
+    color: #343434;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.32px;
+}
+
+.username {
+    align-self: stretch;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.2px;
+}
+
+.paths-section {
+    width: 190px;
+    height: 106px;
+    flex-shrink: 0;
+    border-radius: 33px;
+    background: #FFF;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile-settings-button {
+    width: 121px;
+    height: 30px;
+
+    border-radius: 15px;
+    background: #343434;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    border-style: none;
+
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

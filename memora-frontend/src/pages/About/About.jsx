@@ -2,15 +2,11 @@ import { Navbar } from '../../components/Navbar';
 import styles from './About.module.css'
 import developerImage from '../../assets/developer-image.jpeg'
 import backButton from '../../assets/back-button.svg'
-import { useEffect } from 'react';
+import { useBodyClass } from '../../utils/useBodyClass';
 
 export const About = () => {
-    useEffect(() => {
-    document.body.className = 'about-body';
-    return () => {
-      document.body.className = ''; // cleanup when leaving page
-    };
-  }, []);
+
+  useBodyClass('about-body');
 
     return (
         <>

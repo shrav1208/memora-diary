@@ -1,69 +1,93 @@
 .navbar-container {
     position: fixed;
-  top: 0;                  /* stick to top */
-  left: 50%;               /* move to center of viewport */
-  transform: translateX(-50%);  /* pull back by half width */
-  z-index: 10000;           /* ensure it stays above content */
-  
-    display: flex;
-    flex-direction: row;
-width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
 
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    justify-content: center; /* centers inner wrapper */
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1800px;  /* content width */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-path {
-display: flex;
-align-items: center;
-gap: 7px;
-padding-left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-left: 24px;
 }
 
 .logo-name-nav {
     display: flex;
     flex-direction: row;
-align-items: center;
-gap: 10px;
+    align-items: center;
+    gap: 10px;
 }
 
 .logo {
     width: 30px;
-height: 60px;
+    height: 60px;
 }
 
 .heading {
     color: #000;
-text-align: center;
-font-family: Sora;
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin: 0;
-padding: 0;
+    text-align: center;
+    font-family: Sora;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar-links {
     display: flex;
-padding-left: 24px;
-padding-right: 24px;
-justify-content: flex-end;
-align-items: center;
-gap: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
 }
 
 .navlink {
     color: #343434;
-text-align: center;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .profile-photo {
     width: 30px;
-height: 30px;
+    height: 30px;
+}
+
+.sidebar {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    margin-right: 20px;
+    align-self: center;
+}
+
+.sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 9999;
+
+    /* optional */
+    display: flex;
 }

@@ -9,6 +9,7 @@ router.get('/', async(req, res)=>{
         // console.log(req);
 
         const user = await User.findById(req.session.userID).select("name");
+        const username = await User.findById(req.session.userID).select("username");
 
         if (!user) {
             // console.log("IAM LOSIGN MY MIND");
@@ -17,7 +18,7 @@ router.get('/', async(req, res)=>{
 
         // console.log(user);
 
-        return res.json({success: true, user});
+        return res.json({success: true, user, username});
         
     }catch(err){
         console.error("IAM LOSIGN MY MIND:", err);
