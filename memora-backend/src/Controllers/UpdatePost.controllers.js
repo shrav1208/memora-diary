@@ -1,22 +1,28 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
+import mongoose from "mongoose";
 
 export const updatePost = async(req, res) => {
-    try {
+    try{
+
         const { title, content, mood } = req.body;
+        const { id } = req.params;
 
-        const entry = await DiaryEntry.findById(req.params.id);
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid entry ID",
+            });
+        }
+        const entry = await DiaryEntry.findOne({
+            _id: id,
+            user: req.session.userID,
+            isDeleted: false,
+        })
 
-        if (!entry || entry.isDeleted) {
+        if (!entry) {
             return res.status(404).json({
                 success: false,
                 message: "Diary entry not found",
-            });
-        }
-
-        if (entry.user.toString() !== req.user.userId) {
-            return res.status(403).json({
-                success: false,
-                message: "Access denied",
             });
         }
 
@@ -36,9 +42,9 @@ export const updatePost = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: "Diary entry updated",
-            entry,
         });
-    } catch (err) {
+        
+    }catch(err){
         console.error("Update diary error:", err);
         return res.status(500).json({
             success: false,

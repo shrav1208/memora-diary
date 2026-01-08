@@ -3,9 +3,12 @@ import styles from './Day.module.css'
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 export const Day = ({ selectedMonth, selectedDay }) => {
+
+    const navigate = useNavigate();
+
     console.log(selectedMonth);
 
     const year = 2026;
@@ -80,9 +83,17 @@ export const Day = ({ selectedMonth, selectedDay }) => {
                         {!loading &&
                             !error &&
                             entries.map((entry) => (
-                                <Link to='/fullscreen-editor' state={{
-                                    _id: entry._id,
-                                }}><EntryCard entry={entry} key={entry._id} /></Link>
+                                <button onClick={()=>{
+                                    navigate('/fullscreen-editor', {
+                                        state: {
+                                            title: entry.title,
+                                            content: entry.content,
+                                            entryid: entry._id,
+                                        },
+                                    });
+                                }}>
+                                    <EntryCard entry={entry} />
+                                </button>
                             ))}
                     </div>
                 </div>

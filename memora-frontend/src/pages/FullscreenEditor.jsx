@@ -23,10 +23,11 @@ export const FullscreenEditor = () => {
 
     const initialTitle = location.state?.title || "";
     const initialContent = location.state?.content || "";
+    const entryid = location.state?.entryid || null;
 
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
-    
+
     //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
     const [activeHighlight, setActiveHighlight] = useState(null);
     // const [textColor, setTextColor] = useState("#343434"); // default text color
@@ -41,18 +42,22 @@ export const FullscreenEditor = () => {
         }
 
         try {
+
             setSaving(true);
 
-            await axios.post(
-                "/api/create",
-                {
+            if(entryid){
+                await axios.patch(`/api/update/post/${entryid}`,{
                     title: inputTitle.trim(),
-                    content: inputText, // TinyMCE gives HTML — perfect
-                },
-                {
-                    withCredentials: true, // auth cookie
-                }
-            );
+                    content: inputText,
+                })
+            }
+            else{
+                await axios.post("/api/create",{
+                        title: inputTitle.trim(),
+                        content: inputText, // TinyMCE gives HTML — perfect
+                    }
+                );
+            }
 
             // Navigate only AFTER successful save
             navigate("/dashboard/day");
