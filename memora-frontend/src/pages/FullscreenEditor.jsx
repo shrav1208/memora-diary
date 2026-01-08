@@ -4,8 +4,11 @@ import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
-import { Link } from "react-router";
 import { useBodyClass } from "../utils/useBodyClass";
+import { useLocation } from 'react-router';
+
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
@@ -13,14 +16,54 @@ export const FullscreenEditor = () => {
 
     useBodyClass('fullscreen-body');
 
-    const [inputTitle, setInputTitle] = useState("");
-    const [inputText, setInputText] = useState("");
+    const navigate = useNavigate();
+    const [saving, setSaving] = useState(false);
+
+    const location = useLocation();
+
+    const initialTitle = location.state?.title || "";
+    const initialContent = location.state?.content || "";
+
+    const [inputTitle, setInputTitle] = useState(initialTitle);
+    const [inputText, setInputText] = useState(initialContent);
+    
     //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
     const [activeHighlight, setActiveHighlight] = useState(null);
     // const [textColor, setTextColor] = useState("#343434"); // default text color
     const editorRef = useRef(null);
 
     const displayDate = dayjs().format("ddd, YYYY MMM D, H:mm A");
+
+    const handleSaveEntry = async () => {
+        if (!inputText.trim()) {
+            alert("Diary entry cannot be empty");
+            return;
+        }
+
+        try {
+            setSaving(true);
+
+            await axios.post(
+                "/api/create",
+                {
+                    title: inputTitle.trim(),
+                    content: inputText, // TinyMCE gives HTML — perfect
+                },
+                {
+                    withCredentials: true, // auth cookie
+                }
+            );
+
+            // Navigate only AFTER successful save
+            navigate("/dashboard/day");
+
+        } catch (err) {
+            console.error("Failed to save diary entry:", err);
+            alert(err.response?.data?.message || "Failed to save entry");
+        } finally {
+            setSaving(false);
+        }
+    };
 
     // function to run editor commands
     const runCommand = (cmd, value = null) => {
@@ -100,8 +143,11 @@ export const FullscreenEditor = () => {
                     </button>
 
                     {/* Tick Button */}
-                    <Link to="/dashboard/day">
-                    <div className={styles['okay-button']}>
+                    <div
+                        className={styles['okay-button']}
+                        onClick={handleSaveEntry}
+                        style={{ opacity: saving ? 0.6 : 1, pointerEvents: saving ? "none" : "auto" }}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="68"
@@ -156,7 +202,6 @@ export const FullscreenEditor = () => {
 
                         <img src={tickmark} className={styles['small-tick']} alt="ok" />
                     </div>
-                    </Link>
 
                     {/* Underline */}
                     <button type="button" onClick={() => runCommand("Underline")}>
