@@ -3,16 +3,12 @@ import profile from '../assets/profile-photo.png';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LogoutButton } from './LogoutButton';
-import { Link, useNavigate } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router';
 
 export const SideBar = () => {
 
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
-
-    const navigate = useNavigate();
-    const { setUser } = useAuth();
 
     useEffect(() => {
         (
@@ -29,15 +25,7 @@ export const SideBar = () => {
             })();
     }, []);
 
-    const handleLogout = async () => {
-        try {
-            await axios.post('/api/logout', {}, { withCredentials: true });
-            setUser(null);
-            navigate('/login', { replace: true });
-        } catch (err) {
-            console.error("Logout failed:", err);
-        }
-    };
+    
 
     return (
         <>
@@ -55,7 +43,7 @@ export const SideBar = () => {
 
                 <div className={styles['paths-section']}>
                     <Link to='/profile'><button className={styles['profile-settings-button']}>Profile Settings</button></Link>
-                    <LogoutButton onClick={handleLogout} />
+                    <LogoutButton/>
                 </div>
 
             </div>
