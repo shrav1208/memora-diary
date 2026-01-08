@@ -20,7 +20,7 @@ export const readPosts = async (req, res) => {
             });
         }
 
-        const userId = req.session.userID;
+        const userId = new mongoose.Types.ObjectId(req.session.userID);
 
         // month is 0-based (Jan = 0) — same as dayjs
         // ✅ PURE UTC — NO LOCAL TIME INVOLVED

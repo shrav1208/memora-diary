@@ -1,15 +1,28 @@
 import styles from './EntryCard.module.css'
+import { removeFormatting } from "../../utils/removeFormatting";
 
 export const EntryCard = ({ entry }) => {
+
+    const paragraphs = removeFormatting(entry.content);
+
     return (
         <div key={entry.id} className={styles['entry-card']}>
-            <div className={styles['entry-time']}>
-                <span>{entry.time}</span>
+             <div className={styles['entry-time']}>
+                <span>
+                    {new Date(entry.createdAt).toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    })}
+                </span>
             </div>
             <div className={styles['vertical-separator']}></div>
             <div className={styles['entry-content']}>
                 <p className={styles['entry-title']}>{entry.title}</p>
-                <p className={styles['entry-text']}>{entry.content}</p>
+                <div className={styles['entry-text']}>
+                    {paragraphs.map((text, idx) => (
+                        <p key={idx}>{text}</p>
+                    ))}
+                </div>
             </div>
         </div>
     );
