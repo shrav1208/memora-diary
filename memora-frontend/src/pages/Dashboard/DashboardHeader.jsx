@@ -157,12 +157,6 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
                     onChange={(event)=>{setQuery(event.target.value);}}
                     value = {query}
                     />
-                    <input 
-                    className={styles['search-box']} 
-                    placeholder="Search your memories..." 
-                    onChange={(event)=>{setQuery(event.target.value);}}
-                    value = {query}
-                    />
                 </div>
 
                 <div className={styles['features-flex']}>
