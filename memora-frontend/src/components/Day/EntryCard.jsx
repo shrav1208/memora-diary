@@ -5,8 +5,10 @@ export const EntryCard = ({ entry }) => {
 
     const paragraphs = removeFormatting(entry.content);
 
+    const
+
     return (
-        <div key={entry.id} className={styles['entry-card']}>
+        <button key={entry.id} className={styles['entry-card']} onClick={}>
              <div className={styles['entry-time']}>
                 <span>
                     {new Date(entry.createdAt).toLocaleTimeString([], {
@@ -24,6 +26,6 @@ export const EntryCard = ({ entry }) => {
                     ))}
                 </div>
             </div>
-        </div>
+        </button>
     );
 }

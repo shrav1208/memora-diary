@@ -3,6 +3,7 @@ import styles from './Day.module.css'
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router';
 
 export const Day = ({ selectedMonth, selectedDay }) => {
     console.log(selectedMonth);
@@ -79,7 +80,9 @@ export const Day = ({ selectedMonth, selectedDay }) => {
                         {!loading &&
                             !error &&
                             entries.map((entry) => (
-                                <EntryCard entry={entry} key={entry._id} />
+                                <Link to='/fullscreen-editor' state={{
+                                    _id: entry._id,
+                                }}><EntryCard entry={entry} key={entry._id} /></Link>
                             ))}
                     </div>
                 </div>
