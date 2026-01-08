@@ -18,10 +18,10 @@ export const SideBar = () => {
         (
             async () => {
                 try {
-                    const res = await axios.get('/api/dashboard', { withCredentials: true });
+                    const res = await axios.get('/api/read/user', { withCredentials: true });
                     console.log(res);
                     setName(res.data.user.name);
-                    setUsername(res.data.username.username);
+                    setUsername(res.data.user.username);
 
                 } catch (err) {
                     console.error(err.message);
