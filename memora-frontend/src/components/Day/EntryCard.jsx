@@ -5,8 +5,6 @@ export const EntryCard = ({ entry }) => {
 
     const paragraphs = removeFormatting(entry.content);
 
-    const
-
     return (
         <button key={entry.id} className={styles['entry-card']} onClick={}>
              <div className={styles['entry-time']}>
