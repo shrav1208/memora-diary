@@ -13,6 +13,27 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [name, setName] = useState('');
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+
+    useEffect(()=>{
+        if(!query.trim()) {
+            setResults([]);
+            return;
+        }
+
+        const timeout = setTimeout (async () => {
+            try{
+                const res = await axios.get(`/api/search?query=${encodeURIComponent(query)}`);
+                // console.log(res.data);
+                setResults(res.data.results);
+            }catch(err){
+                console.error("Search Error: " + err.message);
+            }
+        }, 300);
+        
+        return () => clearTimeout(timeout)
+    }, [query])
 
     useEffect(()=>{
         (async()=>{
@@ -130,7 +151,12 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
                             <img src={plusIcon} className={styles['plus']} />
                         </div>
                     </div>
-                    <input className={styles['search-box']} placeholder="Search your memories..." />
+                    <input 
+                    className={styles['search-box']} 
+                    placeholder="Search your memories..." 
+                    onChange={(event)=>{setQuery(event.target.value);}}
+                    value = {query}
+                    />
                 </div>
 
                 <div className={styles['features-flex']}>

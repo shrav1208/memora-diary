@@ -1,0 +1,36 @@
+import DiaryEntry from "../Models/DiaryEntry.js";
+
+export const searchPosts = async(req, res) => {
+    const { query } = req.query;
+
+    if(!query || !query.trim()){
+        return res.status(400).json({
+            success: false,
+            message: "Search Query Required",
+        });
+    }
+
+    try{
+        const queryTrim = query.trim();
+
+        const results = await DiaryEntry.find({
+            user: req.session.userID,
+            isDeleted: false,
+            $or: [
+                { title: { $regex: queryTrim, $options: 'i'} },
+                { content: { $regex: queryTrim, $options: 'i'} },
+            ]
+        }).limit(20).sort({ updatedAt: -1 });
+
+        return res.status(200).json({
+            success: true,
+            results,
+        });
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+}
