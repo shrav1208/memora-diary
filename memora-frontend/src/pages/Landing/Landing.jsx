@@ -1,41 +1,18 @@
 import styles from './Landing.module.css'
 import { Navbar } from '../../components/Navbar';
-import { useEffect } from 'react';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
-import { LogoutButton } from '../../components/LogoutButton';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useBodyClass } from '../../utils/useBodyClass';
 
 export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
 
-    const navigate = useNavigate();
-    const { setUser } = useAuth();
-
-    useEffect(() => {
-        document.body.className = 'landing-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
+    useBodyClass('landing-body');
 
     const handleClickEvent = () => {
         setFromLanding(true);
         setSelectedMonth(dayjs().month());
         setSelectedDay(dayjs().date());
     }
-
-    const handleLogout = async () => {
-        try {
-            await axios.post('/api/logout', {}, { withCredentials: true });
-            setUser(null);
-            navigate('/login', { replace: true });
-        }catch (err) {
-            console.error("Logout failed:", err);
-        }
-    };
-
 
     return (
         <>
@@ -61,8 +38,6 @@ export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) =>
                     Go to my Dashboard
                 </button>
                 </Link>
-
-                <LogoutButton onClick={handleLogout}/>
             </div>
         </>
     );
