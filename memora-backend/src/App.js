@@ -10,6 +10,7 @@ import readUserRoutes from './Routes/ReadUser.routes.js';
 import readPostRoutes from './Routes/ReadPosts.routes.js';
 import updatePostRoutes from './Routes/UpdatePost.routes.js';
 import deletePostRoutes from './Routes/DeletePost.routes.js';
+import searchPosts from './Routes/SearchPosts.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -42,6 +43,9 @@ app.use('/api/read/user', requireAuth, readUserRoutes);
 app.use('/api/read/post', requireAuth, readPostRoutes);
 app.use('/api/update/post', requireAuth, updatePostRoutes);
 app.use('/api/delete/post', requireAuth, deletePostRoutes);
+
+//Search
+app.use('/api/search', requireAuth, searchPosts);
 
 //Test
 
