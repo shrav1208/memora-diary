@@ -35,7 +35,7 @@
 }
 
 .popup-box input,
-textarea {
+.input-text {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -75,6 +75,7 @@ textarea {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    padding: 0 !important;
 }
 
 .input-text {
@@ -90,6 +91,10 @@ textarea {
     /* hide scrollbar */
     scrollbar-width: none;       /* Firefox */
     -ms-overflow-style: none;    /* IE/Edge */
+
+    border: none; 
+    outline: none;
+    background: transparent;
 }
 
 .input-text::-webkit-scrollbar {
