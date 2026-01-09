@@ -3,6 +3,14 @@ import mongoose from "mongoose";
 
 export const getYears = async (req, res) => {
   try {
+
+    if (!req.session.userID) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized",
+        });
+    }
+
     const userId = new mongoose.Types.ObjectId(req.session.userID);
 
     const years = await DiaryEntry.aggregate([
