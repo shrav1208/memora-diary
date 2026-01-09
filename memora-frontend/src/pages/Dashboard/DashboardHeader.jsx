@@ -24,7 +24,7 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
 
         const timeout = setTimeout (async () => {
             try{
-                const res = await axios.get(`/api/search?query=${encodeURIComponent(query)}`);
+                const res = await axios.get(`/api/search?q=${encodeURIComponent(query)}`);
                 // console.log(res.data);
                 setResults(res.data.results);
             }catch(err){

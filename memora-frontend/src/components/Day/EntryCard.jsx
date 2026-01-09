@@ -7,7 +7,7 @@ export const EntryCard = ({ entry }) => {
 
     return (
         <div key={entry.id} className={styles['entry-card']}>
-             <div className={styles['entry-time']}>
+            <div className={styles['entry-time']}>
                 <span>
                     {new Date(entry.createdAt).toLocaleTimeString([], {
                         hour: '2-digit',

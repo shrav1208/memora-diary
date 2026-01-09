@@ -4,10 +4,9 @@ import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import axios from "axios";
-import { useNavigate } from "react-router";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
@@ -18,18 +17,37 @@ export const FullscreenEditor = () => {
 
     const location = useLocation();
 
+    const { id: entryid } = useParams();
+
     const initialTitle = location.state?.title || "";
     const initialContent = location.state?.content || "";
 
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
-    
+
     //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
     const [activeHighlight, setActiveHighlight] = useState(null);
     // const [textColor, setTextColor] = useState("#343434"); // default text color
     const editorRef = useRef(null);
 
     const displayDate = dayjs().format("ddd, YYYY MMM D, H:mm A");
+
+    useEffect(() => {
+        if (!entryid) return;
+
+        (async () => {
+            try {
+                const res = await axios.get(`/api/get/post/${entryid}`);
+                setInputTitle(res.data.title);
+                setInputText(res.data.content);
+            } catch (err) {
+                console.error("Failed to fetch entry", err);
+                alert("Failed to load diary entry");
+                navigate("/dashboard/day");
+            }
+        })();    
+    }, [entryid, navigate]);
+
 
     const handleSaveEntry = async () => {
         if (!inputText.trim()) {
@@ -40,16 +58,19 @@ export const FullscreenEditor = () => {
         try {
             setSaving(true);
 
-            await axios.post(
-                "/api/create",
-                {
+            if(entryid){
+                await axios.patch(`/api/update/post/${entryid}`,{
                     title: inputTitle.trim(),
-                    content: inputText, // TinyMCE gives HTML — perfect
-                },
-                {
-                    withCredentials: true, // auth cookie
-                }
-            );
+                    content: inputText,
+                })
+            }
+            else{
+                await axios.post("/api/create",{
+                        title: inputTitle.trim(),
+                        content: inputText, // TinyMCE gives HTML — perfect
+                    }
+                );
+            }
 
             // Navigate only AFTER successful save
             navigate("/dashboard/day");

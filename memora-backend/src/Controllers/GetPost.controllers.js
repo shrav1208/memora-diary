@@ -1,12 +1,13 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
+import mongoose from "mongoose";
 
 export const getPost = async (req, res) => {
-    const { id } = req.id;
+    const { id } = req.params;
 
-    if(!id || !id.trim()){
+    if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).json({
             success: false,
-            message: "ID Required",
+            message: "Invalid ID",
         });
     }
 
@@ -17,10 +18,19 @@ export const getPost = async (req, res) => {
             isDeleted: false,
         })
 
+        if (!result) {
+            return res.status(404).json({
+                success: false,
+                message: "Diary entry not found",
+            });
+        }
+
         return res.status(200).json({
             success: true,
-            result,
+            title: result.title,
+            content: result.content,
         });
+
     }catch(err){
         console.log(err);
         return res.status(500).json({

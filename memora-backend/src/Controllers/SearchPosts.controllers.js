@@ -1,9 +1,9 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
 
 export const searchPosts = async(req, res) => {
-    const { query } = req.query;
+    const { q } = req.query;
 
-    if(!query || !query.trim()){
+    if(!q || !q.trim()){
         return res.status(400).json({
             success: false,
             message: "Search Query Required",
@@ -11,7 +11,7 @@ export const searchPosts = async(req, res) => {
     }
 
     try{
-        const queryTrim = query.trim();
+        const queryTrim = q.trim();
 
         const results = await DiaryEntry.find({
             user: req.session.userID,

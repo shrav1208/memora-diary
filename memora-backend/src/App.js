@@ -49,7 +49,7 @@ app.use('/api/read/user', requireAuth, readUserRoutes);
 app.use('/api/read/post', requireAuth, readPostRoutes);
 app.use('/api/update/post', requireAuth, updatePostRoutes);
 app.use('/api/delete/post', requireAuth, deletePostRoutes);
-app.use('api/get/post', requireAuth, getPostRoutes);
+app.use('/api/get/post', requireAuth, getPostRoutes);
 
 //Search
 app.use('/api/search', requireAuth, searchPosts);
