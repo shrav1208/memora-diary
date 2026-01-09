@@ -59,6 +59,13 @@ function App() {
           </ProtectedRoute>}
         />
 
+        <Route path='/fullscreen-editor/:id' element={
+          <ProtectedRoute>
+            <FullscreenEditor />
+          </ProtectedRoute>}
+        />
+
+
         <Route
           path="/dashboard"
           element={

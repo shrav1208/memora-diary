@@ -5,10 +5,9 @@ import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
 import { useBodyClass } from "../utils/useBodyClass";
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import axios from "axios";
-import { useNavigate } from "react-router";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
@@ -21,9 +20,10 @@ export const FullscreenEditor = () => {
 
     const location = useLocation();
 
+    const { id: entryid } = useParams();
+
     const initialTitle = location.state?.title || "";
     const initialContent = location.state?.content || "";
-    const entryid = location.state?.entryid || null;
 
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
@@ -35,6 +35,23 @@ export const FullscreenEditor = () => {
 
     const displayDate = dayjs().format("ddd, YYYY MMM D, H:mm A");
 
+    useEffect(() => {
+        if (!entryid) return;
+
+        (async () => {
+            try {
+                const res = await axios.get(`/api/get/post/${entryid}`);
+                setInputTitle(res.data.title);
+                setInputText(res.data.content);
+            } catch (err) {
+                console.error("Failed to fetch entry", err);
+                alert("Failed to load diary entry");
+                navigate("/dashboard/day");
+            }
+        })();    
+    }, [entryid, navigate]);
+
+
     const handleSaveEntry = async () => {
         if (!inputText.trim()) {
             alert("Diary entry cannot be empty");
@@ -42,7 +59,6 @@ export const FullscreenEditor = () => {
         }
 
         try {
-
             setSaving(true);
 
             if(entryid){
