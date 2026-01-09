@@ -83,14 +83,14 @@ export const Day = ({ selectedMonth, selectedDay }) => {
                         {!loading &&
                             !error &&
                             entries.map((entry) => (
-                                <button 
+                                <div 
                                     key={entry._id}
                                     onClick={()=>{
                                         navigate(`/fullscreen-editor/${entry._id}`);
                                     }}
                                 >
                                     <EntryCard entry={entry} />
-                                </button>
+                                </div>
                             ))
                         }
                     </div>

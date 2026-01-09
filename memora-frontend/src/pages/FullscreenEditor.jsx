@@ -4,7 +4,6 @@ import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
-import { useBodyClass } from "../utils/useBodyClass";
 import { useLocation, useNavigate, useParams } from 'react-router';
 
 import axios from "axios";
