@@ -13,6 +13,8 @@ import deletePostRoutes from './Routes/DeletePost.routes.js';
 import getPostRoutes from './Routes/GetPost.routes.js';
 import searchPosts from './Routes/SearchPosts.routes.js';
 import getYearsRoutes from './Routes/GetYears.routes.js';
+import getMonthsRoutes from './Routes/GetMonths.routes.js';
+import getDaysRoutes from './Routes/GetDays.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -41,6 +43,8 @@ app.use('/api/auth', authRoutes);
 //Display
 
 app.use('/api/get/years', requireAuth, getYearsRoutes);
+app.use('/api/get/months', requireAuth, getMonthsRoutes);
+app.use('/api/get/days', requireAuth, getDaysRoutes);
 
 //CRUD
 
@@ -52,6 +56,7 @@ app.use('/api/delete/post', requireAuth, deletePostRoutes);
 app.use('/api/get/post', requireAuth, getPostRoutes);
 
 //Search
+
 app.use('/api/search', requireAuth, searchPosts);
 
 //Test
