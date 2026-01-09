@@ -13,8 +13,6 @@ import axios from "axios";
 
 export const FullscreenEditor = () => {
 
-    useBodyClass('fullscreen-body');
-
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
 

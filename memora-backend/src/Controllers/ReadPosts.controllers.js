@@ -23,20 +23,19 @@ export const readPosts = async (req, res) => {
         const userId = new mongoose.Types.ObjectId(req.session.userID);
 
         // month is 0-based (Jan = 0) — same as dayjs
-        // ✅ PURE UTC — NO LOCAL TIME INVOLVED
-        const startOfDay = new Date(Date.UTC(
+        const startOfDay = new Date(
             Number(year),
             Number(month),     // 0-based (Jan = 0)
             Number(day),
             0, 0, 0, 0
-        ));
+        );
 
-        const endOfDay = new Date(Date.UTC(
+        const endOfDay = new Date(
             Number(year),
             Number(month),
             Number(day),
             23, 59, 59, 999
-        ));
+        );
 
         console.log("QUERY RANGE:", startOfDay, endOfDay);
 

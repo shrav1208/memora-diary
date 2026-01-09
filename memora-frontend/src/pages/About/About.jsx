@@ -2,11 +2,8 @@ import { Navbar } from '../../components/Navbar';
 import styles from './About.module.css'
 import developerImage from '../../assets/developer-image.jpeg'
 import backButton from '../../assets/back-button.svg'
-import { useBodyClass } from '../../utils/useBodyClass';
 
 export const About = () => {
-
-  useBodyClass('about-body');
 
     return (
         <>

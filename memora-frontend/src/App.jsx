@@ -14,16 +14,25 @@ import dayjs from 'dayjs';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
+import { useRouteBodyClass } from './utils/useRouteBodyClass';
+import { All } from './components/All/All';
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
+
+  // useState for month selection
+  const [selectedYear, setSelectedYear] = useState(dayjs().month());
+
   // useState for month selection
   const [selectedMonth, setSelectedMonth] = useState(dayjs().month());
 
   // useState for day selection
   const [selectedDay, setSelectedDay] = useState(dayjs().date());
+
   console.log(dayjs().date(selectedDay).format());
   console.log(dayjs().month(selectedMonth).date(selectedDay).format("YYYY-MM-DD"));
+
+  useRouteBodyClass();
 
   return (
     <>
@@ -82,6 +91,7 @@ function App() {
           }
         >
           <Route index element={<Year setSelectedMonth={setSelectedMonth} />} />
+          <Route path='all' element={<All />} />
           <Route path="year" element={<Year setSelectedMonth={setSelectedMonth} />} />
           <Route path="month" element={<Month selectedMonth={selectedMonth} setSelectedDay={setSelectedDay} />} />
           <Route path="day" element={<Day selectedMonth={selectedMonth} selectedDay={selectedDay} />} />

@@ -12,6 +12,7 @@ import updatePostRoutes from './Routes/UpdatePost.routes.js';
 import deletePostRoutes from './Routes/DeletePost.routes.js';
 import getPostRoutes from './Routes/GetPost.routes.js';
 import searchPosts from './Routes/SearchPosts.routes.js';
+import getYearsRoutes from './Routes/GetYears.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -36,6 +37,10 @@ app.use('/api/login', loginRoutes);
 app.use('/api/signup', signupRoutes);
 app.use('/api/logout', requireAuth, logoutRoutes);
 app.use('/api/auth', authRoutes);
+
+//Display
+
+app.use('/api/get/years', requireAuth, getYearsRoutes);
 
 //CRUD
 
