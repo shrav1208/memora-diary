@@ -10,6 +10,10 @@ export const All = () => {
     const [years, setYears] = useState([]);
     const navigate = useNavigate();
 
+    const onYearClick = (year) => {
+        navigate(`/dashboard/${year}`);
+    };
+
     useEffect(() => {
         const loadYears = async () => {
             try {
@@ -41,8 +45,7 @@ export const All = () => {
                         key={y.year}
                         year={y.year}
                         count={y.count}
-                        onClick={() => navigate(`/dashboard/year`)}
-                    // add /${y.year} later
+                        onClick={onYearClick(y.year)}
                     />
                 ))}
             </div>

@@ -1,17 +1,20 @@
 import { Navbar } from '../../components/Navbar';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import { DashboardHeader } from './DashboardHeader';
 import styles from './DashboardPage.module.css';
 import { NavigateViews } from '../../components/NavigateViews';
+import dayjs from 'dayjs';
 
-export const DashboardPage = ({
-  selectedMonth,
-  setSelectedMonth,
-  selectedDay,
-  setSelectedDay,
-  fromLanding,
-  setFromLanding,
-}) => {
+export const DashboardPage = ({ fromLanding, setFromLanding }) => {
+
+  const navigate = useNavigate();
+
+  const goToToday = () => {
+    const today = dayjs();
+    navigate(
+      `/dashboard/${today.year()}/${today.month()}/${today.date()}`
+    );
+  };
 
   return (
     <>
@@ -19,8 +22,7 @@ export const DashboardPage = ({
 
       <div className={styles['page']}>
         <DashboardHeader
-          setSelectedMonth={setSelectedMonth}
-          setSelectedDay={setSelectedDay}
+          goToToday={goToToday}
           fromLanding={fromLanding}
           setFromLanding={setFromLanding}
         />
@@ -29,7 +31,7 @@ export const DashboardPage = ({
 
         {/* THIS is where Year / Month / Day swap */}
         <div className={styles['container']}><Outlet /></div>
-        
+
       </div>
     </>
   );

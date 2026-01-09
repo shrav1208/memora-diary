@@ -14,6 +14,8 @@ export const FullscreenEditor = () => {
 
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
+    const [entryDate, setEntryDate] = useState(dayjs());
+
 
     const location = useLocation();
 
@@ -30,7 +32,7 @@ export const FullscreenEditor = () => {
     // const [textColor, setTextColor] = useState("#343434"); // default text color
     const editorRef = useRef(null);
 
-    const displayDate = dayjs().format("ddd, YYYY MMM D, H:mm A");
+    const displayDate = entryDate.format("ddd, YYYY MMM D, H:mm A");
 
     useEffect(() => {
         if (!entryid) return;
@@ -40,12 +42,14 @@ export const FullscreenEditor = () => {
                 const res = await axios.get(`/api/get/post/${entryid}`);
                 setInputTitle(res.data.title);
                 setInputText(res.data.content);
+                setEntryDate(dayjs(res.data.createdAt));
             } catch (err) {
                 console.error("Failed to fetch entry", err);
                 alert("Failed to load diary entry");
-                navigate("/dashboard/day");
+
+                navigate(-1);
             }
-        })();    
+        })();
     }, [entryid, navigate]);
 
 
@@ -58,22 +62,24 @@ export const FullscreenEditor = () => {
         try {
             setSaving(true);
 
-            if(entryid){
-                await axios.patch(`/api/update/post/${entryid}`,{
+            if (entryid) {
+                await axios.patch(`/api/update/post/${entryid}`, {
                     title: inputTitle.trim(),
                     content: inputText,
                 })
+                
             }
-            else{
-                await axios.post("/api/create",{
-                        title: inputTitle.trim(),
-                        content: inputText, // TinyMCE gives HTML — perfect
-                    }
+            else {
+                await axios.post("/api/create", {
+                    title: inputTitle.trim(),
+                    content: inputText, // TinyMCE gives HTML — perfect
+                }
                 );
-            }
 
-            // Navigate only AFTER successful save
-            navigate("/dashboard/day");
+                // Navigate only AFTER successful save
+                
+            }
+            navigate(-1);
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);

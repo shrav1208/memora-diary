@@ -4,11 +4,20 @@ import logo from '../assets/navbar-logo.png';
 import { Link } from 'react-router';
 import { SideBar } from './SideBar';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export const Navbar = () => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const sidebarRef = useRef(null);
+
+    const navigate = useNavigate();
+
+    const goToDashboard = () => {
+        const year = dayjs().year();
+        navigate(`/dashboard/${year}`);
+    };
 
     // Close sidebar on outside click
     useEffect(() => {
@@ -30,12 +39,12 @@ export const Navbar = () => {
             <div className={styles['navbar-container']}>
                 <div className={styles['navbar-inner']}>
                     <div className={styles['navbar-path']}>
-                        <Link to='/dashboard/year'>
-                            <div className={styles['logo-name-nav']}>
+                        {/* <Link to='/dashboard/year'> */}
+                            <div className={styles['logo-name-nav']} onClick={goToDashboard}>
                                 <img src={logo} className={styles['logo']} alt="profile" />
                                 <h6 className={styles['heading']}>memora</h6>
                             </div>
-                        </Link>
+                        {/* </Link> */}
                         {/* dynamically changing path here */}
 
                     </div>

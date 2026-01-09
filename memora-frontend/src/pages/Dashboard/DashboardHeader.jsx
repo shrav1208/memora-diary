@@ -3,13 +3,12 @@ import { TodayDate } from './TodayDate';
 import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
 import plusIcon from '../../assets/plus-icon.svg'
-import dayjs from 'dayjs';
 import axios from 'axios';
 import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 import { Link } from 'react-router-dom';
 
-export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding, setFromLanding }) => {
+export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [name, setName] = useState('');
@@ -57,8 +56,7 @@ export const DashboardHeader = ({ setSelectedMonth, setSelectedDay, fromLanding,
 
     const handleButtonClick = () => {
         setIsPopupOpen(true); // open popup on button click
-        setSelectedDay(dayjs().date());
-        setSelectedMonth(dayjs().month());
+        goToToday();
     };
 
     const handleClose = () => {

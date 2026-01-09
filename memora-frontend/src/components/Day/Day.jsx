@@ -1,101 +1,82 @@
 import dayjs from 'dayjs';
-import styles from './Day.module.css'
+import styles from './Day.module.css';
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
-export const Day = ({ selectedMonth, selectedDay }) => {
+export const Day = () => {
+  const navigate = useNavigate();
+  const { year, month, day } = useParams();
 
-    const navigate = useNavigate();
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    console.log(selectedMonth);
+  const selectedDate = dayjs()
+    .year(Number(year))
+    .month(Number(month))   // 0-based
+    .date(Number(day));
 
-    const year = 2026;
-    console.log(dayjs().year(year).month(selectedMonth).date(selectedDay).format("YYYY-MM-DD"));
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    // const entries = data.diary_entries.filter(
-    //     (entry) => entry.date === dayjs().year(2025).month(selectedMonth).date(selectedDay).format("YYYY-MM-DD")
-    // );
+        const res = await axios.get('/api/read/post', {
+          params: {
+            year: selectedDate.year(),
+            month: selectedDate.month(),
+            day: selectedDate.date(),
+          },
+        });
 
-    const [entries, setEntries] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+        setEntries(res.data.entries);
+      } catch (err) {
+        console.error('Failed to fetch diary entries:', err);
+        setError('Could not load entries');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const selectedDate = dayjs()
-        .year(year)
-        .month(selectedMonth)
-        .date(selectedDay);
+    fetchEntries();
+  }, [year, month, day]);
 
-    useEffect(() => {
-        const fetchEntries = async () => {
-            try {
-                setLoading(true);
-                setError(null);
+  return (
+    <div className={styles['container']}>
+      <div className={styles['day-component']}>
+        <p className={styles['month']}>
+          <span className={styles['year-month']}>
+            {selectedDate.format('YYYY')}
+          </span>
+          {selectedDate.format(' MMMM D')}
+        </p>
 
-                const res = await axios.get("/api/read/post", {
-                    params: {
-                        year: selectedDate.year(),
-                        month: selectedDate.month(), // 0-based
-                        day: selectedDate.date(),
-                    },
-                });
+        <div className={styles['entries-wrapper']}>
+          {loading && <p className={styles['no-entry']}>Loading...</p>}
+          {error && <p className={styles['no-entry']}>{error}</p>}
 
-                setEntries(res.data.entries);
-                console.log(res.data);
-            } catch (err) {
-                console.error("Failed to fetch diary entries:", err);
-                setError('Could not load entries');
-            } finally {
-                setLoading(false);
-            }
-        };
+          {!loading && !error && entries.length === 0 && (
+            <p className={styles['no-entry']}>
+              No entries for this day.
+            </p>
+          )}
 
-        fetchEntries();
-    }, [selectedMonth, selectedDay]);
-
-
-    return (
-        <>
-            <div className={styles['container']}>
-                <div className={styles['day-component']}>
-                    <p className={styles['month']}>
-                        <span className={styles['year-month']}>
-                            {selectedDate.format('YYYY')}
-                        </span>
-                        {selectedDate.format(' MMMM DD')}
-                    </p>
-                    <div className={styles['entries-wrapper']}>
-                        {loading && (
-                            <p className={styles['no-entry']}>Loading...</p>
-                        )}
-
-                        {error && (
-                            <p className={styles['no-entry']}>{error}</p>
-                        )}
-
-                        {!loading && !error && entries.length === 0 && (
-                            <p className={styles['no-entry']}>
-                                No entries for this day.
-                            </p>
-                        )}
-
-                        {!loading &&
-                            !error &&
-                            entries.map((entry) => (
-                                <div 
-                                    key={entry._id}
-                                    onClick={()=>{
-                                        navigate(`/fullscreen-editor/${entry._id}`);
-                                    }}
-                                >
-                                    <EntryCard entry={entry} />
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-}
+          {!loading && !error &&
+            entries.map((entry) => (
+              <div
+                key={entry._id}
+                onClick={() =>
+                  navigate(`/fullscreen-editor/${entry._id}`)
+                }
+              >
+                <EntryCard entry={entry} />
+              </div>
+            ))}
+        </div>
+      </div>
+    </div>
+  );
+};
