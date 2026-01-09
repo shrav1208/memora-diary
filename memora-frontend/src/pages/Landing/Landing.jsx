@@ -2,11 +2,8 @@ import styles from './Landing.module.css'
 import { Navbar } from '../../components/Navbar';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
-import { useBodyClass } from '../../utils/useBodyClass';
 
 export const Landing = ({ setFromLanding, setSelectedMonth, setSelectedDay }) => {
-
-    useBodyClass('landing-body');
 
     const handleClickEvent = () => {
         setFromLanding(true);

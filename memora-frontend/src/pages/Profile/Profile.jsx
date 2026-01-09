@@ -3,10 +3,8 @@ import styles from './Profile.module.css'
 import backButton from '../../assets/back-button.svg'
 import profileShrav from '../../assets/profile-photo-shrav.jpeg'
 import cameraIcon from '../../assets/camera-icon.svg'
-import { useBodyClass } from '../../utils/useBodyClass';
 
 export const Profile = () => {
-    useBodyClass('profile-body');
 
     return (
         <>

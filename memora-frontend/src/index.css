@@ -21,7 +21,7 @@ a {
 
 .about-body {
     position: relative;
-    background-image: url("about-bg.png");
+    background-image: url("/about-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -32,7 +32,7 @@ a {
 }
 
 .fullscreen-body {
-    background-image: url("editor-bg.png");
+    background-image: url("/editor-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -43,7 +43,7 @@ a {
 }
 
 .day-body, .month-body, .year-body {
-    background-image: url("dashboard-bg.png");
+    background-image: url("/dashboard-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -54,7 +54,7 @@ a {
 }
 
 .login-body, .signup-body {
-    background-image: url("login-signup-bg.png");
+    background-image: url("/login-signup-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -65,7 +65,7 @@ a {
 }
 
 .profile-body {
-    background-image: url("profile-bg.png");
+    background-image: url("/profile-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -76,7 +76,7 @@ a {
 }
 
 .landing-body {
-    background-image: url("landing-bg.png");
+    background-image: url("/landing-bg.png");
     background-repeat: no-repeat;
     /* prevents tiling */
     background-size: cover;
@@ -86,9 +86,13 @@ a {
     
 }
 
-.day-body,
-.month-body,
-.year-body,
+.day-body {
+    display: block; /* overrides body's flex centering */
+  justify-content: unset;
+  align-items: unset;
+  padding-top: 120px;
+}
+
 .about-body,
 .profile-body {
   display: block; /* overrides body's flex centering */

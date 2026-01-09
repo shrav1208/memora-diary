@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './Login.module.css';
 import { useState } from 'react';
 import axios from 'axios';
@@ -11,13 +10,6 @@ export const Login = () => {
 
     const navigate = useNavigate();
     const { setUser } = useAuth();
-
-    useEffect(() => {
-        document.body.className = 'login-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
 
     const [usernameInput, setUsernameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');

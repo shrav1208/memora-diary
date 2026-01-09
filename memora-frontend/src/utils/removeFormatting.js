@@ -10,6 +10,6 @@ export const removeFormatting = (html) => {
     });
 
     return Array.from(container.querySelectorAll("p"))
-    .map(p => p.innerHTML.replace(/&nbsp;/g, '').trim()) // remove &nbsp; and trim
+    .map(p => p.innerHTML.replaceAll(/&nbsp;/g, '\n').replaceAll('<br>', '\n').trim()) // remove &nbsp; and trim
     .filter(text => text.length > 0); // only keep non-empty paragraphs
 };
