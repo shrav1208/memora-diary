@@ -27,9 +27,6 @@ export const getYears = async (req, res) => {
       }
     ]);
 
-    console.log("USER ID:", userId);
-
-
     res.status(200).json({
       success: true,
       years
