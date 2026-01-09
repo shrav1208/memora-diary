@@ -1,6 +1,6 @@
 import styles from './Landing.module.css'
 import { Navbar } from '../../components/Navbar';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 export const Landing = ({ setFromLanding }) => {

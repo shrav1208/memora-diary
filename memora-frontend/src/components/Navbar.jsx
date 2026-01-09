@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css'
 import sidebar from '../assets/sidebar.png'
 import logo from '../assets/navbar-logo.png';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { SideBar } from './SideBar';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';

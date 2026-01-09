@@ -1,5 +1,5 @@
 import { Login } from './pages/Onboarding/Login'
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 import './App.module.css'
 import { Signup } from './pages/Onboarding/Signup';
 import { Landing } from './pages/Landing/Landing';
@@ -10,7 +10,6 @@ import { Day } from './components/Day/Day';
 import { useState } from 'react';
 import { About } from './pages/About/About';
 import { Profile } from './pages/Profile/Profile';
-import dayjs from 'dayjs';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
@@ -74,15 +73,14 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to={`/dashboard/${dayjs().year()}/${dayjs().month()}/${dayjs().date()}`} />} />
 
+          {/* Static first */}
           <Route path="all" element={<All />} />
 
-          <Route path=":year" element={<Year />} />
-
-          <Route path=":year/:month" element={<Month />} />
-
+          {/* Dynamic next */}
           <Route path=":year/:month/:day" element={<Day />} />
+          <Route path=":year/:month" element={<Month />} />
+          <Route path=":year" element={<Year />} />
 
         </Route>
 

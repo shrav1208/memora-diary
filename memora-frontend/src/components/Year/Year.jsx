@@ -2,7 +2,7 @@ import data from '../../diary_entries_2025.json';
 import dayjs from 'dayjs';
 import styles from './Year.module.css'
 import { MonthCard } from './MonthCard';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export const Year = () => {
 

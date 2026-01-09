@@ -3,7 +3,7 @@ import styles from './Day.module.css';
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const Day = () => {
   const navigate = useNavigate();

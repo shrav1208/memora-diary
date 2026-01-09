@@ -1,6 +1,6 @@
 
 import styles from './All.module.css'
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { YearCard } from './YearCard';
@@ -34,9 +34,6 @@ export const All = () => {
         loadYears();
     }, []);
 
-
-
-
     return (
         <>
             <div className={styles['years-collection']}>
@@ -45,7 +42,7 @@ export const All = () => {
                         key={y.year}
                         year={y.year}
                         count={y.count}
-                        onClick={onYearClick(y.year)}
+                        onClick={() => onYearClick(y.year)}
                     />
                 ))}
             </div>

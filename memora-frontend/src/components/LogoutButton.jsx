@@ -1,6 +1,6 @@
 import styles from './LogoutButton.module.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export const LogoutButton = () => {
