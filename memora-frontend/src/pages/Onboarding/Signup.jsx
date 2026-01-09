@@ -12,13 +12,6 @@ export const Signup = () => {
     const navigate = useNavigate();
     const { setUser } = useAuth();
 
-    useEffect(() => {
-        document.body.className = 'signup-body';
-        return () => {
-            document.body.className = ''; // cleanup when leaving page
-        };
-    }, []);
-
     // form states
     const [newUsernameInput, setNewUsernameInput] = useState('');
     const [nameInput, setNameInput] = useState('');

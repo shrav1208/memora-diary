@@ -1,9 +1,7 @@
 import { Navbar } from '../../components/Navbar';
 import { Outlet } from 'react-router';
 import { DashboardHeader } from './DashboardHeader';
-import { useEffect } from 'react';
 import styles from './DashboardPage.module.css';
-import { useBodyClass } from '../../utils/useBodyClass';
 
 export const DashboardPage = ({
   selectedMonth,
@@ -14,13 +12,11 @@ export const DashboardPage = ({
   setFromLanding,
 }) => {
 
-  useBodyClass('day-body');
-
   return (
     <>
       <Navbar />
 
-      <div className={styles['container']}>
+      <div className={styles['page']}>
         <DashboardHeader
           setSelectedMonth={setSelectedMonth}
           setSelectedDay={setSelectedDay}

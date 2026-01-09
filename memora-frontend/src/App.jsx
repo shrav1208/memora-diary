@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
+import { useRouteBodyClass } from './utils/useRouteBodyClass';
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
@@ -24,6 +25,8 @@ function App() {
   const [selectedDay, setSelectedDay] = useState(dayjs().date());
   console.log(dayjs().date(selectedDay).format());
   console.log(dayjs().month(selectedMonth).date(selectedDay).format("YYYY-MM-DD"));
+
+  useRouteBodyClass();
 
   return (
     <>

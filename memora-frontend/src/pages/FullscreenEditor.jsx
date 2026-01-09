@@ -4,7 +4,6 @@ import tickmark from "../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../components/Navbar";
-import { useBodyClass } from "../utils/useBodyClass";
 import { useLocation } from 'react-router';
 
 import axios from "axios";
@@ -13,8 +12,6 @@ import { useNavigate } from "react-router";
 // minor changes remaining - title input sizing errors during responsiveness
 
 export const FullscreenEditor = () => {
-
-    useBodyClass('fullscreen-body');
 
     const navigate = useNavigate();
     const [saving, setSaving] = useState(false);
