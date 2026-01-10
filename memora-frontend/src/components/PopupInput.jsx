@@ -3,7 +3,7 @@ import styles from './PopupInput.module.css';
 import tickmark from '../assets/tickmark.svg';
 import dayjs from "dayjs";
 import expandButton from '../assets/expand.svg';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 

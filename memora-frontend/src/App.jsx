@@ -1,5 +1,5 @@
 import { Login } from './pages/Onboarding/Login'
-import { Routes, Route } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 import './App.module.css'
 import { Signup } from './pages/Onboarding/Signup';
 import { Landing } from './pages/Landing/Landing';
@@ -10,7 +10,6 @@ import { Day } from './components/Day/Day';
 import { useState } from 'react';
 import { About } from './pages/About/About';
 import { Profile } from './pages/Profile/Profile';
-import dayjs from 'dayjs';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
@@ -19,18 +18,6 @@ import { All } from './components/All/All';
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
-
-  // useState for month selection
-  const [selectedYear, setSelectedYear] = useState(dayjs().month());
-
-  // useState for month selection
-  const [selectedMonth, setSelectedMonth] = useState(dayjs().month());
-
-  // useState for day selection
-  const [selectedDay, setSelectedDay] = useState(dayjs().date());
-
-  console.log(dayjs().date(selectedDay).format());
-  console.log(dayjs().month(selectedMonth).date(selectedDay).format("YYYY-MM-DD"));
 
   useRouteBodyClass();
 
@@ -58,7 +45,7 @@ function App() {
 
         <Route path='/landing' element={
           <ProtectedRoute>
-            <Landing setFromLanding={setFromLanding} setSelectedMonth={setSelectedMonth} setSelectedDay={setSelectedDay} />
+            <Landing setFromLanding={setFromLanding} />
           </ProtectedRoute>}
         />
 
@@ -80,21 +67,21 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardPage
-                selectedMonth={selectedMonth}
-                setSelectedMonth={setSelectedMonth}
-                selectedDay={selectedDay}
-                setSelectedDay={setSelectedDay}
                 fromLanding={fromLanding}
                 setFromLanding={setFromLanding}
               />
             </ProtectedRoute>
           }
         >
-          <Route index element={<Year setSelectedMonth={setSelectedMonth} />} />
-          <Route path='all' element={<All />} />
-          <Route path="year" element={<Year setSelectedMonth={setSelectedMonth} />} />
-          <Route path="month" element={<Month selectedMonth={selectedMonth} setSelectedDay={setSelectedDay} />} />
-          <Route path="day" element={<Day selectedMonth={selectedMonth} selectedDay={selectedDay} />} />
+
+          {/* Static first */}
+          <Route path="all" element={<All />} />
+
+          {/* Dynamic next */}
+          <Route path=":year/:month/:day" element={<Day />} />
+          <Route path=":year/:month" element={<Month />} />
+          <Route path=":year" element={<Year />} />
+
         </Route>
 
         <Route path='/about' element={<About />} />

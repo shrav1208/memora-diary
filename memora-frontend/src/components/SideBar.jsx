@@ -3,7 +3,7 @@ import profile from '../assets/profile-photo.png';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LogoutButton } from './LogoutButton';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const SideBar = () => {
 

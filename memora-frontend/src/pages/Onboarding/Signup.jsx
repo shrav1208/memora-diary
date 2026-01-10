@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Signup.module.css';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";

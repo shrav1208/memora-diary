@@ -6,6 +6,13 @@
   gap: 66px;
 }
 
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
 .container {
     width: 1040px;
     flex-direction: column;
