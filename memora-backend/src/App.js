@@ -5,9 +5,9 @@ import loginRoutes from './Routes/Login.routes.js';
 import signupRoutes from './Routes/Signup.routes.js';
 import logoutRoutes from './Routes/Logout.routes.js';
 import authRoutes from './Routes/Auth.routes.js';
-import createRoutes from './Routes/Create.routes.js';
+import createPostRoutes from './Routes/CreatePost.routes.js';
 import readUserRoutes from './Routes/ReadUser.routes.js';
-import readPostRoutes from './Routes/ReadPosts.routes.js';
+import readPostsRoutes from './Routes/ReadPosts.routes.js';
 import updatePostRoutes from './Routes/UpdatePost.routes.js';
 import deletePostRoutes from './Routes/DeletePost.routes.js';
 import getPostRoutes from './Routes/GetPost.routes.js';
@@ -48,9 +48,9 @@ app.use('/api/get/days', requireAuth, getDaysRoutes);
 
 //CRUD
 
-app.use('/api/create', requireAuth, createRoutes);
+app.use('/api/create/post', requireAuth, createPostRoutes);
 app.use('/api/read/user', requireAuth, readUserRoutes);
-app.use('/api/read/post', requireAuth, readPostRoutes);
+app.use('/api/read/posts', requireAuth, readPostsRoutes);
 app.use('/api/update/post', requireAuth, updatePostRoutes);
 app.use('/api/delete/post', requireAuth, deletePostRoutes);
 app.use('/api/get/post', requireAuth, getPostRoutes);

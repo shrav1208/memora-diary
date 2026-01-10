@@ -28,7 +28,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
             setSaving(true);
 
             await axios.post(
-                "/api/create",
+                "/api/create/post",
                 {
                     title: inputTitle.trim(),
                     content, // TinyMCE HTML
