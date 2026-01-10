@@ -16,7 +16,11 @@ export const Month = () => {
     const daysInMonth = dayjs().year(year).month(month).daysInMonth();
 
     // // Create array of day numbers: 1, 2, 3, ...
-    // const firstDayOfMonth = dayjs().month(month).day(); // 0=Sun, 1=Mon, etc.
+    // const firstDayOfMonth = dayjs()
+    //     .year(year)
+    //     .month(month)
+    //     .date(1)
+    //     .day(); // 0=Sun, 1=Mon, etc.
 
     // // Create empty slots before the 1st
     // const blanks = Array(firstDayOfMonth).fill(null);
@@ -41,26 +45,38 @@ export const Month = () => {
         navigate(`/dashboard/${year}/${month}/${day}`);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         const loadDays = async () => {
-            try{
+            try {
                 const res = await axios.get('/api/get/days', {
                     params: { year, month }
                 });
 
-                if(res.data.success) {
+                if (res.data.success) {
                     const dayMap = new Map(
                         res.data.days.map(d => [d.day, d.count])
                     );
 
                     const fullDays = Array.from({ length: daysInMonth }, (_, i) => ({
-                        day: i+1,
-                        count: dayMap.get(i+1) ?? 0
+                        day: i + 1,
+                        count: dayMap.get(i + 1) ?? 0
                     }));
 
-                    setDays(fullDays);
-                } 
-            }catch (err) {
+                    const firstDayOfMonth = dayjs()
+                        .year(year)
+                        .month(month)
+                        .date(1)
+                        .day();
+
+                    const calendarDays = [
+                        ...Array(firstDayOfMonth).fill(null),
+                        ...fullDays
+                    ];
+
+                    setDays(calendarDays);
+
+                }
+            } catch (err) {
                 console.error("Failed to fetch diary entries:", err);
             }
         };
@@ -87,15 +103,22 @@ export const Month = () => {
                 </div>
 
                 <div className={styles['days-collection']}>
-                    {days.map((d) => (
-                        <DayCard
-                        key={d.day}
-                        day = {dayjs().year(year).month(month).date(d.day).format("DD")}
-                        count = {d.count}
-                        onClick={() => onDayClick(d.day)}
-                        />
+                    {days.map((d, index) => (
+                        d === null ? (
+                            <div key={`blank-${index}`} className={styles['empty-day']} />
+                        ) : (
+                            <DayCard
+                                day={d.day}
+                                month={month}
+                                year={year}
+                                count={d.count}
+                                onClick={() => onDayClick(d.day)}
+                            />
+
+                        )
                     ))}
                 </div>
+
             </div>
             {/* </div> */}
         </>
