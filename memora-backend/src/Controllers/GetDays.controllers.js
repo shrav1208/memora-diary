@@ -40,17 +40,17 @@ try {
         });
     }
 
-    if (m < 1 || m > 12) {
+    if (m < 0 || m > 11) {
         return res.status(400).json({
             success: false,
-            message: "Month must be between 1 and 12",
+            message: "Month must be between 0 and 11",
         });
     }
 
     const userId = new mongoose.Types.ObjectId(req.session.userID);
 
-    const startDate = new Date(y, m - 1, 1);
-    const endDate = new Date(y, m, 1);
+    const startDate = new Date(y, m, 1);
+    const endDate = new Date(y, m+1, 1);
 
     const days = await DiaryEntry.aggregate([
     {

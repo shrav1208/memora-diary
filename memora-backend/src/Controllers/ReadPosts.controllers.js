@@ -9,11 +9,7 @@ export const readPosts = async (req, res) => {
     try {
         const { year, month, day } = req.query;
 
-        if (
-            year === undefined ||
-            month === undefined ||
-            day === undefined
-        ) {
+        if (year === undefined || month === undefined || day === undefined) {
             return res.status(400).json({
                 success: false,
                 message: "Year, month and day are required",
@@ -22,22 +18,22 @@ export const readPosts = async (req, res) => {
 
         const userId = new mongoose.Types.ObjectId(req.session.userID);
 
-        // month is 0-based (Jan = 0) — same as dayjs
-        const startOfDay = new Date(
-            Number(year),
-            Number(month),     // 0-based (Jan = 0)
-            Number(day),
-            0, 0, 0, 0
-        );
+        // month is 0-based (Jan = 0)
+        const startOfDay = dayjs
+            .utc()
+            .year(Number(year))
+            .month(Number(month))
+            .date(Number(day))
+            .startOf("day")
+            .toDate();
 
-        const endOfDay = new Date(
-            Number(year),
-            Number(month),
-            Number(day),
-            23, 59, 59, 999
-        );
-
-        console.log("QUERY RANGE:", startOfDay, endOfDay);
+        const endOfDay = dayjs
+            .utc()
+            .year(Number(year))
+            .month(Number(month))
+            .date(Number(day))
+            .endOf("day")
+            .toDate();
 
         const entries = await DiaryEntry.find({
             user: userId,
@@ -47,8 +43,6 @@ export const readPosts = async (req, res) => {
                 $lte: endOfDay,
             },
         }).sort({ createdAt: 1 });
-
-        console.log(entries);
 
         return res.status(200).json({
             success: true,
