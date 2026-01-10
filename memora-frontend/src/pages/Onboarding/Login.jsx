@@ -43,7 +43,7 @@ export const Login = () => {
                 setUsernameInput('')
                 setPasswordInput('')
                 
-                const meRes = await axios.get("/api/auth/me");
+                const meRes = await axios.get("/api/auth");
                 setUser(meRes.data.user);
                 navigate("/landing", { replace: true });
             }

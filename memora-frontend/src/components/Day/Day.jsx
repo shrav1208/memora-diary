@@ -24,7 +24,7 @@ export const Day = () => {
         setLoading(true);
         setError(null);
 
-        const res = await axios.get('/api/read/post', {
+        const res = await axios.get('/api/read/posts', {
           params: {
             year: selectedDate.year(),
             month: selectedDate.month(),
