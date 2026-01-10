@@ -42,7 +42,7 @@ try {
     },
     {
         $group: {
-        _id: { $month: "$createdAt" },
+        _id: { $subtract: [{ $month: "$createdAt" }, 1] },
         count: { $sum: 1 }
         }
     },
