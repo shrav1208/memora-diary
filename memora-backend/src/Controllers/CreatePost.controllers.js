@@ -1,6 +1,6 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
 
-export const create = async(req, res) => {
+export const createPost = async(req, res) => {
     try {
         const { title, content, mood } = req.body;
 

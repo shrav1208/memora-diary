@@ -70,7 +70,7 @@ export const FullscreenEditor = () => {
                 
             }
             else {
-                await axios.post("/api/create", {
+                await axios.post("/api/create/post", {
                     title: inputTitle.trim(),
                     content: inputText, // TinyMCE gives HTML — perfect
                 }
