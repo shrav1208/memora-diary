@@ -73,6 +73,9 @@ export const Signup = () => {
                 setNameInput('');
                 setCreatePasswordInput('');
                 setConfirmPasswordInput('');
+
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                await axios.post("/api/session/timezone", { timezone });
                 
                 const meRes = await axios.get("/api/auth");
                 setUser(meRes.data.user);

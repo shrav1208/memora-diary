@@ -42,6 +42,9 @@ export const Login = () => {
             if (res.data.success) {
                 setUsernameInput('')
                 setPasswordInput('')
+
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                await axios.post("/api/session/timezone", { timezone });
                 
                 const meRes = await axios.get("/api/auth");
                 setUser(meRes.data.user);

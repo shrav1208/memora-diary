@@ -15,6 +15,7 @@ import searchPosts from './Routes/SearchPosts.routes.js';
 import getYearsRoutes from './Routes/GetYears.routes.js';
 import getMonthsRoutes from './Routes/GetMonths.routes.js';
 import getDaysRoutes from './Routes/GetDays.routes.js';
+import sessionTimezone from './Routes/SessionTimezone.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -58,6 +59,10 @@ app.use('/api/get/post', requireAuth, getPostRoutes);
 //Search
 
 app.use('/api/search', requireAuth, searchPosts);
+
+//Timezone
+
+app.use('/api/session/timezone', requireAuth, sessionTimezone);
 
 //Test
 

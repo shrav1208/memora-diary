@@ -1,5 +1,11 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
 import mongoose from "mongoose";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const getMonths = async (req, res) => {
 try {
@@ -31,19 +37,21 @@ try {
 
     const userId = new mongoose.Types.ObjectId(req.session.userID);
 
+    const tz = req.session.timezone || "UTC";
+
     const months = await DiaryEntry.aggregate([
     {
         $match: {
             user: userId,
             isDeleted: false,
             $expr: {
-                $eq: [{ $year: "$createdAt" }, year]
+                $eq: [{ $year: {date: "$createdAt", timezone: tz} }, year]
             }
         }
     },
     {
         $group: {
-        _id: { $subtract: [{ $month: "$createdAt" }, 1] },
+        _id: { $subtract: [{ $month: {date: "$createdAt", timezone: tz} }, 1] },
         count: { $sum: 1 }
         }
     },
