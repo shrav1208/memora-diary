@@ -56,6 +56,7 @@ try {
     {
         $match: {
             user: userId,
+            isDeleted: false,
             createdAt: {
                 $gte: startDate,
                 $lt: endDate,
