@@ -1,5 +1,11 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
 import mongoose from "mongoose";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const getDays = async (req, res) => {
 try {
@@ -13,16 +19,16 @@ try {
 
     const { year, month } = req.query;
 
+    // Convert to numbers
+    const y = parseInt(year);
+    const m = parseInt(month);
+
     if (!year || !month) {
         return res.status(400).json({
             success: false,
             message: "year and month are required",
         });
     }
-
-    // Convert to numbers
-    const y = parseInt(year);
-    const m = parseInt(month);
 
     if (isNaN(y) || isNaN(m)) {
         return res.status(400).json({
@@ -49,8 +55,23 @@ try {
 
     const userId = new mongoose.Types.ObjectId(req.session.userID);
 
-    const startDate = new Date(y, m, 1);
-    const endDate = new Date(y, m+1, 1);
+    const tz = req.session.timezone || "UTC";
+
+    // console.log(tz);
+
+    const startDate = dayjs
+    .tz(`${y}-${m + 1}-1`, tz)
+    .startOf("month")
+    .utc()
+    .toDate();
+
+    // console.log(startDate);
+
+    const endDate = dayjs
+    .tz(`${y}-${m + 1}-1`, tz)
+    .endOf("month")
+    .utc()
+    .toDate();
 
     const days = await DiaryEntry.aggregate([
     {
@@ -59,14 +80,19 @@ try {
             isDeleted: false,
             createdAt: {
                 $gte: startDate,
-                $lt: endDate,
+                $lte: endDate,
             },
         }
     },
     {
         $group: {
-        _id: { $dayOfMonth: "$createdAt" },
-        count: { $sum: 1 }
+        _id: { 
+            $dayOfMonth: {
+                date: "$createdAt",
+                timezone: tz,
+            },
+        },
+        count: { $sum: 1 },
         }
     },
     {
