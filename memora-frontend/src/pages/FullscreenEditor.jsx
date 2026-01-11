@@ -67,7 +67,7 @@ export const FullscreenEditor = () => {
                     title: inputTitle.trim(),
                     content: inputText,
                 })
-                
+
             }
             else {
                 await axios.post("/api/create/post", {
@@ -77,7 +77,7 @@ export const FullscreenEditor = () => {
                 );
 
                 // Navigate only AFTER successful save
-                
+
             }
             navigate(-1);
 
@@ -88,6 +88,30 @@ export const FullscreenEditor = () => {
             setSaving(false);
         }
     };
+
+    const handleDelete = async () => {
+        // If entry is not saved yet, just exit editor
+        if (!entryid) {
+            navigate(-1);
+            return;
+        }
+
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this diary entry?"
+        );
+
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`/api/delete/post/${entryid}`,
+                { withCredentials: true });
+            navigate(-1);
+        } catch (err) {
+            console.error("Delete failed:", err);
+            alert(err.response?.data?.message || "Failed to delete entry");
+        }
+    };
+
 
     // function to run editor commands
     const runCommand = (cmd, value = null) => {
@@ -292,6 +316,29 @@ export const FullscreenEditor = () => {
                     </div>
 
 
+                </div>
+
+                <div className={styles['delete-button']} onClick={() => handleDelete()}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="19"
+                        height="21"
+                        viewBox="0 0 19 21"
+                        fill="none"
+                    >
+                        <path
+                            d="M8.17823 8.1778H6.13379V16.3556H8.17823V8.1778Z"
+                            fill="#343434"
+                        />
+                        <path
+                            d="M12.2671 8.1778H10.2227V16.3556H12.2671V8.1778Z"
+                            fill="#343434"
+                        />
+                        <path
+                            d="M18.4 4.08889H14.3111V2.04444C14.3111 0.92 13.3911 0 12.2667 0H6.13333C5.00889 0 4.08889 0.92 4.08889 2.04444V4.08889H0V6.13333H2.04444V18.4C2.04444 19.5244 2.96444 20.4444 4.08889 20.4444H14.3111C15.4356 20.4444 16.3556 19.5244 16.3556 18.4V6.13333H18.4V4.08889ZM6.13333 2.04444H12.2667V4.08889H6.13333V2.04444ZM14.3111 18.4H4.08889V6.13333H6.13333H12.2667H14.3111V18.4Z"
+                            fill="#343434"
+                        />
+                    </svg>
                 </div>
             </form>
         </>

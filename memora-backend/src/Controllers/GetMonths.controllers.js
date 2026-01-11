@@ -35,6 +35,7 @@ try {
     {
         $match: {
             user: userId,
+            isDeleted: false,
             $expr: {
                 $eq: [{ $year: "$createdAt" }, year]
             }

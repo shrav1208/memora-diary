@@ -15,7 +15,7 @@ export const getYears = async (req, res) => {
 
     const years = await DiaryEntry.aggregate([
       {
-        $match: { user: userId } // IMPORTANT: user-specific
+        $match: { user: userId, isDeleted: false } // IMPORTANT: user-specific
       },
       {
         $group: {
