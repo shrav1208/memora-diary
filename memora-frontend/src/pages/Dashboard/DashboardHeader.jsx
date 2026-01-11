@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 import { Link } from 'react-router-dom';
+import { SearchPopup } from '../../components/SearchPopup';
+import searchIcon from '../../assets/search-icon.png'
 
 export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
 
@@ -15,37 +17,49 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
 
-    useEffect(()=>{
-        if(!query.trim()) {
+    useEffect(() => {
+        if (!query.trim()) {
             setResults([]);
             return;
         }
 
-        const timeout = setTimeout (async () => {
-            try{
+        const timeout = setTimeout(async () => {
+            try {
                 const res = await axios.get(`/api/search?q=${encodeURIComponent(query)}`);
                 // console.log(res.data);
                 setResults(res.data.results);
-            }catch(err){
+            } catch (err) {
                 console.error("Search Error: " + err.message);
             }
         }, 300);
-        
+
         return () => clearTimeout(timeout)
     }, [query])
 
-    useEffect(()=>{
-        (async()=>{
-            try{
+    useEffect(() => {
+        (async () => {
+            try {
                 const res = await axios.get('/api/read/user', { withCredentials: true });
                 // console.log(res.data);
                 setName(res.data.user.name);
-            }catch(err){
+            } catch (err) {
                 console.error(err.message);
             }
-            
+
         })();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const handler = (e) => {
+            if (e.key === 'Escape') {
+                setQuery('');
+                setResults([]);
+            }
+        };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+    }, []);
+
 
     useEffect(() => {
         if (fromLanding) {
@@ -149,12 +163,29 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                             <img src={plusIcon} className={styles['plus']} />
                         </div>
                     </div>
-                    <input 
-                    className={styles['search-box']} 
-                    placeholder="Search your memories..." 
-                    onChange={(event)=>{setQuery(event.target.value);}}
-                    value = {query}
-                    />
+                    <div className={styles['search-wrapper']}>
+                        <div className={styles['search-box-wrapper']}>
+                        <input
+                            className={styles['search-box']}
+                            placeholder="Search your memories..."
+                            onChange={(event) => setQuery(event.target.value)}
+                            value={query}
+                        />
+                        <div className={styles['search-icon']}>
+                        <img src={searchIcon} className={styles['search-icon-img']} alt='search' />
+                        </div>
+                        </div>
+
+                        {query && (
+                            <SearchPopup
+                                results={results}
+                                onClose={() => {
+                                    setQuery('');
+                                    setResults([]);
+                                }}
+                            />
+                        )}
+                    </div>
                 </div>
 
                 <div className={styles['features-flex']}>
