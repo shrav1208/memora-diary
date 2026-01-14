@@ -13,7 +13,7 @@ function calculateMood(score){
     return "excited";
 }
 
-export const updateDailyMood = async (mood, score, userID) => {
+export const updateDailyMood = async (score, userID) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -26,7 +26,7 @@ export const updateDailyMood = async (mood, score, userID) => {
         await DailyMood.create({
             user: userID,
             date: today,
-            mood,
+            mood: calculateMood(score),
             score,
             entries: 1,
             source: "entries",

@@ -21,11 +21,12 @@ export const createPost = async(req, res) => {
             title: title.trim(),
             content: content.trim(),
             mood,
+            score,
         });
 
         await entry.save();
 
-        await updateDailyMood (mood, score, req.session.userID);
+        await updateDailyMood (score, req.session.userID);
 
         return res.status(201).json({
             success: true,
