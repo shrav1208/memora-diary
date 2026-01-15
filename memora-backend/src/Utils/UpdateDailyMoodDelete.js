@@ -1,4 +1,10 @@
 import DailyMood from "../Models/DailyMood.js";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone.js";
+import utc from "dayjs/plugin/utc.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 function calculatedScore(totalScore, entries, score){
     return ((totalScore*entries)-score)/(entries-1);
@@ -13,9 +19,11 @@ function calculateMood(score){
     return "excited";
 }
 
-export const updateDailyMoodDelete = async (score, userID) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+export const updateDailyMoodDelete = async (score, userID, timezone) => {
+    
+    const tz = timezone || "UTC";
+    
+    const today = dayjs().tz(tz).startOf("day").utc().toDate();
 
     const dailyMood = await DailyMood.findOne({
         user: userID,

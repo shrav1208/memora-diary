@@ -38,9 +38,8 @@ export const updatePost = async(req, res) => {
         if (title !== undefined) entry.title = title.trim();
         if (content !== undefined) entry.content = content.trim();
 
-        const {mood, score} = analyseMood (title, content);
+        const {mood, score} = analyseMood (entry.title, entry.content);
 
-        const prevmood = entry.mood;
         const prevscore = entry.score;
 
         entry.mood = mood;
@@ -48,7 +47,7 @@ export const updatePost = async(req, res) => {
 
         await entry.save();
 
-        await updateDailyMoodUpdate(score, prevscore, req.session.userID)
+        await updateDailyMoodUpdate(score, prevscore, req.session.userID, req.session.timezone);
 
         return res.status(200).json({
             success: true,

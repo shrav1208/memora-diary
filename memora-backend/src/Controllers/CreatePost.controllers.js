@@ -26,7 +26,7 @@ export const createPost = async(req, res) => {
 
         await entry.save();
 
-        await updateDailyMood (score, req.session.userID);
+        await updateDailyMood (score, req.session.userID, req.session.timezone);
 
         return res.status(201).json({
             success: true,
