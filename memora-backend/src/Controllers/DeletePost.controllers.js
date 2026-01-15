@@ -29,7 +29,7 @@ export const deletePost = async (req, res) => {
         entry.isDeleted = true;
         await entry.save();
 
-        await updateDailyMoodDelete(entry.score, req.session.userID, req.session.timezone);
+        await updateDailyMoodDelete(entry.score, req.session.userID, req.session.timezone, entry.createdAt);
 
         // console.log("✅ ENTRY DELETED");
         return res.status(200).json({

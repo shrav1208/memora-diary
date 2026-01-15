@@ -19,16 +19,18 @@ function calculateMood(score){
     return "excited";
 }
 
-export const updateDailyMoodDelete = async (score, userID, timezone) => {
+export const updateDailyMoodDelete = async (score, userID, timezone, entryDate) => {
     
     const tz = timezone || "UTC";
     
-    const today = dayjs().tz(tz).startOf("day").utc().toDate();
+    const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
 
     const dailyMood = await DailyMood.findOne({
         user: userID,
-        date: today,
-    })
+        date,
+    });
+
+    if (!dailyMood) return;
 
     if (dailyMood.entries === 1) {
         await dailyMood.deleteOne();

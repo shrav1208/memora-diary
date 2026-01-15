@@ -47,7 +47,7 @@ export const updatePost = async(req, res) => {
 
         await entry.save();
 
-        await updateDailyMoodUpdate(score, prevscore, req.session.userID, req.session.timezone);
+        await updateDailyMoodUpdate(score, prevscore, req.session.userID, req.session.timezone, entry.createdAt);
 
         return res.status(200).json({
             success: true,
