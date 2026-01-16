@@ -1,10 +1,12 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
 import mongoose from "mongoose";
+import { analyseMood } from "../Utils/AnalyseMood.js";
+import { updateDailyMoodUpdate } from "../Utils/UpdateDailyMoodUpdate.js";
 
 export const updatePost = async(req, res) => {
     try{
 
-        const { title, content, mood } = req.body;
+        const { title, content } = req.body;
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -35,9 +37,17 @@ export const updatePost = async(req, res) => {
 
         if (title !== undefined) entry.title = title.trim();
         if (content !== undefined) entry.content = content.trim();
-        if (mood !== undefined) entry.mood = mood;
+
+        const {mood, score} = analyseMood (entry.title, entry.content);
+
+        const prevscore = entry.score;
+
+        entry.mood = mood;
+        entry.score = score;
 
         await entry.save();
+
+        await updateDailyMoodUpdate(score, prevscore, req.session.userID, req.session.timezone, entry.createdAt);
 
         return res.status(200).json({
             success: true,

@@ -26,6 +26,12 @@ const diaryEntrySchema = new mongoose.Schema({
         type: String,
         enum: ["happy", "sad", "anxious", "calm", "excited", "neutral"],
         default: "neutral",
+        required: true,
+    },
+
+    score: {
+        type: Number,
+        // required: true, (uncomment later)
     },
 
     isDeleted: {
