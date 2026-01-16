@@ -26,7 +26,7 @@ export const setMood = async (req, res) => {
     const today = dayjs().tz(tz).startOf("day").utc().toDate();
 
     DailyMood.create({
-        user: req.session.userID,
+        user: userId,
         date: today,
         mood,
         score: calculateScore(mood),
