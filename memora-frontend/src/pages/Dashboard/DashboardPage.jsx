@@ -4,11 +4,13 @@ import { DashboardHeader } from './DashboardHeader';
 import styles from './DashboardPage.module.css';
 import { NavigateViews } from '../../components/NavigateViews';
 import dayjs from 'dayjs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { MoodInputPopup } from './MoodInputPopup';
 
 export const DashboardPage = ({ fromLanding, setFromLanding }) => {
 
   const navigate = useNavigate();
+    const [isMoodPopupOpen, setIsMoodPopupOpen] = useState(false);
 
   const goToToday = () => {
     const today = dayjs();
@@ -30,6 +32,22 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
     }
   }, [location.pathname, navigate]);
 
+   /**
+   * AUTO OPEN AT 10 PM IF NO ENTRY EXISTS
+   * (assumes you already know whether today has an entry)
+   */
+  useEffect(() => {
+    const now = dayjs();
+
+    const isAfter10PM = now.hour() >= 22;
+
+    const hasDiaryEntryToday = false; // 🔴 replace with real value from API/state
+
+    if (isAfter10PM && !hasDiaryEntryToday) {
+      setIsMoodPopupOpen(true);
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -43,10 +61,14 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
 
         <div className={styles['outer']}>
 
-        <NavigateViews />
+        <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} />
 
         {/* THIS is where Year / Month / Day swap */}
         <div className={styles['container']}><Outlet /></div>
+        <MoodInputPopup
+            isOpen={isMoodPopupOpen}
+            onClose={() => setIsMoodPopupOpen(false)}
+          />
         </div>
       </div>
     </>
