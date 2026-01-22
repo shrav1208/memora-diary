@@ -42,7 +42,7 @@ export const Day = () => {
     };
 
     fetchEntries();
-  }, [year, month, day]);
+  }, [year, month, day, selectedDate]);
 
   return (
     <div className={styles['container']}>
