@@ -19,7 +19,7 @@
 
 .mood-pop-up {
     width: 540px;
-    height: 320px;
+    height: 320px; 
     position: absolute;
     z-index: 1100;
 
@@ -35,6 +35,13 @@
     padding: 20px;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
     gap: 25px;
 }
 
@@ -97,7 +104,6 @@
 }
 
 .save-button {
-    /* width: 102px; */
     padding: 0 16px;
     height: 42px;
     border-radius: 30px;
@@ -106,16 +112,19 @@
     border: none;
 
     color: #FFF;
-    text-align: center;
     font-family: Inter;
     font-size: 14px;
-    font-style: normal;
     font-weight: 300;
-    line-height: normal;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* transition base
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease; */
 }
 
 .mood-button {
@@ -127,9 +136,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .mood-img {
     width: 25px;
     height: 25px;
+}
+
+.selected {
+    border: 1.5px hidden white;
+    outline: none;
+    filter: drop-shadow(0 0 8px rgba(255, 119, 194, 0.655));
+
+    transform: scale(1.25);
 }

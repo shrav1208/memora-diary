@@ -6,46 +6,30 @@ import utc from "dayjs/plugin/utc.js";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-function calculatedScore(totalScore, entries, score){
-    return ((totalScore*entries)+score)/(entries+1);
-}
-
-function calculateMood(score){
-    if (score <= -4) return "sad";
-    if (score <= -1) return "anxious";
-    if (score < 2) return "neutral";
-    if (score < 5) return "calm";
-    if (score < 9) return "happy";
+function calculateMood(score) {
+    if (score <= -6) return "sad";
+    if (score <= -3) return "anxious";
+    if (score <= 0) return "neutral";
+    if (score <= 3) return "calm";
+    if (score <= 6) return "happy";
     return "excited";
 }
 
-export const updateDailyMood = async (score, userID, timezone) => {
-    
-    const tz = timezone || "UTC";
-
+export const updateDailyMood = async (score, userID, tz = "UTC") => {
     const today = dayjs().tz(tz).startOf("day").utc().toDate();
 
-    const dailyMood = await DailyMood.findOne({
-        user: userID,
-        date: today,
-    })
+    const doc = await DailyMood.findOneAndUpdate(
+        { user: userID, date: today },
+        { $setOnInsert: { user: userID, date: today } },
+        { upsert: true, new: true }
+    );
 
-    if(!dailyMood){
-        await DailyMood.create({
-            user: userID,
-            date: today,
-            mood: calculateMood(score),
-            score,
-            entries: 1,
-            source: "entries",
-        })
-    }else{
-        dailyMood.score = calculatedScore(dailyMood.score, dailyMood.entries, score);
-        dailyMood.mood = calculateMood(dailyMood.score);
-        dailyMood.entries += 1;
-        dailyMood.source = "entries";
-        await dailyMood.save();
-    }
+    // Recalculate running average for entries
+    const prevTotal = (doc.entriesScore ?? 0) * (doc.entriesCount ?? 0);
+    doc.entriesCount = (doc.entriesCount ?? 0) + 1;
+    doc.entriesScore = (prevTotal + score) / doc.entriesCount;
+    doc.entriesMood = calculateMood(doc.entriesScore);
 
-
-}
+    doc.resolveDisplay();
+    await doc.save();
+};

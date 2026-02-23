@@ -53,15 +53,7 @@ export const NavigateViews = ({ onMoodClick }) => {
     // Only render the button if we're NOT on today's path
     const showDayButton = location.pathname !== todayPath;
 
-    const useShowMoodButton = () => {
-        const { year, month, day } = useParams();
-
-        return Boolean(year && month && day);
-
-
-    };
-
-    const showMoodButton = useShowMoodButton();
+    const showMoodButton = Boolean(params.year && params.month && params.day);
 
     return (
         <div className={styles.container}>

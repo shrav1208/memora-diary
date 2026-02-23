@@ -32,21 +32,34 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
     }
   }, [location.pathname, navigate]);
 
+    // Parse year/month/day directly from the pathname
+  const pathParts = location.pathname.split('/').filter(Boolean);
+  // pathname looks like /dashboard/2025/5/14
+  // pathParts = ['dashboard', '2025', '5', '14']
+  const year = Number(pathParts[1]);
+  const month = Number(pathParts[2]);
+  const day = Number(pathParts[3]);
+
+  // Build the date — fall back to today if params aren't in the URL
+  const popupDate = (year && month !== undefined && day)
+    ? new Date(year, month, day)
+    : new Date();
+
    /**
    * AUTO OPEN AT 10 PM IF NO ENTRY EXISTS
    * (assumes you already know whether today has an entry)
    */
-  useEffect(() => {
-    const now = dayjs();
+  // useEffect(() => {
+  //   const now = dayjs();
 
-    const isAfter10PM = now.hour() >= 22;
+  //   const isAfter10PM = now.hour() >= 22;
 
-    const hasDiaryEntryToday = false; // 🔴 replace with real value from API/state
+  //   const hasDiaryEntryToday = false; // 🔴 replace with real value from API/state
 
-    if (isAfter10PM && !hasDiaryEntryToday) {
-      setIsMoodPopupOpen(true);
-    }
-  }, []);
+  //   if (isAfter10PM && !hasDiaryEntryToday) {
+  //     setIsMoodPopupOpen(true);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -68,6 +81,7 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
         <MoodInputPopup
             isOpen={isMoodPopupOpen}
             onClose={() => setIsMoodPopupOpen(false)}
+            date={popupDate}
           />
         </div>
       </div>
