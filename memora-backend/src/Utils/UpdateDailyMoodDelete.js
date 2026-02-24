@@ -6,39 +6,39 @@ import utc from "dayjs/plugin/utc.js";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-function calculatedScore(totalScore, entries, score){
-    return ((totalScore*entries)-score)/(entries-1);
-}
-
-function calculateMood(score){
-    if (score <= -4) return "sad";
-    if (score <= -1) return "anxious";
-    if (score < 2) return "neutral";
-    if (score < 5) return "calm";
-    if (score < 9) return "happy";
+function calculateMood(score) {
+    if (score <= -6) return "sad";
+    if (score <= -3) return "anxious";
+    if (score <= 0) return "neutral";
+    if (score <= 3) return "calm";
+    if (score <= 6) return "happy";
     return "excited";
 }
 
-export const updateDailyMoodDelete = async (score, userID, timezone, entryDate) => {
-    
-    const tz = timezone || "UTC";
-    
+export const updateDailyMoodDelete = async (score, userID, tz = "UTC", entryDate) => {
     const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
 
-    const dailyMood = await DailyMood.findOne({
-        user: userID,
-        date,
-    });
+    const doc = await DailyMood.findOne({ user: userID, date });
+    if (!doc || !doc.entriesCount) return;
 
-    if (!dailyMood) return;
-
-    if (dailyMood.entries === 1) {
-        await dailyMood.deleteOne();
-        return;
+    if (doc.entriesCount === 1) {
+        // No more entries for this day — clear entries fields
+        doc.entriesCount = 0;
+        doc.entriesScore = null;
+        doc.entriesMood = null;
+    } else {
+        const prevTotal = doc.entriesScore * doc.entriesCount;
+        doc.entriesCount -= 1;
+        doc.entriesScore = (prevTotal - score) / doc.entriesCount;
+        doc.entriesMood = calculateMood(doc.entriesScore);
     }
-    
-    dailyMood.score = calculatedScore(dailyMood.score, dailyMood.entries, score);
-    dailyMood.mood = calculateMood(dailyMood.score);
-    dailyMood.entries -= 1;
-    await dailyMood.save();
-}
+
+    doc.resolveDisplay();
+
+    // If nothing left to show at all, remove the document
+    if (doc.mood === null) {
+        await doc.deleteOne();
+    } else {
+        await doc.save();
+    }
+};

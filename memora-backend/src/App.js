@@ -17,7 +17,9 @@ import getMonthsRoutes from './Routes/GetMonths.routes.js';
 import getDaysRoutes from './Routes/GetDays.routes.js';
 import sessionTimezone from './Routes/SessionTimezone.routes.js';
 import getMoods from './Routes/GetMoods.routes.js';
+import getDailyMood from './Routes/GetDailyMood.routes.js';
 import setMood from './Routes/SetMood.routes.js';
+import getTodayReflection from './Routes/GetTodayReflection.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -69,7 +71,11 @@ app.use('/api/session/timezone', requireAuth, sessionTimezone);
 //Mood
 
 app.use('/api/get/moods', requireAuth, getMoods);
+app.use('/api/get/daily-mood', requireAuth, getDailyMood);
 app.use('/api/set/mood', requireAuth, setMood);
+
+// Reflection
+app.use('/api/get/today-reflection', requireAuth, getTodayReflection);
 
 //Test
 

@@ -6,34 +6,25 @@ import utc from "dayjs/plugin/utc.js";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-function calculatedScore(totalScore, entries, score, prevscore){
-    return ((totalScore*entries)-prevscore+score)/entries;
-}
-
-function calculateMood(score){
-    if (score <= -4) return "sad";
-    if (score <= -1) return "anxious";
-    if (score < 2) return "neutral";
-    if (score < 5) return "calm";
-    if (score < 9) return "happy";
+function calculateMood(score) {
+    if (score <= -6) return "sad";
+    if (score <= -3) return "anxious";
+    if (score <= 0) return "neutral";
+    if (score <= 3) return "calm";
+    if (score <= 6) return "happy";
     return "excited";
 }
 
-export const updateDailyMoodUpdate = async (score, prevscore, userID, timezone, entryDate) => {
-    
-    const tz = timezone || "UTC";
-    
+export const updateDailyMoodUpdate = async (newScore, prevScore, userID, tz = "UTC", entryDate) => {
     const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
 
-    const dailyMood = await DailyMood.findOne({
-        user: userID,
-        date,
-    });
+    const doc = await DailyMood.findOne({ user: userID, date });
+    if (!doc || !doc.entriesCount) return;
 
-    if (!dailyMood) return;
-    if (dailyMood.entries <= 0) return;
-    
-    dailyMood.score = calculatedScore(dailyMood.score, dailyMood.entries, score, prevscore);
-    dailyMood.mood = calculateMood(dailyMood.score);
-    await dailyMood.save();
-}
+    const prevTotal = doc.entriesScore * doc.entriesCount;
+    doc.entriesScore = (prevTotal - prevScore + newScore) / doc.entriesCount;
+    doc.entriesMood = calculateMood(doc.entriesScore);
+
+    doc.resolveDisplay();
+    await doc.save();
+};

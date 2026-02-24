@@ -34,6 +34,15 @@ const diaryEntrySchema = new mongoose.Schema({
         // required: true, (uncomment later)
     },
 
+    reflection: {
+        heading: String,
+        body: String,
+        generatedBy: {
+            type: String,
+            enum: ['template', 'llm'],
+        },
+    },
+
     isDeleted: {
         type: Boolean,
         default: false,

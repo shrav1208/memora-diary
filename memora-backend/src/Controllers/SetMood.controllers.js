@@ -7,30 +7,86 @@ import mongoose from "mongoose";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-function calculateScore(mood){
-    if (mood === "sad") return -4;
-    if (mood === "anxious") return -1;
-    if (mood === "neutral") return 0;
-    if (mood === "calm") return 4;
-    if (mood === "happy") return 8;
-    else return 9;
-}
+const moodScores = {
+    sad: -6,
+    anxious: -3,
+    neutral: 0,
+    calm: 3,
+    happy: 6,
+    excited: 9,
+};
 
 export const setMood = async (req, res) => {
-    const { mood } = req.body;
+    try {
+        const { mood, date } = req.body;
 
-    const userId = new mongoose.Types.ObjectId(req.session.userID);
-    
-    const tz = req.session.timezone || "UTC";
+        if (!moodScores.hasOwnProperty(mood)) {
+            return res.status(400).json({ success: false, message: "Invalid mood" });
+        }
 
-    const today = dayjs().tz(tz).startOf("day").utc().toDate();
+        if (!date) {
+            return res.status(400).json({ success: false, message: "Date required" });
+        }
 
-    DailyMood.create({
-        user: userId,
-        date: today,
-        mood,
-        score: calculateScore(mood),
-        entries: 0,
-        source: "manual",
-    })
-}
+        const userId = new mongoose.Types.ObjectId(req.session.userID);
+        const tz = req.session.timezone || "UTC";
+
+        // 🔥 Normalize SELECTED date, not today
+        const selectedDate = dayjs(date)
+            .tz(tz)
+            .startOf("day")
+            .utc()
+            .toDate();
+
+        const doc = await DailyMood.findOneAndUpdate(
+            { user: userId, date: selectedDate },
+            { $setOnInsert: { user: userId, date: selectedDate } },
+            { upsert: true, new: true }
+        );
+
+        doc.manualMood = mood;
+        doc.manualScore = moodScores[mood];
+
+        doc.resolveDisplay();
+        await doc.save();
+
+        return res.status(200).json({ success: true });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ success: false });
+    }
+};
+
+// Optional: clear manual mood and fall back to entries
+export const clearManualMood = async (req, res) => {
+    try {
+        const userId = new mongoose.Types.ObjectId(req.session.userID);
+        const tz = req.session.timezone || "UTC";
+        const { date } = req.body;
+
+        const selectedDate = dayjs(date)
+            .tz(tz)
+            .startOf("day")
+            .utc()
+            .toDate();
+
+        const doc = await DailyMood.findOne({ user: userId, date: selectedDate });
+        if (!doc) return res.status(200).json({ success: true });
+
+        doc.manualMood = null;
+        doc.manualScore = null;
+        doc.resolveDisplay();
+
+        if (doc.mood === null) {
+            await doc.deleteOne();
+        } else {
+            await doc.save();
+        }
+
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ success: false });
+    }
+};

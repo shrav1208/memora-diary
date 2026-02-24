@@ -81,7 +81,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                             content_style: `
                                 body {
                                     font-family: 'Inter', sans-serif;
-                                    text-align: justify;
+                                    text-align: left;
                                     font-size: 24px;
                                     font-style: normal;
                                     font-weight: 300;

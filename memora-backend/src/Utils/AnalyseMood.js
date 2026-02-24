@@ -14,10 +14,10 @@ export const analyseMood = (title, content) => {
 
     const { score } = sentiment.analyze(text);
 
-    if (score <= -4) return {mood: "sad", score};
-    if (score <= -1) return {mood: "anxious", score};
-    if (score < 2) return {mood: "neutral", score};
-    if (score < 5) return {mood: "calm", score};
-    if (score < 9) return {mood: "happy", score};
+    if (score <= -6) return {mood: "sad", score};
+    if (score <= -3) return {mood: "anxious", score};
+    if (score <= 0) return {mood: "neutral", score};
+    if (score <= 3) return {mood: "calm", score};
+    if (score <= 6) return {mood: "happy", score};
     return {mood: "excited", score};
 }

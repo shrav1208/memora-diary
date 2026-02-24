@@ -2,9 +2,10 @@ import DiaryEntry from "../Models/DiaryEntry.js";
 import mongoose from "mongoose";
 import { analyseMood } from "../Utils/AnalyseMood.js";
 import { updateDailyMoodUpdate } from "../Utils/UpdateDailyMoodUpdate.js";
+import { generateReflection } from "../Utils/GenerateReflection.js";
 
-export const updatePost = async(req, res) => {
-    try{
+export const updatePost = async (req, res) => {
+    try {
 
         const { title, content } = req.body;
         const { id } = req.params;
@@ -38,7 +39,31 @@ export const updatePost = async(req, res) => {
         if (title !== undefined) entry.title = title.trim();
         if (content !== undefined) entry.content = content.trim();
 
-        const {mood, score} = analyseMood (entry.title, entry.content);
+        const { mood, score } = analyseMood(entry.title, entry.content);
+
+        let reflection;
+        let generatedBy;
+
+        const shouldCallLLM =
+            (mood === "sad" || Math.abs(score) > 0.8) &&
+            entry.content.length > 50;
+
+        if (shouldCallLLM) {
+            reflection = await generateReflection(entry.title, entry.content, mood);
+            generatedBy = "llm";
+        } else {
+            reflection =
+                reflectionTemplates[
+                Math.floor(Math.random() * reflectionTemplates.length)
+                ];
+            generatedBy = "template";
+        }
+
+        entry.reflection = {
+            heading: reflection.heading,
+            body: reflection.body,
+            generatedBy,
+        };
 
         const prevscore = entry.score;
 
@@ -53,8 +78,8 @@ export const updatePost = async(req, res) => {
             success: true,
             message: "Diary entry updated",
         });
-        
-    }catch(err){
+
+    } catch (err) {
         console.error("Update diary error:", err);
         return res.status(500).json({
             success: false,
