@@ -41,6 +41,7 @@ line-height: normal;
 
 .quote {
 align-self: stretch;
+justify-content: center;
 
 color: #343434;
 text-align: justify;
