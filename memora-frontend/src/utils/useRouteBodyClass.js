@@ -15,6 +15,8 @@ export const useRouteBodyClass = () => {
       document.body.classList.add("login-body");
     } else if (pathname.startsWith("/signup")) {
       document.body.classList.add("signup-body");
+    } else if (pathname.startsWith("/profile-setup")) {
+      document.body.classList.add("signup-body");
     } else if (pathname.startsWith("/landing")) {
       document.body.classList.add("landing-body");
     } else if (pathname.startsWith("/profile")) {

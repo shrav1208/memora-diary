@@ -81,124 +81,147 @@
 
 .profile-img {
     width: 275px;
-height: 275px;
-border-radius: 50%;
-/* primary-shadow */
-box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    height: 275px;
+    border-radius: 50%;
+    /* primary-shadow */
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+    /* important */
 }
 
 .profile-input-fields p {
     color: #000;
-font-family: Inter;
-font-size: 24px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .vertical-inputs {
-   display: flex;
-width: 333px;
-flex-direction: column;
-align-items: flex-start;
-gap: 19px;
+    display: flex;
+    width: 333px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19px;
 }
 
 .vertical-inputs p {
     color: #000;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
 .input-vertical {
     width: 333px;
-height: 36px;
-flex-shrink: 0;
+    height: 36px;
+    flex-shrink: 0;
 
-border-radius: 24px;
-border: 1px solid #000;
-background: rgba(249, 253, 255, 0.31);
-box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(75.1500015258789px);
+    border-radius: 24px;
+    border: 1px solid #000;
+    background: rgba(249, 253, 255, 0.31);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(75.1500015258789px);
 
-color: #343434;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    color: #343434;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-padding: 0px 15px;
+    padding: 0px 15px;
 }
 
 .horizontal-inputs {
-   display: flex;
-width: 333px;
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    width: 333px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .input-horizontal {
     width: 80px;
-height: 36px;
-flex-shrink: 0;
+    height: 36px;
+    flex-shrink: 0;
 
-border-radius: 24px;
-border: 1px solid #000;
-background: rgba(249, 253, 255, 0.31);
-box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(75.1500015258789px);
+    border-radius: 24px;
+    border: 1px solid #000;
+    background: rgba(249, 253, 255, 0.31);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(75.1500015258789px);
 
-text-align: center;
+    text-align: center;
 
-color: #343434;
-text-align: center;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    color: #343434;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .horizontal-inputs p {
     color: #000;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
 .input-section {
-  display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
 }
 
 .input-section-horizontal {
     display: flex;
-align-items: center;
-gap: 9px;
+    align-items: center;
+    gap: 9px;
 }
 
 .inputs {
     display: flex;
-align-items: flex-start;
-align-content: flex-start;
-gap: 40px 0;
-align-self: stretch;
-flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 40px 0;
+    align-self: stretch;
+    flex-wrap: wrap;
 }
 
 .profile-image-edit p {
     color: #343434;
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.save-button {
+    width: 145px;
+    height: 50px;
+    flex-shrink: 0;
+
+    border-radius: 33px;
+    background: #343434;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    border-style: none;
+
+    color: #FFF;
+    text-align: center;
+    font-family: Sora;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    /* align-self: ; */
 }

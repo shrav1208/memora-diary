@@ -26,8 +26,8 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
                 const todayEntry = res.data.result.find(entry => {
                     const entryDate = new Date(entry.date);
                     return entryDate.getDate() === date.getDate() &&
-                           entryDate.getMonth() === date.getMonth() &&
-                           entryDate.getFullYear() === date.getFullYear();
+                        entryDate.getMonth() === date.getMonth() &&
+                        entryDate.getFullYear() === date.getFullYear();
                 });
 
                 if (todayEntry?.manualMood) {
@@ -53,7 +53,7 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
             setSaving(true);
             await axios.post(
                 "/api/set/mood",
-                { 
+                {
                     mood: selectedMood,
                     date: date.toISOString(), // send the specific date
                 },
@@ -66,6 +66,23 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
             setSaving(false);
         }
     };
+
+    const today = new Date();
+
+    const isToday =
+        date.getDate() === today.getDate() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear();
+
+    const formattedDate = date.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+
+    const headingText = isToday
+        ? "How are you feeling today?"
+        : `How were you feeling on ${formattedDate}?`;
 
     return (
         <div className={styles['popup-overlay']} onClick={onClose}>
@@ -80,7 +97,7 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
                         <div className={styles['star-container']}>
                             <img src={star} className={styles['star']} alt='star' />
                         </div>
-                        <p className={styles['heading']}>How are you feeling today?</p>
+                        <p className={styles['heading']}>{headingText}</p>
                     </div>
 
                     <div className={styles['moods-container']}>

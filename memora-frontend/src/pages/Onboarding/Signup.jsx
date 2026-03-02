@@ -79,7 +79,7 @@ export const Signup = () => {
                 
                 const meRes = await axios.get("/api/auth");
                 setUser(meRes.data.user);
-                navigate("/landing", { replace: true });
+                navigate("/profile-setup", { replace: true });
             }
         } catch (err) {
             if (err.response) {

@@ -41,19 +41,36 @@ export const NavigateViews = ({ onMoodClick }) => {
         if (nextView === "day") navigate(`/dashboard/${year}/${month}/${day}`);
     };
 
-    const today = dayjs();
+    // const today = dayjs();
+    const today = dayjs().startOf("day");
     const todayPath = `/dashboard/${today.year()}/${today.month()}/${today.date()}`;
 
     const goToToday = () => {
         navigate(todayPath);
     };
 
+    const selectedDate = dayjs()
+        .year(Number(year))
+        .month(Number(month))
+        .date(Number(day))
+        .startOf("day");
+
+    // Check if selected date is in the future
+    const isFuture = selectedDate.isAfter(today);
+
+    // Check if we're in day view
+    const isDayView = Boolean(params.year && params.month && params.day);
+
+    // Show mood button only if:
+    // - Day view
+    // - Not a future date
+    const showMoodButton = isDayView && !isFuture;
 
 
     // Only render the button if we're NOT on today's path
     const showDayButton = location.pathname !== todayPath;
 
-    const showMoodButton = Boolean(params.year && params.month && params.day);
+    // const showMoodButton = Boolean(params.year && params.month && params.day);
 
     return (
         <div className={styles.container}>
@@ -203,7 +220,7 @@ export const NavigateViews = ({ onMoodClick }) => {
                     </button>
                 )}
 
-                
+
             </div>
 
 
