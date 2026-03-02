@@ -9,13 +9,14 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: 5,
         maxlength: 15,
-
     },
+
     password: {
         type: String,
         required: true,
         minlength: 6,
     },
+
     name: {
         type: String,
         required: true,
@@ -23,9 +24,28 @@ const userSchema = new mongoose.Schema({
         minlength: 1,
         trim: true,
     },
-},
-{ timestamps: true },
-);
+
+    age: {
+        type: Number,
+        default: null
+    },
+
+    gender: {
+        type: String,
+        default: null
+    },
+
+    profilePhoto: {
+        type: String,   // store image URL or file path
+        default: null
+    },
+
+    profileCompleted: {
+        type: Boolean,
+        default: false
+    }
+
+}, { timestamps: true });
 
 const User = mongoose.model("User", userSchema, "users");
 export default User;

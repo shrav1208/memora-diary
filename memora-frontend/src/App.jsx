@@ -15,6 +15,7 @@ import PublicRoute from './routes/PublicRoute';
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
 import { useRouteBodyClass } from './utils/useRouteBodyClass';
 import { All } from './components/All/All';
+import { ProfileSetup } from './pages/Onboarding/ProfileSetup';
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
@@ -41,6 +42,12 @@ function App() {
           <PublicRoute>
             <Signup />
           </PublicRoute>}
+        />
+
+        <Route path='/profile-setup' element={
+          <ProtectedRoute>
+            <ProfileSetup />
+          </ProtectedRoute>}
         />
 
         <Route path='/landing' element={

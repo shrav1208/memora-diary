@@ -5,7 +5,7 @@ export const readUser = async(req, res)=>{
         
         // console.log(req);
 
-        const user = await User.findById(req.session.userID).select("-password");
+        const user = await User.findById(req.session.userID).select("-password"); // means select everything but password
 
         if (!user) {
             // console.log("IAM LOSIGN MY MIND");
@@ -15,7 +15,7 @@ export const readUser = async(req, res)=>{
             });
         }
 
-        // console.log(user);
+        console.log(user);
 
         return res.status(201).json({
             success: true, 

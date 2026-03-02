@@ -1,18 +1,18 @@
 import User from '../Models/User.js';
 import bcrypt from 'bcrypt';
 
-export const signup = async(req, res)=>{
-    try{
-        const {username, password, name} = req.body;
+export const signup = async (req, res) => {
+    try {
+        const { username, password, name } = req.body;
 
-        if(!username.trim() || !password || !name.trim()){
+        if (!username.trim() || !password || !name.trim()) {
             return res.status(400).json({
                 success: false,
                 message: "Please enter all Fields!"
             });
         }
 
-        if(password.trim().length < 6){
+        if (password.trim().length < 6) {
             return res.status(400).json({
                 success: false,
                 message: "Password must be at least 6 characters!"
@@ -35,9 +35,9 @@ export const signup = async(req, res)=>{
             });
         }
 
-        const existingUser = await User.findOne({username: normalizedUsername});
+        const existingUser = await User.findOne({ username: normalizedUsername });
 
-        if(existingUser){
+        if (existingUser) {
             return res.status(409).json({
                 success: false,
                 message: "User already exists",
@@ -49,6 +49,7 @@ export const signup = async(req, res)=>{
             username: normalizedUsername,
             password: hashPass,
             name: name.trim(),
+            profileCompleted: false  
         });
         await user.save();
 
@@ -60,7 +61,7 @@ export const signup = async(req, res)=>{
             userId: user._id
         });
 
-    }catch(err){
+    } catch (err) {
         console.error("Signup error:", err);
         return res.status(500).json({
             success: false,

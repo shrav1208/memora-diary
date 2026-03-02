@@ -20,6 +20,8 @@ import getMoods from './Routes/GetMoods.routes.js';
 import getDailyMood from './Routes/GetDailyMood.routes.js';
 import setMood from './Routes/SetMood.routes.js';
 import getTodayReflection from './Routes/GetTodayReflection.routes.js';
+import completeProfile from './Routes/CompleteProfile.routes.js';
+import updateProfile from './Routes/UpdateProfile.routes.js';
 
 import sessionConfig from './Config/Session.js';
 
@@ -42,6 +44,7 @@ app.use(sessionConfig);
 
 app.use('/api/login', loginRoutes);
 app.use('/api/signup', signupRoutes);
+app.use('/api/profile/setup', requireAuth, completeProfile);
 app.use('/api/logout', requireAuth, logoutRoutes);
 app.use('/api/auth', authRoutes);
 
@@ -59,6 +62,7 @@ app.use('/api/read/posts', requireAuth, readPostsRoutes);
 app.use('/api/update/post', requireAuth, updatePostRoutes);
 app.use('/api/delete/post', requireAuth, deletePostRoutes);
 app.use('/api/get/post', requireAuth, getPostRoutes);
+app.use('/api/update/profile', requireAuth, updateProfile)
 
 //Search
 

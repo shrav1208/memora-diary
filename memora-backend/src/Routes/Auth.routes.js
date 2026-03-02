@@ -1,18 +1,28 @@
-import express from 'express';
+import express from "express";
+import User from "../Models/User.js"; // adjust path if needed
 
 const router = express.Router();
 
-router.get('/', (req, res)=>{
-    if(!req.session.userID){
+router.get("/", async (req, res) => {
+    if (!req.session.userID) {
         return res.status(401).json({ authenticated: false });
     }
 
-    // console.log(req.session.userID)
+    try {
+        const user = await User.findById(req.session.userID).select("-password");
 
-    return res.status(200).json({
-        authenticated: true,
-        user: req.session.userID,
-    })
-})
+        if (!user) {
+            return res.status(404).json({ authenticated: false });
+        }
+
+        return res.status(200).json({
+            authenticated: true,
+            user: user, // ✅ now returning full user object
+        });
+
+    } catch (err) {
+        return res.status(500).json({ message: "Server error" });
+    }
+});
 
 export default router;
