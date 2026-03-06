@@ -1,6 +1,6 @@
 .years-collection {
     display: flex;
-    width: 1040px;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;

@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    width: 1040px;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
 
 .day-component {
     display: flex;
-width: 1040px;
+width: 100%;
 flex-direction: column;
 align-items: flex-start;
 gap: 24px;

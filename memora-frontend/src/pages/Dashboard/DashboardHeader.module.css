@@ -1,36 +1,60 @@
+/* ================================
+   HEADER WRAPPER
+================================ */
+
 .dashboard-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
+    gap: clamp(16px, 2.5vh, 24px);
+    width: 100%;
 }
+
+/* ================================
+   TOP ROW
+================================ */
 
 .name-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    align-self: stretch;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* ================================
+   LEFT SIDE
+================================ */
+
+.left-half {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .name {
     color: #000;
     font-family: Inter;
-    font-size: 48px;
-    font-style: normal;
+    font-size: clamp(26px, 4vw, 48px);
     font-weight: 800;
-    line-height: normal;
+    margin: 0;
 }
 
-.left-half {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/* ================================
+   PLUS ICON
+================================ */
 
 .plus-icon {
     position: relative;
-    margin: 0px 10px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.plus-icon:hover {
+    transform: translateY(-2px);
 }
 
 .plus {
@@ -39,32 +63,48 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    width: 21.712px;
-    height: 21.712px;
-    /* transform: rotate(45deg); */
-    flex-shrink: 0;
-    padding-bottom: 2px;
-    
+    width: 20px;
+    height: 20px;
+}
+
+/* ================================
+   SEARCH SECTION
+================================ */
+
+.search-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    /* slightly safer math */
+    max-width: 422px;
+}
+
+.search-box-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .search-box {
-    width: 422px;
+    width: 100%;
     height: 42px;
-    flex-shrink: 0;
 
     border-radius: 33px;
     border: 1px solid #d7f2ff;
-    background: linear-gradient(121deg, rgba(185, 233, 255, 0.46) 16.1%, rgba(185, 233, 255, 0.10) 84.91%);
-    backdrop-filter: blur(98.6500015258789px);
+
+    background: linear-gradient(121deg,
+            rgba(185, 233, 255, 0.46) 16.1%,
+            rgba(185, 233, 255, 0.10) 84.91%);
+
+    backdrop-filter: blur(40px);
     box-shadow: 0 2px 10.5px rgba(0, 0, 0, 0.25);
 
-    padding: 0px 15px;
-    color: #343434;
-    font-family: Inter;
+    padding: 0 42px 0 16px;
     font-size: 16px;
-    font-style: normal;
     font-weight: 300;
-    line-height: normal;
+
+    transition: box-shadow 0.15s ease, border 0.15s ease;
 }
 
 .search-box::placeholder {
@@ -72,57 +112,195 @@
 }
 
 .search-box:hover {
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 .search-box:focus {
     border-color: #83d6ff;
-    box-shadow:
-        /* inset 0 0 0 0.5px #d7f2ff, */
-        0 2px 10.5px 0 rgba(0, 0, 0, 0.50);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
     outline: none;
 }
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.search-icon-img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ================================
+   FEATURES ROW (DESKTOP DEFAULT)
+================================ */
 
 .features-flex {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+    align-items: stretch;
+    width: 100%;
+    gap: 24px;
+
+    flex-wrap: nowrap;
+    /* critical: prevent early wrapping */
 }
 
 .right-boxes {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 20px;
+
+    flex-shrink: 0;
+    /* prevents layout collapse */
 }
 
-.search-wrapper {
-    position: relative; /* 🔑 THIS IS THE KEY */
+/* ================================
+   BREAKPOINT — STACK QUOTE ABOVE
+   (Triggers BEFORE overflow begins)
+================================ */
+
+@media (max-width: 930px) {
+
+    .features-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    /* Quote full width */
+    .features-flex> :first-child {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Date + Mood stay in one row */
+    .right-boxes {
+        width: 100%;
+        flex-direction: row;
+        gap: 20px;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        /* wraps ONLY if absolutely necessary */
+    }
+
+    .right-boxes> :first-child {
+        flex: 0 0 157px;
+        /* fixed width */
+    }
+
+    .right-boxes> :last-child {
+        flex: 1 1 0;
+        /* 0 base instead of auto — ignores intrinsic width */
+        min-width: 0;
+    }
+
+    .name-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .name {
+        font-size: clamp(26px, 8vw, 48px);
+    }
 }
 
-.search-box-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+/* ================================
+   SMALL DESKTOP WINDOW
+================================ */
+
+@media (max-width: 600px) {}
+
+/* ================================
+   HEIGHT RESPONSIVENESS
+================================ */
+/* 
+@media (max-height: 520px) {
+
+    .dashboard-header {
+        gap: 12px;
+    }
+
+    .name {
+        font-size: 24px;
+    }
+
+    .search-box {
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .right-boxes {
+        gap: 12px;
+    }
 }
 
-.search-icon {
-    padding: 0;
-    position: absolute;
-    right: 10px;
-    /* 👈 THIS shifts it inward */
-    height: 100%;
-    /* 👈 match input height */
-    display: flex;
-    align-items: center;
-    /* 👈 center icon vertically */
-    border: none;
-    background: transparent;
-    z-index: 2;
-}
+@media (max-height: 380px) {
 
-.search-icon-img {
-    width: 24px;
-    height: 24px;
-}
+    .dashboard-header {
+        gap: 8px;
+    }
 
+    .search-box {
+        height: 32px;
+    }
+} */
+
+/* ================================
+   MOBILE LAYOUT
+================================ */
+
+@media (max-width: 600px) {
+
+    .features-flex {
+        display: grid;
+        grid-template-columns: 1fr 110px;
+        grid-auto-rows: min-content;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    /* Quote card */
+    .features-flex> :first-child {
+        grid-column: 1 / 2;
+        grid-row: 1;
+        min-width: 0;
+        height: 120px;
+    }
+
+    /* Date box */
+    .right-boxes> :first-child {
+        grid-column: 2;
+        grid-row: 1;
+
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        /* square shape */
+    }
+
+    /* Mood tracker */
+    .right-boxes> :last-child {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+    }
+
+    /* stack the right-box container */
+    .right-boxes {
+        display: contents;
+    }
+
+    /* Typography scale for mobile */
+    .name {
+        font-size: clamp(22px, 7vw, 34px);
+    }
+}

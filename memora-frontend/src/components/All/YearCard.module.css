@@ -1,7 +1,7 @@
 .year-card {
     /* flex: 1 0 0; */
     /* align-self: stretch; */
-    width: 1040px;
+    width: 100%;
     height: 140px;
 
     border-radius: 28px;

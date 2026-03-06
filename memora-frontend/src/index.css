@@ -9,6 +9,7 @@ body {
     /* vertical centering */
     font-family: Inter;
     background-attachment: fixed;
+    overflow-x: hidden;  /* add this — catches any remaining overflow */
 }
 
 p {
