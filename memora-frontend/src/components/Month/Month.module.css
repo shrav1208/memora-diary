@@ -1,9 +1,37 @@
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .month-component {
     display: flex;
     width: 100%;            /* was: 1040px */
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+    animation: fadeUp 0.4s ease-out both;
 }
 
 .month {
@@ -30,6 +58,7 @@
     grid-template-rows: repeat(6, minmax(0, 1fr));
     grid-template-columns: repeat(7, minmax(0, 1fr));
     /* no height — cards define their own size via aspect-ratio */
+    animation: fadeUp 0.4s ease-out 0.08s both;
 }
 
 .empty-day {

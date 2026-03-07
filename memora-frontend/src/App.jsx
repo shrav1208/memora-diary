@@ -1,21 +1,31 @@
-import { Login } from './pages/Onboarding/Login'
+import { lazy, Suspense, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.module.css'
-import { Signup } from './pages/Onboarding/Signup';
-import { Landing } from './pages/Landing/Landing';
-import { FullscreenEditor } from './pages/Editor/FullscreenEditor';
-import { Year } from './components/Year/Year';
-import { Month } from './components/Month/Month';
-import { Day } from './components/Day/Day';
-import { useState } from 'react';
-import { About } from './pages/About/About';
-import { Profile } from './pages/Profile/Profile';
+import './App.module.css';
+import { useRouteBodyClass } from './utils/useRouteBodyClass';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
+
+// ─── Eagerly loaded (tiny, always needed on first paint) ───────────────────────
 import { DashboardPage } from './pages/Dashboard/DashboardPage';
-import { useRouteBodyClass } from './utils/useRouteBodyClass';
-import { All } from './components/All/All';
-import { ProfileSetup } from './pages/Onboarding/ProfileSetup';
+import { Year }          from './components/Year/Year';
+import { Month }         from './components/Month/Month';
+import { Day }           from './components/Day/Day';
+import { All }           from './components/All/All';
+
+// ─── Lazily loaded (not needed until user navigates there) ─────────────────────
+const Login        = lazy(() => import('./pages/Onboarding/Login').then(m => ({ default: m.Login })));
+const Signup       = lazy(() => import('./pages/Onboarding/Signup').then(m => ({ default: m.Signup })));
+const ProfileSetup = lazy(() => import('./pages/Onboarding/ProfileSetup').then(m => ({ default: m.ProfileSetup })));
+const Landing      = lazy(() => import('./pages/Landing/Landing').then(m => ({ default: m.Landing })));
+const FullscreenEditor = lazy(() => import('./pages/Editor/FullscreenEditor').then(m => ({ default: m.FullscreenEditor })));
+const About        = lazy(() => import('./pages/About/About').then(m => ({ default: m.About })));
+const Profile      = lazy(() => import('./pages/Profile/Profile').then(m => ({ default: m.Profile })));
+
+// Thin wrapper: Suspense per-route with null fallback.
+// null = no spinner, no layout shift, body bg already visible.
+function Lazy({ children }) {
+  return <Suspense fallback={null}>{children}</Suspense>;
+}
 
 function App() {
   const [fromLanding, setFromLanding] = useState(false);
@@ -24,50 +34,48 @@ function App() {
 
   return (
     <>
-      {/* <Day selectedDay={selectedDate}/> */}
       <Routes>
         <Route path='/' element={
           <PublicRoute>
-            <Login />
+            <Lazy><Login /></Lazy>
           </PublicRoute>}
         />
 
         <Route path='/login' element={
           <PublicRoute>
-            <Login />
+            <Lazy><Login /></Lazy>
           </PublicRoute>}
         />
 
         <Route path='/signup' element={
           <PublicRoute>
-            <Signup />
+            <Lazy><Signup /></Lazy>
           </PublicRoute>}
         />
 
         <Route path='/profile-setup' element={
           <ProtectedRoute>
-            <ProfileSetup />
+            <Lazy><ProfileSetup /></Lazy>
           </ProtectedRoute>}
         />
 
         <Route path='/landing' element={
           <ProtectedRoute>
-            <Landing setFromLanding={setFromLanding} />
+            <Lazy><Landing setFromLanding={setFromLanding} /></Lazy>
           </ProtectedRoute>}
         />
 
         <Route path='/fullscreen-editor' element={
           <ProtectedRoute>
-            <FullscreenEditor />
+            <Lazy><FullscreenEditor /></Lazy>
           </ProtectedRoute>}
         />
 
         <Route path='/fullscreen-editor/:id' element={
           <ProtectedRoute>
-            <FullscreenEditor />
+            <Lazy><FullscreenEditor /></Lazy>
           </ProtectedRoute>}
         />
-
 
         <Route
           path="/dashboard"
@@ -86,22 +94,20 @@ function App() {
 
           {/* Dynamic next */}
           <Route path=":year/:month/:day" element={<Day />} />
-          <Route path=":year/:month" element={<Month />} />
-          <Route path=":year" element={<Year />} />
-
+          <Route path=":year/:month"      element={<Month />} />
+          <Route path=":year"             element={<Year />} />
         </Route>
 
-        <Route path='/about' element={<About />} />
+        <Route path='/about' element={<Lazy><About /></Lazy>} />
 
         <Route path='/profile' element={
           <ProtectedRoute>
-            <Profile />
+            <Lazy><Profile /></Lazy>
           </ProtectedRoute>}
         />
-
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

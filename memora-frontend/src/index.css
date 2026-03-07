@@ -4,15 +4,13 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    /* horizontal centering */
     align-items: center;
-    /* vertical centering */
     font-family: Inter;
     background-attachment: fixed;
 }
 
 body {
-    overflow-x: clip;   /* instead of overflow-x: hidden */  /* add this — catches any remaining overflow */
+    overflow-x: clip;
 }
 
 p {
@@ -23,84 +21,133 @@ a {
   text-decoration: none;
 }
 
+/* ============================================
+   GLOBAL ANIMATION SYSTEM
+   Usage: add class="animate" (or animate-2/3/4
+   for stagger) to any element you want to
+   fade-up on mount. Works with CSS modules
+   because these are global classes.
+============================================ */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Base animate class */
+.animate {
+    animation: fadeUp 0.45s ease-out both;
+}
+
+/* Stagger delays — add these alongside .animate */
+.animate-2 { animation-delay: 0.08s; }
+.animate-3 { animation-delay: 0.16s; }
+.animate-4 { animation-delay: 0.24s; }
+.animate-5 { animation-delay: 0.32s; }
+.animate-6 { animation-delay: 0.40s; }
+
+/* Fade-only variant (no upward movement) */
+.animate-fade {
+    animation: fadeIn 0.4s ease-out both;
+}
+
+/* Scale-in variant — good for popups/cards */
+.animate-scale {
+    animation: scaleIn 0.3s ease-out both;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .animate,
+    .animate-fade,
+    .animate-scale {
+        animation: none;
+    }
+}
+
+
+/* ============================================
+   BODY BACKGROUND CLASSES
+============================================ */
+
 .about-body {
     position: relative;
     background-image: url("/about-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
-
 }
 
 .fullscreen-body {
     background-image: url("/editor-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
-     background-attachment: fixed;
+    background-attachment: fixed;
 }
 
 .day-body, .month-body, .year-body {
     background-image: url("/dashboard-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
     background-attachment: fixed;
 }
 
 .login-body, .signup-body {
     background-image: url("/login-signup-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
-    
 }
 
 .profile-body {
     background-image: url("/profile-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
-
 }
 
 .landing-body {
     background-image: url("/landing-bg.png");
     background-repeat: no-repeat;
-    /* prevents tiling */
     background-size: cover;
-    /* makes it fill the screen */
     background-position: center;
-    /* centers the image */
-    
 }
 
 .day-body {
-    display: block; /* overrides body's flex centering */
-  justify-content: unset;
-  align-items: unset;
-  padding-top: 120px;
+    display: block;
+    justify-content: unset;
+    align-items: unset;
+    padding-top: 120px;
 }
 
 .about-body,
 .profile-body {
-  display: block; /* overrides body's flex centering */
-  justify-content: unset;
-  align-items: unset;
-  padding: 134px 0;
+    display: block;
+    justify-content: unset;
+    align-items: unset;
+    padding: 134px 0;
 }

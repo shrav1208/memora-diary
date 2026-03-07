@@ -1,22 +1,39 @@
 .container {
+    position: relative;
     display: flex;
     align-items: center;
     gap: clamp(4px, 1vw, 8px);
     width: 100%;
     flex-wrap: nowrap;
-    overflow: hidden;
 
     button {
         cursor: pointer;
     }
 }
 
-.normal, .highlighted {
+.pill {
+    position: absolute;
+    height: 42px;
+    border-radius: 33px;
+    border: 1px solid #B9E9FF;
+    background: linear-gradient(121deg, rgba(185, 233, 255, 0.46) 16.1%, rgba(185, 233, 255, 0.10) 84.91%);
+    backdrop-filter: blur(98.65px);
+    pointer-events: none;
+    z-index: 0;
+    transition: left  0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                top   0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn {
+    position: relative;
+    z-index: 1;
     height: 42px;
     width: clamp(64px, 4vw, 81px);
     flex-shrink: 1;
-    /* min-width: 0; */
     border-radius: 33px;
+    border: 1px solid transparent;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,18 +42,16 @@
     font-size: clamp(12px, 1.4vw, 16px);
     font-weight: 500;
     white-space: nowrap;
+    transition: color 0.2s ease;
+    animation: fadeIn 0.2s ease-out both;
 }
 
-.normal {
-    border: 1px solid transparent;
-    background: transparent;
+.btn:hover {
+    background: rgba(185, 233, 255, 0.15);
 }
 
-.highlighted {
-    border: 1px solid #B9E9FF;
-    background: linear-gradient(121deg, rgba(185, 233, 255, 0.46) 16.1%, rgba(185, 233, 255, 0.10) 84.91%);
-    backdrop-filter: blur(98.65px);
-}
+.normal      { composes: btn; }
+.highlighted { composes: btn; }
 
 .right-side {
     margin-left: auto;
@@ -63,7 +78,15 @@
     font-size: clamp(12px, 1.4vw, 16px);
     font-weight: 500;
     white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.gototoday:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gototoday:active { transform: translateY(0); }
 
 .mood {
     height: 42px;
@@ -82,25 +105,33 @@
     font-size: clamp(12px, 1.4vw, 16px);
     font-weight: 500;
     white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.mood:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mood:active { transform: translateY(0); }
 
 @media (max-width: 600px) {
     .container {
-        flex-wrap: wrap;        /* allow right-side to drop */
-        overflow: visible;      /* let the new row be visible */
+        flex-wrap: wrap;
+        overflow: visible;
     }
 
     .right-side {
         order: -1;
-        width: 100%;            /* claim the full second line */
-        margin-left: 0;         /* no longer needs to push right */
+        width: 100%;
+        margin-left: 0;
         gap: 12px;
         margin-bottom: 16px;
     }
 
     .gototoday,
     .mood {
-        flex: 1;                /* both buttons share the full width equally */
+        flex: 1;
         justify-content: center;
     }
 }
