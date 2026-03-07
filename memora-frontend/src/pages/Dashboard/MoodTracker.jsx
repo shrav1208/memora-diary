@@ -3,27 +3,22 @@ import {
     Line,
     XAxis,
     YAxis,
-    CartesianGrid,
-    Tooltip,
     ResponsiveContainer
 } from "recharts";
-// import generateMoodData from "./generateMoodData";
 import styles from './MoodTracker.module.css'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 
-export const MoodTracker = () => {
+export const MoodTracker = ({ refreshKey }) => {
 
-    const[moodData, setMoodData] = useState([]);
+    const [moodData, setMoodData] = useState([]);
 
-    useEffect(()=>{
-        (async()=>{
+    useEffect(() => {
+        (async () => {
             const res = await axios.get('/api/get/moods');
-            // console.log(res.data.result);
             const result = res.data.result.map(({ date, score }) => ({
-                day : new Date(date).getDate(),
-                mood : score,
+                day: new Date(date).getDate(),
+                mood: score,
             }));
 
             const moodMap = new Map(result.map(item => [item.day, item.mood]));
@@ -35,21 +30,17 @@ export const MoodTracker = () => {
                     mood: moodMap.has(day) ? moodMap.get(day) : null,
                 };
             });
-            // console.log(result);
+
             setMoodData(fullMonth);
         })();
-    }, [])
-
-    // console.log(moodData);
+    }, [refreshKey]); // re-fetches whenever refreshKey changes
 
     return (
         <div className={styles['mood-card']}>
             <p className={styles['mood-heading']}>Mood Tracker</p>
             <div className={styles['chart-wrapper']}>
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart
-                        data={moodData}
-                    >
+                    <LineChart data={moodData}>
                         <XAxis
                             dataKey="day"
                             tick={false}
@@ -75,13 +66,9 @@ export const MoodTracker = () => {
                             activeDot={{ r: 1, fill: "#343434", stroke: "#343434" }} // same size on hover
                             isAnimationActive={false} // disables mount animation
                         />
-
                     </LineChart>
-
                 </ResponsiveContainer>
             </div>
-
         </div>
-
     );
 };

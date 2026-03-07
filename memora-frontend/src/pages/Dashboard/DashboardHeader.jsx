@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { SearchPopup } from '../../components/SearchPopup';
 import searchIcon from '../../assets/search-icon.png'
 
-export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
+export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRefreshKey, onEntrySaved }) => {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [name, setName] = useState('');
@@ -26,7 +26,6 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
         const timeout = setTimeout(async () => {
             try {
                 const res = await axios.get(`/api/search?q=${encodeURIComponent(query)}`);
-                // console.log(res.data);
                 setResults(res.data.results);
             } catch (err) {
                 console.error("Search Error: " + err.message);
@@ -40,12 +39,10 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
         (async () => {
             try {
                 const res = await axios.get('/api/read/user', { withCredentials: true });
-                // console.log(res.data);
                 setName(res.data.user.name);
             } catch (err) {
                 console.error(err.message);
             }
-
         })();
     }, []);
 
@@ -60,7 +57,6 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
         return () => window.removeEventListener('keydown', handler);
     }, []);
 
-
     useEffect(() => {
         if (fromLanding) {
             setIsPopupOpen(true);
@@ -74,17 +70,11 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
     };
 
     const handleClose = () => {
-        setIsPopupOpen(false); // close popup
+        setIsPopupOpen(false);
     };
-
-    const handleSubmit = (value) => {
-        console.log("User input:", value); // handle submitted value
-    };
-
 
     return (
         <>
-
             <div className={styles['dashboard-header']}>
                 <div className={styles['name-flex']}>
                     <div className={styles['left-half']}>
@@ -96,7 +86,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                                 height="58"
                                 viewBox="0 0 58 58"
                                 fill="none"
-                                overflow="visible"   // prevents clipping
+                                overflow="visible"
                             >
                                 <foreignObject x="0" y="0" width="58" height="58">
                                     <div
@@ -110,7 +100,6 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                                     />
                                 </foreignObject>
 
-                                {/* Circle with drop shadow filter */}
                                 <circle
                                     data-figma-bg-blur-radius="197.3"
                                     cx="29"
@@ -119,42 +108,21 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                                     fill="url(#paint0_linear_265_3410)"
                                     stroke="url(#paint1_linear_265_3410)"
                                     strokeWidth="3"
-                                    filter="url(#dropShadow)"   // ✅ shadow applied here
+                                    filter="url(#dropShadow)"
                                 />
 
                                 <defs>
-                                    {/* Drop shadow filter */}
                                     <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
-                                        <feDropShadow
-                                            dx="0"
-                                            dy="2"
-                                            stdDeviation="3.5"
-                                            floodColor="black"
-                                            floodOpacity="0.25"
-                                        />
+                                        <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="black" floodOpacity="0.25" />
                                     </filter>
-
                                     <clipPath id="bgblur_0_265_3410_clip_path" transform="translate(197.3 197.3)">
                                         <circle cx="29" cy="29" r="27.5" />
                                     </clipPath>
-
-                                    <linearGradient
-                                        id="paint0_linear_265_3410"
-                                        x1="28"
-                                        y1="-1.78894e-06"
-                                        x2="57.3822"
-                                        y2="26.4977"
-                                        gradientUnits="userSpaceOnUse"
-                                    >
+                                    <linearGradient id="paint0_linear_265_3410" x1="28" y1="-1.78894e-06" x2="57.3822" y2="26.4977" gradientUnits="userSpaceOnUse">
                                         <stop stopColor="#94DDFF" />
                                         <stop offset="1" stopColor="#DBF4FF" stopOpacity="0.88" />
                                     </linearGradient>
-
-                                    <linearGradient
-                                        id="paint1_linear_265_3410"
-                                        x1="30" y1="57" x2="29" y2="-13.5"
-                                        gradientUnits="userSpaceOnUse"
-                                    >
+                                    <linearGradient id="paint1_linear_265_3410" x1="30" y1="57" x2="29" y2="-13.5" gradientUnits="userSpaceOnUse">
                                         <stop stopColor="#92DCFF" />
                                         <stop offset="1" stopColor="#EEFAFF" />
                                     </linearGradient>
@@ -165,15 +133,15 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                     </div>
                     <div className={styles['search-wrapper']}>
                         <div className={styles['search-box-wrapper']}>
-                        <input
-                            className={styles['search-box']}
-                            placeholder="Search your memories..."
-                            onChange={(event) => setQuery(event.target.value)}
-                            value={query}
-                        />
-                        <div className={styles['search-icon']}>
-                        <img src={searchIcon} className={styles['search-icon-img']} alt='search' />
-                        </div>
+                            <input
+                                className={styles['search-box']}
+                                placeholder="Search your memories..."
+                                onChange={(event) => setQuery(event.target.value)}
+                                value={query}
+                            />
+                            <div className={styles['search-icon']}>
+                                <img src={searchIcon} className={styles['search-icon-img']} alt='search' />
+                            </div>
                         </div>
 
                         {query && (
@@ -189,22 +157,18 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding }) => {
                 </div>
 
                 <div className={styles['features-flex']}>
-
                     <QuoteCard />
-
                     <div className={styles['right-boxes']}>
                         <TodayDate />
-                        <MoodTracker />
+                        <MoodTracker refreshKey={moodRefreshKey} />
                     </div>
                 </div>
             </div>
 
-
-
             <PopupInput
                 isOpen={isPopupOpen}
                 onClose={handleClose}
-                onSubmit={handleSubmit}
+                onSaved={onEntrySaved}
             />
         </>
     );

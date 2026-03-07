@@ -10,13 +10,14 @@ import { MoodInputPopup } from './MoodInputPopup';
 export const DashboardPage = ({ fromLanding, setFromLanding }) => {
 
   const navigate = useNavigate();
-    const [isMoodPopupOpen, setIsMoodPopupOpen] = useState(false);
+  const [isMoodPopupOpen, setIsMoodPopupOpen] = useState(false);
+  const [moodRefreshKey, setMoodRefreshKey] = useState(0);
+
+  const bumpRefresh = () => setMoodRefreshKey(k => k + 1);
 
   const goToToday = () => {
     const today = dayjs();
-    navigate(
-      `/dashboard/${today.year()}/${today.month()}/${today.date()}`
-    );
+    navigate(`/dashboard/${today.year()}/${today.month()}/${today.date()}`);
   };
 
   const location = useLocation();
@@ -70,6 +71,8 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
           goToToday={goToToday}
           fromLanding={fromLanding}
           setFromLanding={setFromLanding}
+          moodRefreshKey={moodRefreshKey}
+          onEntrySaved={bumpRefresh}
         />
 
         <div className={styles['outer']}>
@@ -81,6 +84,7 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
         <MoodInputPopup
             isOpen={isMoodPopupOpen}
             onClose={() => setIsMoodPopupOpen(false)}
+            onSaved={bumpRefresh}
             date={popupDate}
           />
         </div>

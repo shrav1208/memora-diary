@@ -17,7 +17,6 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
     const displayDate = dayjs().format('ddd, YYYY MMM D, H:mm A');
 
     const handleSaveEntry = async () => {
-        // Strip whitespace-only content
         const textOnly = content.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, "").trim();
         if (!textOnly) {
             alert("Diary entry cannot be empty");
@@ -31,7 +30,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                 "/api/create/post",
                 {
                     title: inputTitle.trim(),
-                    content, // TinyMCE HTML
+                    content,
                 },
                 { withCredentials: true }
             );
@@ -52,8 +51,8 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
     if (!isOpen) return null;
 
     return (
-        <div className={styles['popup-overlay']}>
-            <div className={styles['popup-box']}>
+        <div className={styles['popup-overlay']} onClick={onClose}>
+            <div className={styles['popup-box']} onClick={(e) => e.stopPropagation()}>
                 <form>
                     <input
                         className={styles['input-title']}
@@ -93,7 +92,6 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                                     box-shadow: none !important;
                                 }`,
                                 setup: (editor) => {
-                                    // Disable formatting shortcuts (B/I/U)
                                     editor.on("keydown", (e) => {
                                         if ((e.ctrlKey || e.metaKey) && ["b", "i", "u"].includes(e.key.toLowerCase())) {
                                             e.preventDefault();
@@ -111,21 +109,23 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                             <Link
                                 to="/fullscreen-editor"
                                 state={{
-                                    title: inputTitle,   // current popup title
-                                    content: content     // current TinyMCE HTML
+                                    title: inputTitle,
+                                    content: content
                                 }}
                             >
                                 <img src={expandButton} alt="expand" />
                             </Link>
                         </div>
-
                     </div>
                 </form>
             </div>
 
             <div
                 className={styles['okay-button']}
-                onClick={saving ? undefined : handleSaveEntry}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (!saving) handleSaveEntry();
+                }}
                 style={{
                     opacity: saving ? 0.6 : 1,
                     pointerEvents: saving ? "none" : "auto",
