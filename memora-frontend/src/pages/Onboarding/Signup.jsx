@@ -6,7 +6,6 @@ import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
 import { useAuth } from '../../context/AuthContext';
 
-
 export const Signup = () => {
 
     const navigate = useNavigate();
@@ -18,6 +17,9 @@ export const Signup = () => {
     const [createPasswordInput, setCreatePasswordInput] = useState('');
     const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
 
+    // ⭐ Remember me state
+    const [rememberMe, setRememberMe] = useState(false);
+
     // validation state
     const [passwordError, setPasswordError] = useState('');
 
@@ -26,16 +28,18 @@ export const Signup = () => {
 
     // confirm password validation
     useEffect(() => {
+
         if (!createPasswordInput || !confirmPasswordInput) {
             setPasswordError('');
             return;
         }
 
-        if (createPasswordInput != confirmPasswordInput) {
+        if (createPasswordInput !== confirmPasswordInput) {
             setPasswordError('Passwords do not match :(');
         } else {
             setPasswordError('');
         }
+
     }, [createPasswordInput, confirmPasswordInput]);
 
     function saveUsernameInput(event) {
@@ -62,13 +66,16 @@ export const Signup = () => {
         if (passwordError) return;
 
         try {
+
             const res = await axios.post('/api/signup', {
                 username: newUsernameInput,
                 password: createPasswordInput,
                 name: nameInput,
-            });
-            // console.log(res.data)
+                rememberMe: rememberMe
+            }, { withCredentials: true });
+
             if (res.data.success) {
+
                 setNewUsernameInput('');
                 setNameInput('');
                 setCreatePasswordInput('');
@@ -76,12 +83,18 @@ export const Signup = () => {
 
                 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 await axios.post("/api/session/timezone", { timezone });
-                
-                const meRes = await axios.get("/api/auth");
+
+                const meRes = await axios.get("/api/auth", {
+                    withCredentials: true
+                });
+
                 setUser(meRes.data.user);
+
                 navigate("/profile-setup", { replace: true });
             }
+
         } catch (err) {
+
             if (err.response) {
                 alert(err.response.data.message);
             }
@@ -93,101 +106,112 @@ export const Signup = () => {
     }
 
     return (
-        <>
-            <div className={styles['container']}>
-                <div className={styles['logo-name-tagline']}>
-                    <div className={styles['logo-name']}>
-                        <div className={styles['logo-image']}></div>
-                        <p className={styles['heading-memora']}>memora</p>
-                    </div>
+        <div className={styles['container']}>
 
-                    <p className={styles['subtitle']}>a diary that listens</p>
+            <div className={styles['logo-name-tagline']}>
+                <div className={styles['logo-name']}>
+                    <div className={styles['logo-image']}></div>
+                    <p className={styles['heading-memora']}>memora</p>
                 </div>
 
-                <form className={styles['input-fields']} onSubmit={sendCredentials}>
+                <p className={styles['subtitle']}>a diary that listens</p>
+            </div>
 
+            <form className={styles['input-fields']} onSubmit={sendCredentials}>
+
+                <input
+                    type="text"
+                    className={styles['input']}
+                    placeholder='Enter username'
+                    onChange={saveUsernameInput}
+                    value={newUsernameInput}
+                />
+
+                <input
+                    type="text"
+                    className={styles['input']}
+                    placeholder='Enter first name'
+                    onChange={saveNameInput}
+                    value={nameInput}
+                />
+
+                {/* Password */}
+                <div className={styles['password-input']}>
                     <input
-                        type="text"
+                        type={showPassword ? "text" : "password"}
                         className={styles['input']}
-                        placeholder='Enter username'
-                        onChange={saveUsernameInput}
-                        value={newUsernameInput}
+                        placeholder='Enter password'
+                        onChange={savePasswordInput}
+                        value={createPasswordInput}
                     />
-
-                    <input
-                        type="text"
-                        className={styles['input']}
-                        placeholder='Enter first name'
-                        onChange={saveNameInput}
-                        value={nameInput}
-                    />
-
-                    <div className={styles['password-input']}> 
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            className={styles['input']}
-                            placeholder='Enter password'
-                            onChange={savePasswordInput}
-                            value={createPasswordInput}
-                        />
-
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className={styles['show-hide']}
-                            
-                        >
-                            {showPassword ? <img src={hide} className={styles['show-hide-icons']} /> : <img src={show} className={styles['show-hide-icons']} />}
-                        </button>
-                    </div>
-
-                    <div className={styles['password-input']}>
-
-                        <input
-                            type={showConfirm ? "text" : "password"}
-                            className={styles['input']}
-                            placeholder='Confirm password'
-                            onChange={savePassConfirmInput}
-                            value={confirmPasswordInput}
-                        />
-
-                        <button
-                            type="button"
-                            onClick={() => setShowConfirm(!showConfirm)}
-                            className={styles['show-hide']}
-                        >
-                            {showConfirm ? <img src={hide} className={styles['show-hide-icons']} /> : <img src={show} className={styles['show-hide-icons']} />}
-                        </button>
-                    </div>
-
-                    {passwordError && (
-                        <p className={styles['error-text']}>{passwordError}</p>
-                    )}
-
-                    <label className={styles['remember-checkbox']}>
-                        <input id={styles['remember-check']} type="checkbox" />
-                        <span className={styles['checkmark']}></span>
-                        Remember me
-                    </label>
 
                     <button
-                        type="submit"
-                        className={styles['login-button']}
-                        disabled={
-                            !newUsernameInput ||
-                            !createPasswordInput ||
-                            !confirmPasswordInput ||
-                            passwordError
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className={styles['show-hide']}
+                    >
+                        {showPassword
+                            ? <img src={hide} className={styles['show-hide-icons']} />
+                            : <img src={show} className={styles['show-hide-icons']} />
                         }
-                    >Sign up
-
                     </button>
-                    {/* disables button if username or password is missing, OR password mismatch occurs */}
+                </div>
 
-                    <p className={styles['link-to-signup-p']}>Click here to <Link to='/login'>Login</Link></p>
+                {/* Confirm Password */}
+                <div className={styles['password-input']}>
+                    <input
+                        type={showConfirm ? "text" : "password"}
+                        className={styles['input']}
+                        placeholder='Confirm password'
+                        onChange={savePassConfirmInput}
+                        value={confirmPasswordInput}
+                    />
 
-                </form>
-            </div>
-        </>
-    )
-}
+                    <button
+                        type="button"
+                        onClick={() => setShowConfirm(!showConfirm)}
+                        className={styles['show-hide']}
+                    >
+                        {showConfirm
+                            ? <img src={hide} className={styles['show-hide-icons']} />
+                            : <img src={show} className={styles['show-hide-icons']} />
+                        }
+                    </button>
+                </div>
+
+                {passwordError && (
+                    <p className={styles['error-text']}>{passwordError}</p>
+                )}
+
+                {/* ⭐ Remember Me */}
+                <label className={styles['remember-checkbox']}>
+                    <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                    />
+                    <span className={styles['checkmark']}></span>
+                    Remember me
+                </label>
+
+                <button
+                    type="submit"
+                    className={styles['login-button']}
+                    disabled={
+                        !newUsernameInput ||
+                        !createPasswordInput ||
+                        !confirmPasswordInput ||
+                        passwordError
+                    }
+                >
+                    Sign up
+                </button>
+
+                <p className={styles['link-to-signup-p']}>
+                    Click here to <Link to='/login'>Login</Link>
+                </p>
+
+            </form>
+        </div>
+    );
+};
