@@ -3,11 +3,12 @@ import styles from './Day.module.css';
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
 
 export const Day = () => {
   const navigate = useNavigate();
   const { year, month, day } = useParams();
+  const { refreshKey } = useOutletContext();
 
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ export const Day = () => {
 
   const selectedDate = dayjs()
     .year(Number(year))
-    .month(Number(month))   // 0-based
+    .month(Number(month))
     .date(Number(day));
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export const Day = () => {
     };
 
     fetchEntries();
-  }, [year, month, day]);
+  }, [year, month, day, refreshKey]); // re-fetches on new entry saved
 
   return (
     <div className={styles['container']}>
@@ -68,9 +69,7 @@ export const Day = () => {
             entries.map((entry) => (
               <div
                 key={entry._id}
-                onClick={() =>
-                  navigate(`/fullscreen-editor/${entry._id}`)
-                }
+                onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
               >
                 <EntryCard entry={entry} />
               </div>
