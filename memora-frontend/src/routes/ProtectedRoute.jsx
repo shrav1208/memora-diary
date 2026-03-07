@@ -17,6 +17,11 @@ const ProtectedRoute = ({ children }) => {
         return <Navigate to="/profile-setup" replace />;
     }
 
+    // ⭐ If profile already completed → block onboarding pages
+    if (user.profileCompleted && location.pathname === "/profile-setup") {
+        return <Navigate to="/landing" replace />;
+    }
+
     return children;
 };
 

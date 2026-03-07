@@ -19,7 +19,7 @@ export default session({
         httpOnly: true,
         secure: false, //false for localhost change to true for prod
         sameSite: "lax", // CSRF protection
-        maxAge: 1000*60*60*24, // milliseconds (1 day expiry)
+        maxAge: null // default = session cookie (closes on browser close)
     }
     
 

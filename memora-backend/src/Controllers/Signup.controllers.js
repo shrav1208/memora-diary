@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 export const signup = async (req, res) => {
     try {
-        const { username, password, name } = req.body;
+        const { username, password, name, rememberMe } = req.body; // get rememberMe
 
         if (!username.trim() || !password || !name.trim()) {
             return res.status(400).json({
@@ -44,16 +44,31 @@ export const signup = async (req, res) => {
             });
         }
 
+        // Hash password
         const hashPass = await bcrypt.hash(password, 10);
+
+        // Create new user
         const user = new User({
             username: normalizedUsername,
             password: hashPass,
             name: name.trim(),
-            profileCompleted: false  
+            profileCompleted: false
         });
+
         await user.save();
 
+        // ✅ Create session
         req.session.userID = user._id;
+
+        // ⭐ Remember Me logic
+        if (rememberMe) {
+            const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+            req.session.cookie.maxAge = THIRTY_DAYS;
+            req.session.cookie.expires = new Date(Date.now() + THIRTY_DAYS);
+        } else {
+            req.session.cookie.expires = false;
+            req.session.cookie.maxAge = null;
+        }
 
         return res.status(201).json({
             success: true,

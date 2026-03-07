@@ -10,13 +10,14 @@ import { MoodInputPopup } from './MoodInputPopup';
 export const DashboardPage = ({ fromLanding, setFromLanding }) => {
 
   const navigate = useNavigate();
-    const [isMoodPopupOpen, setIsMoodPopupOpen] = useState(false);
+  const [isMoodPopupOpen, setIsMoodPopupOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const bumpRefresh = () => setRefreshKey(k => k + 1);
 
   const goToToday = () => {
     const today = dayjs();
-    navigate(
-      `/dashboard/${today.year()}/${today.month()}/${today.date()}`
-    );
+    navigate(`/dashboard/${today.year()}/${today.month()}/${today.date()}`);
   };
 
   const location = useLocation();
@@ -70,17 +71,22 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
           goToToday={goToToday}
           fromLanding={fromLanding}
           setFromLanding={setFromLanding}
+          moodRefreshKey={refreshKey}
+          onEntrySaved={bumpRefresh}
         />
 
         <div className={styles['outer']}>
+          <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} />
 
-        <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} />
+          {/* Pass refreshKey to any child route via Outlet context */}
+          <div className={styles['container']}>
+            <Outlet context={{ refreshKey }} />
+          </div>
 
-        {/* THIS is where Year / Month / Day swap */}
-        <div className={styles['container']}><Outlet /></div>
-        <MoodInputPopup
+          <MoodInputPopup
             isOpen={isMoodPopupOpen}
             onClose={() => setIsMoodPopupOpen(false)}
+            onSaved={bumpRefresh}
             date={popupDate}
           />
         </div>

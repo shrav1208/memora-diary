@@ -11,8 +11,7 @@ import axios from 'axios';
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from 'react';
 
-
-export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
+export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) => {
     const [selectedMood, setSelectedMood] = useState(null);
     const [saving, setSaving] = useState(false);
 
@@ -53,12 +52,10 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
             setSaving(true);
             await axios.post(
                 "/api/set/mood",
-                {
-                    mood: selectedMood,
-                    date: date.toISOString(), // send the specific date
-                },
+                { mood: selectedMood, date: date.toISOString() },
                 { withCredentials: true }
             );
+            onSaved?.();  // bump the refresh key
             onClose();
         } catch (err) {
             console.error(err);
@@ -101,76 +98,27 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
                     </div>
 
                     <div className={styles['moods-container']}>
-
-                        <MoodButton
-                            img={blue}
-                            label="Sad"
-                            value="sad"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
-
-                        <MoodButton
-                            img={red}
-                            label="Anxious"
-                            value="anxious"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
-
-                        <MoodButton
-                            img={green}
-                            label="Neutral"
-                            value="neutral"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
-
-                        <MoodButton
-                            img={purple}
-                            label="Calm"
-                            value="calm"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
-
-                        <MoodButton
-                            img={orange}
-                            label="Happy"
-                            value="happy"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
-
-                        <MoodButton
-                            img={yellow}
-                            label="Excited"
-                            value="excited"
-                            selectedMood={selectedMood}
-                            setSelectedMood={setSelectedMood}
-                        />
+                        <MoodButton img={blue} label="Sad" value="sad" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
+                        <MoodButton img={red} label="Anxious" value="anxious" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
+                        <MoodButton img={green} label="Neutral" value="neutral" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
+                        <MoodButton img={purple} label="Calm" value="calm" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
+                        <MoodButton img={orange} label="Happy" value="happy" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
+                        <MoodButton img={yellow} label="Excited" value="excited" selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
                     </div>
                 </motion.div>
 
-                {/* <button
-                    className={`${styles['save-button']} ${selectedMood ? styles['save-visible'] : styles['save-hidden']}`}
-                    onClick={handleSaveMood}
-                    disabled={!selectedMood}
-                >
-                    Save Mood
-                </button> */}
                 <AnimatePresence>
                     {selectedMood && (
                         <motion.button
                             layout
                             onClick={handleSaveMood}
-                            disabled={!selectedMood}
+                            disabled={saving}
                             className={styles["save-button"]}
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 12 }}
                         >
-                            Save Mood
+                            {saving ? "Saving..." : "Save Mood"}
                         </motion.button>
                     )}
                 </AnimatePresence>
@@ -182,8 +130,7 @@ export const MoodInputPopup = ({ isOpen, onClose, date = new Date() }) => {
 const MoodButton = ({ img, label, value, selectedMood, setSelectedMood }) => (
     <div className={styles['mood-choice']}>
         <button
-            className={`${styles['mood-button']} ${selectedMood === value ? styles['selected'] : ''
-                }`}
+            className={`${styles['mood-button']} ${selectedMood === value ? styles['selected'] : ''}`}
             onClick={() => setSelectedMood(value)}
         >
             <img src={img} className={styles['mood-img']} alt={label} />
