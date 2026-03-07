@@ -1,3 +1,29 @@
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 /* ================= ROOT SCALE SYSTEM ================= */
 
 :root {
@@ -24,7 +50,8 @@
     min-height: 100svh;
 
     box-sizing: border-box;
-    animation: fadeIn 0.6s ease-out;
+    /* animation: fadeIn 0.6s ease-out; */
+    animation: fadeUp 0.5s ease-out both;
 }
 
 /* Only trigger compact mode when truly tiny */
@@ -175,6 +202,7 @@
 
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.45s ease-out 0.15s both;
 }
 
 @media (hover: hover) {
