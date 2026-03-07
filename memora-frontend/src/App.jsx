@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.module.css'
 import { Signup } from './pages/Onboarding/Signup';
 import { Landing } from './pages/Landing/Landing';
-import { FullscreenEditor } from './pages/FullscreenEditor';
+import { FullscreenEditor } from './pages/Editor/FullscreenEditor';
 import { Year } from './components/Year/Year';
 import { Month } from './components/Month/Month';
 import { Day } from './components/Day/Day';

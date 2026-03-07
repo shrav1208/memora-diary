@@ -1,123 +1,255 @@
-.container {
+/* ── Page ── */
+
+.page {
     display: flex;
-    width: 350px;
-    /* height: 390px; */
-    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1540px;
+    box-sizing: border-box;
+    gap: clamp(200px, 6vw, 300px);
+}
+
+/* ── Left brand ── */
+
+.brandSection {
+    width: 35%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 32px;
 }
 
-.upper {
+.logoNameTagline {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-
-    color: #343434;
-    text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    width: 100%;
+    padding-bottom: 100px;
 }
 
-.lower {
+.logoName {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 17px;
-    width: 100%;
-}
-
-.input-field-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
-
-    color: #343434;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
 }
+
+.logoImage {
+    width: clamp(240px, 28vw, 400px);
+    height: clamp(240px, 28vw, 400px);
+    background-image: url('../../assets/LOGO-MEMORA.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-bottom: -80px;
+}
+
+.headingMemora {
+    font-family: Sora;
+    font-size: clamp(52px, 6vw, 80px);
+    font-weight: 400;
+    margin-top: clamp(-50px, -5vw, -70px);
+    color: #343434;
+}
+
+.subtitle {
+    font-family: Inter;
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 300;
+    color: #343434;
+}
+
+/* ── Right card section ── */
+
+.cardSection {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: clamp(24px, 4vw, 60px); */
+}
+
+/* ── Card ── */
+
+.card {
+    width: 100%;
+    max-width: 760px;   /* ← wider */
+
+    box-sizing: border-box;
+
+    border-radius: 33px;
+    border: 1px solid #FFF;
+
+    background: linear-gradient(
+        116deg,
+        rgba(255,255,255,0.75) 11.18%,
+        rgba(255,255,255,0.45) 84.34%
+    );
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 4px 24px rgba(0,0,0,0.10),
+        0 1px 4px rgba(0,0,0,0.06);
+
+    padding: clamp(36px, 4vw, 56px); /* slightly more padding */
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(22px, 2vw, 28px);
+}
+
+.profileHeading {
+    font-family: Inter;
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 600;
+    color: #343434;
+    margin: 0;
+}
+
+/* ── Photo ── */
+
+.photoSection {
+    display: flex;
+    justify-content: center;
+}
+
+.profilePhoto {
+    width: clamp(88px, 10vw, 120px);
+    height: clamp(88px, 10vw, 120px);
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profilePhoto:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Fields ── */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field label {
+    font-family: Inter;
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 300;
+    color: #343434;
+}
+
+/* ── Input ── */
 
 .input {
-    width: 88px;
-    height: 36px;
+    width: 100%;
+    height: clamp(38px, 4vw, 44px);
+    box-sizing: border-box;
+
     border-radius: 24px;
-    border: 0.5px solid #343434;
+    border: 1px solid #000;
     background: rgba(249, 253, 255, 0.31);
     box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(75.1500015258789px);
+    backdrop-filter: blur(75.15px);
 
-    color: #343434;
-    text-align: center;
+    padding: 0 15px;
     font-family: Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-}
-
-.done-button {
-    padding: 10px 24px;
-
-    border-radius: 24px;
-    background: #343434;
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    outline: none;
-    border: none;
-    color: #FFF;
-    text-align: center;
-    font-family: Sora;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.profile-photo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.profile-photo {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    /* border: #343434 solid 2px; */
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    object-fit: cover;
-}
-
-.edit-photo {
-    cursor: pointer;
-    /* font-size: 12px; */
-    /* color: #343434; */
-}
-
-.profile-photo-heading {
- color: #343434;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
+    font-size: clamp(14px, 1.4vw, 16px);
     font-weight: 300;
-    line-height: normal;
+    color: #343434;
+    transition: box-shadow 0.15s ease;
 }
 
-.profile-heading {
-     color: #343434;
-    font-family: s;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+.input:hover {
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.45);
+}
+
+.input:focus {
+    box-shadow:
+        inset 0 0 0 0.5px #000,
+        0 2px 10.5px 0 rgba(0, 0, 0, 0.45);
+    outline: none;
+}
+
+/* ── Gender row ── */
+
+.genderRow {
+    display: flex;
+    gap: clamp(8px, 1.2vw, 14px);
+}
+
+.genderBtn {
+    flex: 1;
+    height: clamp(40px, 4.5vw, 48px);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgba(249, 253, 255, 0.31);
+    backdrop-filter: blur(75.15px);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.10);
+
     font-family: Inter;
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 300;
+    color: #343434;
+    cursor: pointer;
+
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.genderBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.active {
+    background: #343434;
+    color: #fff;
+    border-color: #343434;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* ── Done button ── */
+
+.doneButton {
+    height: clamp(42px, 4.5vw, 50px);
+    border-radius: 33px;
+    border: none;
+    background: #343434;
+    color: #fff;
+    font-family: Sora;
+    font-size: clamp(14px, 1.4vw, 16px);
+    font-weight: 400;
+    cursor: pointer;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.doneButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.doneButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── 768px: hide brand, card fills screen ── */
+
+@media (max-width: 768px) {
+    .brandSection {
+        display: none;
+    }
+
+    .cardSection {
+        flex: 1;
+        padding: 24px 16px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
 }

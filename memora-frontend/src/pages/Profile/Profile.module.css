@@ -1,175 +1,112 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 .container {
     display: flex;
-    width: 1040px;
+    width: 100%;
+    max-width: 1040px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 36px;
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+    padding: 0 clamp(16px, 4vw, 40px);   /* side padding lives here */
+    padding-bottom: 20px;
 }
 
 .back-button {
     position: fixed;
-    width: 60px;
-    height: 60px;
-    flex-shrink: 0;
-
-    bottom: 40px;
-    /* positions it from the bottom */
-    left: 40px;
-    /* keeps it aligned to the left side */
-
+    width: 48px;
+    height: 48px;
+    top: clamp(80px, 10vh, 100px);        /* top-left, just below navbar */
+    left: clamp(16px, 3vw, 40px);
     z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-color: #fff;
     border-radius: 50%;
-
     border: #343434 solid 2px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .content-container {
     display: flex;
-    width: 1057px;
-    height: 619px;
+    width: 100%;
+    max-width: 1057px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 92px;
-    flex-shrink: 0;
+    gap: clamp(32px, 5vw, 56px);
+    /* padding-top: clamp(16px, 3vh, 32px);  breathing room from top */
 }
 
 .profile-heading {
     align-self: stretch;
-    color: #000;
+    color: #343434;
     font-family: Inter;
-    font-size: 48px;
-    font-style: normal;
+    font-size: clamp(32px, 5vw, 48px);
     font-weight: 800;
     line-height: normal;
+    /* padding-left: clamp(60px, 6vw, 80px); clears the back button */
 }
+
+/* ── Main row: inputs + image ── */
 
 .info-box {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 207px;
+    gap: clamp(40px, 8vw, 140px);
     align-self: stretch;
+    flex-wrap: nowrap;
 }
+
+/* ── Left side ── */
 
 .profile-input-fields {
     display: flex;
-    width: 333px;
+    flex: 1;
+    min-width: 0;
     flex-direction: column;
     align-items: flex-start;
     gap: 19px;
 }
 
-.profile-image-edit {
-    display: flex;
-    width: 275px;
-    flex-direction: column;
-    align-items: center;
-    gap: 13px;
-}
-
-.profile-img {
-    width: 275px;
-    height: 275px;
-    border-radius: 50%;
-    /* primary-shadow */
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    object-fit: cover;
-    /* important */
-}
-
-.profile-input-fields p {
-    color: #000;
+.profile-input-fields > p {
+    color: #343434;
     font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
+    font-size: clamp(18px, 2.5vw, 24px);
     font-weight: 600;
     line-height: normal;
+}
+
+.inputs {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 24px 0;
+    align-self: stretch;
+    flex-wrap: wrap;
 }
 
 .vertical-inputs {
     display: flex;
-    width: 333px;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    gap: 19px;
+    gap: 16px;
 }
 
 .vertical-inputs p {
-    color: #000;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-}
-
-.input-vertical {
-    width: 333px;
-    height: 36px;
-    flex-shrink: 0;
-
-    border-radius: 24px;
-    border: 1px solid #000;
-    background: rgba(249, 253, 255, 0.31);
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(75.1500015258789px);
-
     color: #343434;
     font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-
-    padding: 0px 15px;
-}
-
-.horizontal-inputs {
-    display: flex;
-    width: 333px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.input-horizontal {
-    width: 80px;
-    height: 36px;
-    flex-shrink: 0;
-
-    border-radius: 24px;
-    border: 1px solid #000;
-    background: rgba(249, 253, 255, 0.31);
-    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(75.1500015258789px);
-
-    text-align: center;
-
-    color: #343434;
-    text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-}
-
-.horizontal-inputs p {
-    color: #000;
-    font-family: Inter;
     font-size: 14px;
-    font-style: normal;
     font-weight: 300;
     line-height: normal;
 }
@@ -179,6 +116,32 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
+    width: 100%;
+}
+
+.input-vertical {
+    width: 100%;
+    height: 40px;
+    border-radius: 24px;
+    border: 1px solid #000;
+    background: rgba(249, 253, 255, 0.31);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(75.15px);
+    color: #343434;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 15px;
+}
+
+.horizontal-inputs {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 8px;
 }
 
 .input-section-horizontal {
@@ -187,41 +150,109 @@
     gap: 9px;
 }
 
-.inputs {
+.horizontal-inputs p {
+    color: #343434;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.input-horizontal {
+    width: 80px;
+    height: 40px;
+    border-radius: 24px;
+    border: 1px solid #343434;
+    background: rgba(249, 253, 255, 0.31);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(75.15px);
+    text-align: center;
+    color: #343434;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ── Right side: profile image ── */
+
+.profile-image-edit {
     display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 40px 0;
-    align-self: stretch;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+}
+
+.profile-img {
+    width: clamp(140px, 18vw, 275px);
+    height: clamp(140px, 18vw, 275px);
+    border-radius: 50%;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    object-fit: cover;
 }
 
 .profile-image-edit p {
     color: #343434;
     font-family: Inter;
     font-size: 20px;
-    font-style: normal;
     font-weight: 300;
     line-height: normal;
 }
 
+/* ── Save button ── */
+
 .save-button {
     width: 145px;
     height: 50px;
-    flex-shrink: 0;
-
     border-radius: 33px;
     background: #343434;
     box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    border-style: none;
-
+    border: none;
     color: #FFF;
     text-align: center;
     font-family: Sora;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-top: 8px;
+}
 
-    /* align-self: ; */
+.save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ── 768px: stack image above inputs ── */
+
+@media (max-width: 768px) {
+    .info-box {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    .profile-image-edit {
+        align-self: center;
+    }
+
+    .profile-heading {
+        padding-left: 0;        /* heading full width when back button is top-left */
+        padding-top: clamp(40px, 6vw, 56px);   /* clear the back button vertically */
+    }
+}
+
+/* ── 480px ── */
+
+@media (max-width: 480px) {
+    .back-button {
+        /* width: 40px;
+        height: 40px; */
+        top: 72px;
+        left: 14px;
+    }
+
+    .save-button {
+        width: 100%;
+    }
 }

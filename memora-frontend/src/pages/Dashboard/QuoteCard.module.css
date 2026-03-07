@@ -1,53 +1,64 @@
 .quote-card {
-box-sizing: border-box;
-border-radius: 33px;
-border: 1px solid #FFF;
-background: linear-gradient(116deg, rgba(255, 255, 255, 0.66) 11.18%, rgba(255, 255, 255, 0.30) 84.34%);
+    box-sizing: border-box;
+    border-radius: 33px;
+    border: 1px solid #FFF;
+    background: linear-gradient(116deg, rgba(255, 255, 255, 0.66) 11.18%, rgba(255, 255, 255, 0.30) 84.34%);
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(98.65px);
 
-/* shadow+backblur */
-box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(98.6500015258789px);
+    width: 100%;
+    max-width: 422px;
+    height: 135px;          /* fixed — card never grows */
+    flex-shrink: 1;
 
-width: 422px;
-height: 135px;
-flex-shrink: 0;
-
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 12px;
-flex-shrink: 0;
-padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
 }
 
-/* .quote-box {
-    display: flex;
-width: 125px;
-flex-direction: column;
-align-items: flex-start;
-gap: 24px;
-} */
-
 .quote-heading {
-align-self: stretch;
+    align-self: stretch;
+    color: #343434;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    flex-shrink: 0;         /* heading never gets squished */
+}
 
-color: #343434;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+.quote-outer {
+    flex: 1;                /* fills remaining space after heading */
+    min-height: 0;          /* critical — lets flex child shrink below content size */
+    max-height: 145px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
 }
 
 .quote {
-align-self: stretch;
-justify-content: center;
+    align-self: stretch;
+    color: #343434;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 0;
+}
 
-color: #343434;
-text-align: justify;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 200;
-/* line-height: 110.751%; 13.29px */
+@media (max-width: 600px) {
+    .quote-card {
+        border-radius: 24px;
+        max-width: 100%;
+    }
+
+    .quote {
+        font-size: 13px;
+        text-align: left;
+    }
 }

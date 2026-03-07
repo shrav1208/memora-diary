@@ -11,6 +11,10 @@ body {
     background-attachment: fixed;
 }
 
+body {
+    overflow-x: clip;   /* instead of overflow-x: hidden */  /* add this — catches any remaining overflow */
+}
+
 p {
     margin: 0;
 }

@@ -7,7 +7,7 @@
 
 .popup {
     position: absolute;
-    top: calc(100% + 8px); /* right below search box */
+    top: calc(100% + 8px);
     right: 0;
 
     width: 422px;
@@ -29,7 +29,6 @@
 .popup::-webkit-scrollbar {
     display: none;
 }
-
 
 .result {
     display: block;
@@ -65,6 +64,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: baseline;
+    gap: 8px;
 }
 
 .display-date {
@@ -73,7 +73,16 @@
     font-size: 13px;
     font-weight: 300;
     text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-
-
+/* When the 422px popup would bleed off the left edge,
+   switch anchor to left and cap width to the viewport */
+@media (max-width: 600px) {
+    .popup {
+        right: auto;
+        left: 0;
+        width: calc(92vw);
+    }
+}

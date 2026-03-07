@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { analyseMood } from "../Utils/AnalyseMood.js";
 import { updateDailyMoodUpdate } from "../Utils/UpdateDailyMoodUpdate.js";
 import { generateReflection } from "../Utils/GenerateReflection.js";
+import { reflectionTemplates } from "../Utils/ReflectionTemplates.js";
 
 export const updatePost = async (req, res) => {
     try {
