@@ -37,3 +37,9 @@
     min-height: 0;
     /* 👈 VERY IMPORTANT for flex children */
 }
+
+@media (max-width: 600px) {
+    .mood-card {
+        border-radius: 24px;
+    }
+}

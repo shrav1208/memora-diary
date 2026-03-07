@@ -6,13 +6,31 @@
     z-index: 10000;
 
     display: flex;
-    justify-content: center; /* centers inner wrapper */
+    justify-content: center;
+}
+
+/* Background lives on a pseudo-element so it fades independently of content */
+.navbar-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(116deg, rgba(255, 255, 255, 0.733) 11.18%, rgba(255, 255, 255, 0.471) 84.34%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    box-shadow: #000;
+}
+
+.navbar-container.scrolled::before {
+    opacity: 1;
 }
 
 .navbar-inner {
     width: 100%;
-    max-width: 1800px;  /* content width */
-    
+    max-width: 1800px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +40,7 @@
     display: flex;
     align-items: center;
     gap: 7px;
-    padding-left: 24px;
+    padding-left: clamp(16px, 3vw, 24px);
 }
 
 .logo-name-nav {
@@ -30,18 +48,19 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 .logo {
-    width: 30px;
-    height: 60px;
+    width: clamp(20px, 3vw, 30px);
+    height: auto;
 }
 
 .heading {
     color: #000;
     text-align: center;
     font-family: Sora;
-    font-size: 24px;
+    font-size: clamp(18px, 2.5vw, 24px);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -74,11 +93,12 @@
 }
 
 .sidebar {
-    width: 35px;
-    height: 35px;
+    width: clamp(28px, 4vw, 35px);
+    height: clamp(28px, 4vw, 35px);
     flex-shrink: 0;
-    margin-right: 20px;
+    margin-right: clamp(12px, 3vw, 20px);
     align-self: center;
+    cursor: pointer;
 }
 
 .sidebar-wrapper {
@@ -87,7 +107,5 @@
     right: 0;
     height: 100vh;
     z-index: 9999;
-
-    /* optional */
     display: flex;
 }

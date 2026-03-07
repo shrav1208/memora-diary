@@ -5,6 +5,10 @@
     width: 100%;
     flex-wrap: nowrap;
     overflow: hidden;
+
+    button {
+        cursor: pointer;
+    }
 }
 
 .normal, .highlighted {

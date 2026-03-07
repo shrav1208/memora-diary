@@ -4,45 +4,39 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: rgba(217, 217, 217, 0.18); */
-    /* backdrop-filter: blur(3.450000047683716px); */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
+    z-index: 1000;
 }
 
 .mood-pop-up {
-    width: 540px;
-    height: 320px; 
+    width: min(540px, 90vw);
     position: absolute;
     z-index: 1100;
 
     border-radius: 33px;
     border: 1px solid #FFF;
-    /* background: linear-gradient(116deg, rgba(255, 255, 255, 0.66) 11.18%, rgba(255, 255, 255, 0.30) 84.34%); */
     background: linear-gradient(116deg, rgba(255, 255, 255, 0.45) 11.18%, rgba(255, 255, 255, 0.12) 84.34%);
     backdrop-filter: blur(20px);
     box-shadow: 0 2px 10.5px -1px rgba(0, 0, 0, 0.25);
-    /* backdrop-filter: blur(98.6500015258789px); */
 
     display: flex;
-    padding: 20px;
+    padding: clamp(14px, 4vw, 20px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 25px;
+    box-sizing: border-box;
 }
 
 .content {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    width: 100%;
 }
 
 .upper-half {
@@ -59,15 +53,15 @@
 }
 
 .star {
-    width: 111px;
-    height: 88px;
+    width: clamp(70px, 15vw, 111px);
+    height: auto;
 }
 
 .heading {
     color: #343434;
     text-align: center;
     font-family: Inter;
-    font-size: 24px;
+    font-size: clamp(16px, 3.5vw, 24px);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -75,24 +69,25 @@
 
 .moods-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* buttons own the full width evenly */
     align-items: center;
-    gap: 32px;
     align-self: stretch;
+    width: 100%;
 }
 
 .mood-choice {
     display: flex;
-    width: 46px;
+    flex: 1;            /* each slot takes equal share of available width */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    min-width: 0;       /* allow shrinking below content size */
 
     p {
         color: #343434;
         font-family: Inter;
-        font-size: 12px;
+        font-size: clamp(10px, 2.5vw, 12px);
         font-style: normal;
         font-weight: 300;
         line-height: normal;
@@ -119,17 +114,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* transition base
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease; */
 }
 
 .mood-button {
-    width: 25px;
-    height: 25px;
+    /* width: clamp(20px, 20vw, 25px); */
+    height: clamp(20px, 20vw, 25px);
 
     background-color: transparent;
     border: none;
@@ -142,14 +131,76 @@
 }
 
 .mood-img {
-    width: 25px;
-    height: 25px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .selected {
     border: 1.5px hidden white;
     outline: none;
     filter: drop-shadow(0 0 8px rgba(255, 119, 194, 0.655));
-
     transform: scale(1.25);
+}
+
+/* Short screens — landscape tablets, small laptops */
+@media (max-height: 600px) {
+    .mood-pop-up {
+        gap: 16px;
+        padding: 16px;
+        border-radius: 24px;
+    }
+
+    .content {
+        gap: 16px;
+    }
+
+    .star {
+        width: clamp(50px, 10vw, 75px);
+    }
+
+    .heading {
+        font-size: clamp(14px, 2.5vw, 18px);
+    }
+
+    .save-button {
+        height: 36px;
+        font-size: 13px;
+    }
+}
+
+/* Very short — landscape phones */
+@media (max-height: 450px) {
+    .mood-pop-up {
+        gap: 12px;
+        padding: 12px;
+        border-radius: 20px;
+    }
+
+    .content {
+        gap: 10px;
+    }
+
+    /* .star-container {
+        display: none; /* star is decorative — hide it to reclaim space 
+    } */
+
+    .upper-half {
+        flex-direction: row;
+        align-self: center;
+    }
+
+    .heading {
+        font-size: clamp(13px, 2vw, 16px);
+    }
+
+    .mood-choice {
+        gap: 4px;
+    }
+
+    .save-button {
+        height: 32px;
+        font-size: 12px;
+        padding: 0 12px;
+    }
 }

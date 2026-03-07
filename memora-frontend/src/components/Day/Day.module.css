@@ -9,50 +9,52 @@
 
 .day-component {
     display: flex;
-width: 100%;
-flex-direction: column;
-align-items: flex-start;
-gap: 24px;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
 }
 
 .month {
     color: #343434;
     font-family: Inter;
     font-size: 24px;
-    font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
 
 .year-month {
     color: #343434;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .entries-wrapper {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 25px;
-align-self: stretch;
-
-margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;   /* cards stretch full width */
+    gap: 25px;
+    align-self: stretch;
+    margin-bottom: 50px;
 }
 
 .no-entry {
-color: #343434a4;
-text-align: center;
-font-family: Inter;
-font-size: 32px;
-font-style: italic;
-font-weight: 100;
-line-height: normal;
-align-self: center;
-margin: 100px 0;
+    color: #343434a4;
+    text-align: center;
+    font-family: Inter;
+    font-size: clamp(20px, 4vw, 32px);
+    font-style: italic;
+    font-weight: 100;
+    align-self: center;
+    margin: 100px 0;
 }
 
-
+@media (max-width: 600px) {
+    .entries-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+}

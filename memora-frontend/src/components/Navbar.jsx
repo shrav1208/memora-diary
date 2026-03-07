@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 export const Navbar = () => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const sidebarRef = useRef(null);
 
     const navigate = useNavigate();
@@ -18,6 +19,15 @@ export const Navbar = () => {
         const year = dayjs().year();
         navigate(`/dashboard/${year}`);
     };
+
+    // Fade in bg on scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // Close sidebar on outside click
     useEffect(() => {
@@ -34,21 +44,17 @@ export const Navbar = () => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [isSidebarOpen]);
+
     return (
         <>
-            <div className={styles['navbar-container']}>
+            <div className={`${styles['navbar-container']} ${isScrolled ? styles['scrolled'] : ''}`}>
                 <div className={styles['navbar-inner']}>
                     <div className={styles['navbar-path']}>
-                        {/* <Link to='/dashboard/year'> */}
-                            <div className={styles['logo-name-nav']} onClick={goToDashboard}>
-                                <img src={logo} className={styles['logo']} alt="profile" />
-                                <h6 className={styles['heading']}>memora</h6>
-                            </div>
-                        {/* </Link> */}
-                        {/* dynamically changing path here */}
-
+                        <div className={styles['logo-name-nav']} onClick={goToDashboard}>
+                            <img src={logo} className={styles['logo']} alt="profile" />
+                            <h6 className={styles['heading']}>memora</h6>
+                        </div>
                     </div>
-
 
                     <img src={sidebar} className={styles['sidebar']} alt='sidebar' onClick={() => setIsSidebarOpen(prev => !prev)} />
                 </div>

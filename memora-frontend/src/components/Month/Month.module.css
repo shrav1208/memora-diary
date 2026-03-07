@@ -1,7 +1,6 @@
-
 .month-component {
     display: flex;
-    width: 100%;
+    width: 100%;            /* was: 1040px */
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
@@ -10,54 +9,69 @@
 .month {
     color: #343434;
     font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
+    font-size: clamp(20px, 1.8vw, 24px);
     font-weight: 700;
+    line-height: normal;
+}
+
+.year-month {
+    color: #343434;
+    font-family: Inter;
+    font-size: clamp(12px, 1.8vw, 14px);
+    font-weight: 400;
     line-height: normal;
 }
 
 .days-collection {
     display: grid;
-    height: 820px;
     row-gap: 20px;
     column-gap: 20px;
     align-self: stretch;
     grid-template-rows: repeat(6, minmax(0, 1fr));
     grid-template-columns: repeat(7, minmax(0, 1fr));
+    /* no height — cards define their own size via aspect-ratio */
 }
 
 .empty-day {
-  visibility: hidden; /* keeps space but hides box */
+    visibility: hidden;
 }
 
 .weekdays {
-    /* border: 1px solid #343434; */
-  border-radius: 28px;
+    border-radius: 28px;
     display: flex;
-padding: 10px 0;
-justify-content: space-between;
-align-items: flex-start;
-align-self: stretch;
-
-p {
-
-width: 131px;
-    color: #343434;
-text-align: center;
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
+.weekdays p {
+    flex: 1;                /* was: width: 131px — fills column proportionally */
+    color: #343434;
+    text-align: center;
+    font-family: Inter;
+    font-size: clamp(13px, 1.8vw, 20px);
+    font-weight: 500;
+    line-height: normal;
 }
 
-.year-month {
-    color: #343434;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+@media (max-width: 930px) {
+    .days-collection {
+        row-gap: 14px;
+        column-gap: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .days-collection {
+        row-gap: 8px;
+        column-gap: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .days-collection {
+        row-gap: 6px;
+        column-gap: 6px;
+    }
 }

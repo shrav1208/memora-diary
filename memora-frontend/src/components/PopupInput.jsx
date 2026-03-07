@@ -64,21 +64,23 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                         placeholder="Title"
                     />
 
-                    <Editor
-                        className={styles['input-text']}
-                        apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
-                        value={content}
-                        onInit={(evt, editor) => (editorRef.current = editor)}
-                        onEditorChange={setContent}
-                        init={{
-                            inline: true,
-                            menubar: false,
-                            toolbar: false,
-                            branding: false,
-                            statusbar: false,
-                            plugins: [],
-                            placeholder: "What's on your mind...",
-                            content_style: `
+                    <div className={styles['input-text']}>
+                        <Editor
+                            className={styles['input-text']}
+                            apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
+                            value={content}
+                            onInit={(evt, editor) => (editorRef.current = editor)}
+                            onEditorChange={setContent}
+                            init={{
+                                inline: true,
+                                menubar: false,
+                                toolbar: false,
+                                branding: false,
+                                statusbar: false,
+                                body_class: styles['input-text'],
+                                plugins: [],
+                                placeholder: "What's on your mind...",
+                                content_style: `
                                 body {
                                     font-family: 'Inter', sans-serif;
                                     text-align: left;
@@ -90,16 +92,17 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                                     border: none !important;
                                     box-shadow: none !important;
                                 }`,
-                            setup: (editor) => {
-                                // Disable formatting shortcuts (B/I/U)
-                                editor.on("keydown", (e) => {
-                                    if ((e.ctrlKey || e.metaKey) && ["b", "i", "u"].includes(e.key.toLowerCase())) {
-                                        e.preventDefault();
-                                    }
-                                });
-                            },
-                        }}
-                    />
+                                setup: (editor) => {
+                                    // Disable formatting shortcuts (B/I/U)
+                                    editor.on("keydown", (e) => {
+                                        if ((e.ctrlKey || e.metaKey) && ["b", "i", "u"].includes(e.key.toLowerCase())) {
+                                            e.preventDefault();
+                                        }
+                                    });
+                                },
+                            }}
+                        />
+                    </div>
 
                     <div className={styles['date-and-expand']}>
                         <div className={styles['display-date']}>{displayDate}</div>

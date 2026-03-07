@@ -1,57 +1,66 @@
 .month-card {
-    width: 157px;
-    height: 120px;
+    width: 100%;            /* was: 157px */
+    height: 100%;           /* fill grid cell */
 
     border-radius: 28px;
     border: 1px solid rgba(255, 186, 228, 0.63);
     background: linear-gradient(121deg, rgba(255, 186, 228, 0.00) 16.1%, rgba(255, 186, 228, 0.18) 84.91%);
-    backdrop-filter: blur(98.6500015258789px);
-
-
-    /* shadow+backblur */
+    backdrop-filter: blur(98.65px);
     box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(98.6500015258789px);
 
     display: grid;
-    flex-shrink: 0;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     padding: 16px;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.month-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.15);
+}
+
+.month-card:active {
+    transform: translateY(0);
 }
 
 .month-card-exist {
-    width: 157px;
-    height: 120px;
-    flex-shrink: 0;
+    width: 100%;            /* was: 157px */
+    height: 100%;
 
     border-radius: 28px;
     border: 1px solid var(--pink-border, rgba(255, 186, 228, 0.63));
     background: var(--pink-background, linear-gradient(121deg, rgba(255, 186, 228, 0.18) 16.1%, rgba(255, 186, 228, 0.55) 84.91%));
-    backdrop-filter: blur(98.6500015258789px);
-
-
-    /* shadow+backblur */
+    backdrop-filter: blur(98.65px);
     box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(98.6500015258789px);
 
     display: grid;
-    flex-shrink: 0;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     padding: 16px;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.month-card-exist:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.15);
+}
+
+.month-card-exist:active {
+    transform: translateY(0);
+}
+
+/* text styles unchanged */
 .month-heading {
     color: rgba(114, 91, 105, 0.67);
     font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
+    font-size: clamp(16px, 1.8vw, 20px);
     font-weight: 500;
     line-height: normal;
-
-    flex: 1 0 0;
     align-self: stretch;
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
@@ -60,50 +69,33 @@
 .month-heading-exist {
     color: #343434;
     font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
+    font-size: clamp(16px, 1.8vw, 20px);
     font-weight: 500;
     line-height: normal;
-
-    flex: 1 0 0;
     align-self: stretch;
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
 }
 
-.count {
-    color: rgba(114, 91, 105, 0.67);
+.count, .count-exist {
     text-align: right;
     font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
+    font-size: clamp(14px, 1.4vw, 16px);
     font-weight: 600;
     line-height: normal;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    flex: 1 0 0;
     align-self: stretch;
     grid-row: 2 / span 1;
     grid-column: 2 / span 1;
 }
 
-.count-exist {
+.count { color: rgba(114, 91, 105, 0.67); }
+.count-exist { color: #343434; }
 
-    color: #343434;
-    text-align: right;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex: 1 0 0;
-    align-self: stretch;
-    grid-row: 2 / span 1;
-    grid-column: 2 / span 1;
+@media (max-width: 600px) {
+    .month-card, .month-card-exist {
+        border-radius: 24px;
+    }
 }
