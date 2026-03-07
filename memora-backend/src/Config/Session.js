@@ -12,7 +12,7 @@ export default session({
     store: MongoStore.create({
         mongoUrl: "mongodb://127.0.0.1:27017/test",
         collectionName: "sessions",
-        //ttl: 60*60*24, //seconds (1 day expiry)
+        ttl: 60*60*24, //seconds (1 day expiry)
     }),
 
     cookie: {
