@@ -9,6 +9,15 @@ import styles from './MoodTracker.module.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const MOOD_SCALE = {
+    sad:     1,
+    anxious: 2,
+    neutral: 3,
+    calm:    4,
+    happy:   5,
+    excited: 6,
+};
+
 export const MoodTracker = ({ refreshKey }) => {
 
     const [moodData, setMoodData] = useState([]);
@@ -16,9 +25,9 @@ export const MoodTracker = ({ refreshKey }) => {
     useEffect(() => {
         (async () => {
             const res = await axios.get('/api/get/moods');
-            const result = res.data.result.map(({ date, score }) => ({
+            const result = res.data.result.map(({ date, mood }) => ({
                 day: new Date(date).getDate(),
-                mood: score,
+                mood: MOOD_SCALE[mood] ?? null,   // normalise to 1–5
             }));
 
             const moodMap = new Map(result.map(item => [item.day, item.mood]));
@@ -50,7 +59,7 @@ export const MoodTracker = ({ refreshKey }) => {
                             height={1}
                         />
                         <YAxis
-                            domain={[1, 5]}
+                            domain={[1, 6]}
                             tick={false}
                             padding={{ top: 10, bottom: 10 }}
                             tickSize={0}
@@ -62,9 +71,10 @@ export const MoodTracker = ({ refreshKey }) => {
                             dataKey="mood"
                             stroke="#343434"
                             strokeWidth={1}
-                            dot={{ r: 2, fill: "#343434", stroke: "#343434" }} // smaller solid dot
-                            activeDot={{ r: 1, fill: "#343434", stroke: "#343434" }} // same size on hover
-                            isAnimationActive={false} // disables mount animation
+                            dot={{ r: 2, fill: "#343434", stroke: "#343434" }}
+                            activeDot={{ r: 1, fill: "#343434", stroke: "#343434" }}
+                            isAnimationActive={false}
+                            connectNulls={false}
                         />
                     </LineChart>
                 </ResponsiveContainer>
