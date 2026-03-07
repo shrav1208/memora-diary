@@ -1,30 +1,4 @@
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
+/* ── preview card ── */
 .quote-card {
     box-sizing: border-box;
     border-radius: 33px;
@@ -35,7 +9,7 @@
 
     width: 100%;
     max-width: 422px;
-    height: 135px;          /* fixed — card never grows */
+    height: 135px;
     flex-shrink: 1;
 
     display: flex;
@@ -44,7 +18,18 @@
     gap: 12px;
     padding: 16px;
 
-    animation: fadeIn 0.5s ease-out 0.15s both; 
+    cursor: pointer;
+    animation: fadeIn 0.5s ease-out 0.15s both;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.quote-card:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.quote-card:active {
+    transform: translateY(0);
 }
 
 .quote-heading {
@@ -54,12 +39,12 @@
     font-size: 16px;
     font-weight: 500;
     line-height: normal;
-    flex-shrink: 0;         /* heading never gets squished */
+    flex-shrink: 0;
 }
 
 .quote-outer {
-    flex: 1;                /* fills remaining space after heading */
-    min-height: 0;          /* critical — lets flex child shrink below content size */
+    flex: 1;
+    min-height: 0;
     max-height: 145px;
     width: 100%;
     overflow: hidden;
@@ -80,6 +65,93 @@
     margin: 0;
 }
 
+/* ── popup overlay — fixed to viewport, not parent ── */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* ── popup box ── */
+.popup-box {
+    width: min(540px, 90vw);
+    max-height: 80vh;
+
+    border-radius: 33px;
+    border: 1px solid #FFF;
+    background: linear-gradient(116deg, rgba(255, 255, 255, 0.45) 11.18%, rgba(255, 255, 255, 0.12) 84.34%);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 10.5px -1px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: clamp(20px, 4vw, 32px);
+    box-sizing: border-box;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-box::-webkit-scrollbar {
+    display: none;
+}
+
+.popup-heading {
+    color: #343434;
+    font-family: Inter;
+    font-size: clamp(18px, 3.5vw, 24px);
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.popup-body {
+    color: #343434;
+    font-family: Inter;
+    font-size: clamp(14px, 2.2vw, 18px);
+    font-weight: 300;
+    line-height: 1.7;
+    text-align: justify;
+    margin: 0;
+}
+
+.close-button {
+    align-self: flex-end;
+    padding: 0 20px;
+    height: 42px;
+    border-radius: 30px;
+    background: #343434;
+    box-shadow: 0 2px 10.5px 0 rgba(0, 0, 0, 0.25);
+    border: none;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.close-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.close-button:active {
+    transform: translateY(0);
+}
+
 @media (max-width: 600px) {
     .quote-card {
         border-radius: 24px;
@@ -89,5 +161,23 @@
     .quote {
         font-size: 13px;
         text-align: left;
+    }
+
+    .popup-box {
+        border-radius: 24px;
+        max-height: 85vh;
+    }
+
+    .popup-body {
+        text-align: left;
+    }
+}
+
+@media (max-height: 600px) {
+    .popup-box {
+        gap: 16px;
+        padding: 16px;
+        border-radius: 24px;
+        max-height: 90vh;
     }
 }
