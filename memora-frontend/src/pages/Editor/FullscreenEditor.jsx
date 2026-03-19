@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from './FullscreenEditor.module.css';
-// import tickmark from "../../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../../components/Navbar";
@@ -28,11 +27,6 @@ export const FullscreenEditor = () => {
 
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
-
-    //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
-    // const [activeHighlight, setActiveHighlight] = useState(null);
-    // // const [textColor, setTextColor] = useState("#343434"); // default text color
-    // const editorRef = useRef(null);
 
     const displayDate = entryDate.format("ddd, YYYY MMM D, H:mm A");
 
@@ -112,14 +106,6 @@ export const FullscreenEditor = () => {
             alert(err.response?.data?.message || "Failed to delete entry");
         }
     };
-
-
-    // function to run editor commands
-    // const runCommand = (cmd, value = null) => {
-    //     if (editorRef.current) {
-    //         editorRef.current.execCommand(cmd, false, value);
-    //     }
-    // };
 
     const textareaRef = useRef(null);
 
