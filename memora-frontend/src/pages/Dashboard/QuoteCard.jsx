@@ -10,10 +10,15 @@ export const QuoteCard = () => {
 
     useEffect(() => {
         const fetchReflection = async () => {
-            const res = await axios.get("/api/get/today-reflection", {
-                withCredentials: true
-            });
-            setReflection(res.data?.reflection);
+            try {
+                const res = await axios.get("/api/get/today-reflection", {
+                    withCredentials: true
+                });
+                setReflection(res.data?.reflection);
+            } catch (err) {
+                console.error("Failed to fetch reflection:", err);
+                // fallback content already handles null reflection
+            }
         };
         fetchReflection();
     }, []);

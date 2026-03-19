@@ -1,7 +1,7 @@
 import User from '../Models/User.js';
 import bcrypt from "bcrypt";
 
-const fakeHash = "$2b$10$TOuIZcBAgJzMFJy6R/zN2.g7e8gKSpDhX335Q5M39ortaP5sQFNSC"
+const fakeHash = process.env.FAKE_HASH;
 
 export const login = async (req, res) => {
     try {
@@ -35,28 +35,29 @@ export const login = async (req, res) => {
             });
         }
 
-        // ✅ Create session
-        req.session.userID = user._id;
+        // ✅ Create session — regenerate first to prevent session fixation
+        req.session.regenerate((err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: "Server error" });
+            }
 
-        // ⭐ Remember Me Logic
-        if (rememberMe) {
+            req.session.userID = user._id;
 
-            const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+            // ⭐ Remember Me Logic
+            if (rememberMe) {
+                const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+                req.session.cookie.maxAge = THIRTY_DAYS;
+                req.session.cookie.expires = new Date(Date.now() + THIRTY_DAYS);
+            } else {
+                // Session expires when browser closes
+                req.session.cookie.expires = false;
+                req.session.cookie.maxAge = null;
+            }
 
-            req.session.cookie.maxAge = THIRTY_DAYS;
-            req.session.cookie.expires = new Date(Date.now() + THIRTY_DAYS);
-
-        } else {
-
-            // Session expires when browser closes
-            req.session.cookie.expires = false;
-            req.session.cookie.maxAge = null;
-
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "Successfully logged in"
+            return res.status(200).json({
+                success: true,
+                message: "Successfully logged in"
+            });
         });
 
     } catch (err) {

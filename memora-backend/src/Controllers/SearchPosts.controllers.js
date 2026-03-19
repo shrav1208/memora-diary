@@ -12,13 +12,14 @@ export const searchPosts = async(req, res) => {
 
     try{
         const queryTrim = q.trim();
+        const escaped = queryTrim.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex chars
 
         const results = await DiaryEntry.find({
             user: req.session.userID,
             isDeleted: false,
             $or: [
-                { title: { $regex: queryTrim, $options: 'i'} },
-                { content: { $regex: queryTrim, $options: 'i'} },
+                { title: { $regex: escaped, $options: 'i'} },
+                { content: { $regex: escaped, $options: 'i'} },
             ]
         }).limit(20).sort({ updatedAt: -1 });
 

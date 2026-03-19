@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../../components/Navbar";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import EditorToolbar from "./EditorToolbar"
 
 import axios from "axios";
@@ -42,7 +43,7 @@ export const FullscreenEditor = () => {
             try {
                 const res = await axios.get(`/api/get/post/${entryid}`);
                 setInputTitle(res.data.title);
-                setInputText(res.data.content);
+                setInputText(DOMPurify.sanitize(res.data.content));
                 setEntryDate(dayjs(res.data.createdAt));
             } catch (err) {
                 console.error("Failed to fetch entry", err);
@@ -52,7 +53,6 @@ export const FullscreenEditor = () => {
             }
         })();
     }, [entryid, navigate]);
-
 
     const handleSaveEntry = async () => {
         if (!inputText.trim()) {
@@ -152,7 +152,7 @@ export const FullscreenEditor = () => {
                 <div className={styles["editor-window"]}>
                 <Editor
                     className={styles['editor-window']}
-                    apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
+                    apiKey={import.meta.env.VITE_TINYMCE_KEY} 
                     value={inputText}
                     onInit={(evt, ed) => setEditor(ed)}
                     onEditorChange={(newValue) => setInputText(newValue)}

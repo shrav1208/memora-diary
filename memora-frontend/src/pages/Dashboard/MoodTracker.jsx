@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const MOOD_SCALE = {
-    sad:     1,
+    sad: 1,
     anxious: 2,
     neutral: 3,
-    calm:    4,
-    happy:   5,
+    calm: 4,
+    happy: 5,
     excited: 6,
 };
 
@@ -24,23 +24,28 @@ export const MoodTracker = ({ refreshKey }) => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get('/api/get/moods');
-            const result = res.data.result.map(({ date, mood }) => ({
-                day: new Date(date).getDate(),
-                mood: MOOD_SCALE[mood] ?? null,   // normalise to 1–5
-            }));
+            try {
+                const res = await axios.get('/api/get/moods');
+                const result = res.data.result.map(({ date, mood }) => ({
+                    day: new Date(date).getDate(),
+                    mood: MOOD_SCALE[mood] ?? null,
+                }));
 
-            const moodMap = new Map(result.map(item => [item.day, item.mood]));
+                const moodMap = new Map(result.map(item => [item.day, item.mood]));
 
-            const fullMonth = Array.from({ length: 31 }, (_, i) => {
-                const day = i + 1;
-                return {
-                    day,
-                    mood: moodMap.has(day) ? moodMap.get(day) : null,
-                };
-            });
+                const fullMonth = Array.from({ length: 31 }, (_, i) => {
+                    const day = i + 1;
+                    return {
+                        day,
+                        mood: moodMap.has(day) ? moodMap.get(day) : null,
+                    };
+                });
 
-            setMoodData(fullMonth);
+                setMoodData(fullMonth);
+            } catch (err) {
+                console.error("Failed to fetch moods:", err);
+                setMoodData([]); // chart renders empty instead of crashing
+            }
         })();
     }, [refreshKey]); // re-fetches whenever refreshKey changes
 

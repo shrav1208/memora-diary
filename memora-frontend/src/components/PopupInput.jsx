@@ -66,7 +66,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                     <div className={styles['input-text']}>
                         <Editor
                             className={styles['input-text']}
-                            apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
+                            apiKey={import.meta.env.VITE_TINYMCE_KEY} 
                             value={content}
                             onInit={(evt, editor) => (editorRef.current = editor)}
                             onEditorChange={setContent}

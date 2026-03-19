@@ -19,6 +19,7 @@
     "@tiptap/starter-kit": "^3.6.2",
     "axios": "^1.13.2",
     "dayjs": "^1.11.18",
+    "dompurify": "^3.3.3",
     "motion": "^12.28.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

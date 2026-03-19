@@ -1,8 +1,10 @@
+import DOMPurify from 'dompurify';
+
 export const removeFormatting = (html) => {
     if (!html) return "";
 
     const container = document.createElement("div");
-    container.innerHTML = html;
+    container.innerHTML = DOMPurify.sanitize(html); // dom purification added to prevent xss
 
     // Remove formatting tags but keep their children
     container.querySelectorAll("b, strong, i, em, u, span").forEach(el => {

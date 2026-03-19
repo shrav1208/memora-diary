@@ -2,8 +2,6 @@ import User from '../Models/User.js';
 
 export const readUser = async(req, res)=>{
     try{
-        
-        // console.log(req);
 
         const user = await User.findById(req.session.userID).select("-password"); // means select everything but password
 
@@ -14,8 +12,6 @@ export const readUser = async(req, res)=>{
                 message: "IAM LOSIGN MY MIND",
             });
         }
-
-        console.log(user);
 
         return res.status(201).json({
             success: true, 

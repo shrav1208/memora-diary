@@ -9,7 +9,7 @@ dayjs.extend(timezone);
 export const getDailyMood = async (req, res) => {
   try {
     const { year, month, day } = req.query;
-    const userID = req.user.id; // because you're using requireAuth
+    const userID = req.session.userID; // set by requireAuth middleware
 
     if (!year || month === undefined || !day) {
       return res.status(400).json({ message: "Missing date params" });

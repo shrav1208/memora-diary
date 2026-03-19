@@ -10,14 +10,15 @@ export const LogoutButton = () => {
     const { setUser } = useAuth();
 
     const handleLogout = async () => {
-            try {
-                await axios.post('/api/logout', {}, { withCredentials: true });
-                setUser(null);
-                navigate('/login', { replace: true });
-            } catch (err) {
-                console.error("Logout failed:", err);
-            }
-        };
+        try {
+            await axios.post('/api/logout', {}, { withCredentials: true });
+        } catch (err) {
+            console.error("Logout failed:", err);
+        } finally {
+            setUser(null); // always clear, even if server call fails
+            navigate('/login', { replace: true });
+        }
+    };
 
     return (
         <>

@@ -1,5 +1,6 @@
 import styles from './SearchPopup.module.css';
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { removeFormatting } from "../utils/removeFormatting";
 
 export const SearchPopup = ({ results, onClose }) => {
@@ -63,7 +64,9 @@ export const SearchPopup = ({ results, onClose }) => {
                                 </div>
 
                                 <p className={styles.content}>
-                                    {removeFormatting(entry.content?.slice(0, 120) + '…')}
+                                    {removeFormatting(
+                                        DOMPurify.sanitize(entry.content ?? '', { ALLOWED_TAGS: [] }).slice(0, 120) + '…'
+                                    )}
                                 </p>
                             </div>
                         </Link>

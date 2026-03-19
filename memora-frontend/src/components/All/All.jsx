@@ -20,7 +20,6 @@ export const All = () => {
                 const res = await axios.get("/api/get/years", {
                     withCredentials: true
                 });
-                console.log(res.data);
                 
                 if (res.data.success) {
                     setYears(res.data.years);

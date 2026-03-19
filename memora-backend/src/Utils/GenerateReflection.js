@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI('AIzaSyDHcRKUNhNP8jhVSUggD-1WR9i1C75gLcM');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY); 
 
 export const generateReflection = async (title, content, mood) => {
     try {
