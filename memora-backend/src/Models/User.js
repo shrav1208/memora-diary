@@ -27,12 +27,18 @@ const userSchema = new mongoose.Schema({
 
     age: {
         type: Number,
-        default: null
+        default: null,
+        min: [0, "Age cannot be negative"],
+        max: [120, "Age cannot exceed 120"],
     },
 
     gender: {
         type: String,
-        default: null
+        default: null,
+        enum: {
+            values: [null, "male", "female", "other"],
+            message: "Gender must be male, female, or other"
+        }
     },
 
     profilePhoto: {

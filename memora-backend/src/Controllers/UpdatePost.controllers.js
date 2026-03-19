@@ -50,13 +50,20 @@ export const updatePost = async (req, res) => {
             entry.content.length > 50;
 
         if (shouldCallLLM) {
-            reflection = await generateReflection(entry.title, entry.content, mood);
-            generatedBy = "llm";
-        } else {
-            reflection =
-                reflectionTemplates[
-                Math.floor(Math.random() * reflectionTemplates.length)
+            try {
+                reflection = await generateReflection(entry.title, entry.content, mood);
+                generatedBy = "llm";
+            } catch (llmErr) {
+                console.error("Gemini failed, falling back to template:", llmErr);
+                reflection = reflectionTemplates[
+                    Math.floor(Math.random() * reflectionTemplates.length)
                 ];
+                generatedBy = "template";
+            }
+        } else {
+            reflection = reflectionTemplates[
+                Math.floor(Math.random() * reflectionTemplates.length)
+            ];
             generatedBy = "template";
         }
 

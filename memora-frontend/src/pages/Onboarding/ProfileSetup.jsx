@@ -118,6 +118,8 @@ export const ProfileSetup = () => {
                         <input
                             className={styles.input}
                             type="number"
+                            min="0"
+                            max="120"
                             value={age}
                             onChange={(e) => setAge(e.target.value)}
                         />
