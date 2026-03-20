@@ -8,6 +8,22 @@ export const updateProfile = async (req, res) => {
     try {
         const { username, name, age, gender, profilePhoto } = req.body;
 
+        // Validate username
+        if (!username?.trim()) {
+            return res.status(400).json({ message: "Username is required" });
+        }
+        if (username.trim().length < 5 || username.trim().length > 15) {
+            return res.status(400).json({ message: "Username must be 5-15 characters" });
+        }
+
+        // Validate name
+        if (!name?.trim()) {
+            return res.status(400).json({ message: "Name is required" });
+        }
+        if (name.trim().length > 30) {
+            return res.status(400).json({ message: "Name must be 30 characters or less" });
+        }
+
         const user = await User.findById(req.session.userID);
 
         if (!user) {

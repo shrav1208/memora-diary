@@ -1,14 +1,18 @@
 import DiaryEntry from "../Models/DiaryEntry.js";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone.js";
+import utc from "dayjs/plugin/utc.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const getTodayReflection = async (req, res) => {
     try {
         const userId = req.session.userID;
+        const tz = req.session.timezone || "UTC";
 
-        const startOfDay = new Date();
-        startOfDay.setHours(0, 0, 0, 0);
-
-        const endOfDay = new Date();
-        endOfDay.setHours(23, 59, 59, 999);
+        const startOfDay = dayjs().tz(tz).startOf("day").utc().toDate();
+        const endOfDay = dayjs().tz(tz).endOf("day").utc().toDate();
 
         // Get latest entry today
         const entry = await DiaryEntry.findOne({

@@ -19,7 +19,7 @@ const diaryEntrySchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 5000,
+        maxlength: 50000,
     },
 
     mood: {
@@ -32,6 +32,8 @@ const diaryEntrySchema = new mongoose.Schema({
     score: {
         type: Number,
         // required: true, (uncomment later)
+        min: -100,
+        max: 100,
     },
 
     reflection: {

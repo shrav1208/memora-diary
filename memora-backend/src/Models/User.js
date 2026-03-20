@@ -49,7 +49,12 @@ const userSchema = new mongoose.Schema({
     profileCompleted: {
         type: Boolean,
         default: false
-    }
+    },
+
+    usernameChanges: {
+        type: [Number],
+        default: []
+    },
 
 }, { timestamps: true });
 
