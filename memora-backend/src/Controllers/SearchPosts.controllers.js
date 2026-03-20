@@ -28,7 +28,7 @@ export const searchPosts = async(req, res) => {
             results,
         });
     }catch(err){
-        console.log(err);
+        console.error(err);
         return res.status(500).json({
             success: false,
             message: "Server Error",
