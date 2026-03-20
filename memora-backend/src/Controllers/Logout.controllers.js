@@ -9,9 +9,10 @@ export const logout = (req, res) => {
         }
 
         res.clearCookie("memora-session-id", {
-            path: "/",           // MUST match
-            sameSite: "lax",     // MUST match
-            secure: false        // MUST match (true only on HTTPS)
+            path: "/",                                              // MUST match
+            sameSite: "strict",                                     // MUST match
+            secure: process.env.NODE_ENV === 'production',          // MUST match (true only on HTTPS)
+            httpOnly: true,
         });
 
         res.status(200).json({ 

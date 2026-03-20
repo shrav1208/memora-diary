@@ -16,15 +16,19 @@ function calculateMood(score) {
 }
 
 export const updateDailyMoodUpdate = async (newScore, prevScore, userID, tz = "UTC", entryDate) => {
-    const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
+    try {
+        const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
 
-    const doc = await DailyMood.findOne({ user: userID, date });
-    if (!doc || !doc.entriesCount) return;
+        const doc = await DailyMood.findOne({ user: userID, date });
+        if (!doc || !doc.entriesCount) return;
 
-    const prevTotal = doc.entriesScore * doc.entriesCount;
-    doc.entriesScore = (prevTotal - prevScore + newScore) / doc.entriesCount;
-    doc.entriesMood = calculateMood(doc.entriesScore);
+        const prevTotal = doc.entriesScore * doc.entriesCount;
+        doc.entriesScore = (prevTotal - prevScore + newScore) / doc.entriesCount;
+        doc.entriesMood = calculateMood(doc.entriesScore);
 
-    doc.resolveDisplay();
-    await doc.save();
+        doc.resolveDisplay();
+        await doc.save();
+    } catch (err) {
+        console.error("UpdateDailyMoodUpdate error:", err);
+    }
 };

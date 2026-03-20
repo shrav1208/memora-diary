@@ -2,7 +2,7 @@ import app from './App.js';
 import dbConnection from './Config/DB.js';
 import mongoose from 'mongoose';
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 (async()=>{
 

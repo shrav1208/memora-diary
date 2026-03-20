@@ -57,25 +57,28 @@ export const signup = async (req, res) => {
 
         await user.save();
 
-        // ✅ Create session
-        req.session.userID = user._id;
+        // ✅ Create session — regenerate first to prevent session fixation
+        req.session.regenerate((err) => {
+            if (err) return res.status(500).json({ success: false, message: "Server error" });
 
-        // ⭐ Remember Me logic
-        if (rememberMe) {
-            const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
-            req.session.cookie.maxAge = THIRTY_DAYS;
-            req.session.cookie.expires = new Date(Date.now() + THIRTY_DAYS);
-        } else {
-            req.session.cookie.expires = false;
-            req.session.cookie.maxAge = null;
-        }
+            req.session.userID = user._id;
 
-        return res.status(201).json({
-            success: true,
-            message: "User created successfully",
-            userId: user._id
+            // ⭐ Remember Me logic
+            if (rememberMe) {
+                const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+                req.session.cookie.maxAge = THIRTY_DAYS;
+                req.session.cookie.expires = new Date(Date.now() + THIRTY_DAYS);
+            } else {
+                req.session.cookie.expires = false;
+                req.session.cookie.maxAge = null;
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: "User created successfully",
+                userId: user._id
+            });
         });
-
     } catch (err) {
         console.error("Signup error:", err);
         return res.status(500).json({

@@ -33,7 +33,7 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
     }
   }, [location.pathname, navigate]);
 
-    // Parse year/month/day directly from the pathname
+  // Parse year/month/day directly from the pathname
   const pathParts = location.pathname.split('/').filter(Boolean);
   // pathname looks like /dashboard/2025/5/14
   // pathParts = ['dashboard', '2025', '5', '14']
@@ -42,14 +42,14 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
   const day = Number(pathParts[3]);
 
   // Build the date — fall back to today if params aren't in the URL
-  const popupDate = (year && month !== undefined && day)
+  const popupDate = (year && !isNaN(month) && day)
     ? new Date(year, month, day)
     : new Date();
 
-   /**
-   * AUTO OPEN AT 10 PM IF NO ENTRY EXISTS
-   * (assumes you already know whether today has an entry)
-   */
+  /**
+  * AUTO OPEN AT 10 PM IF NO ENTRY EXISTS
+  * (assumes you already know whether today has an entry)
+  */
   // useEffect(() => {
   //   const now = dayjs();
 

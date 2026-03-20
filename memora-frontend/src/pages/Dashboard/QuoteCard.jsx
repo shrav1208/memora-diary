@@ -21,7 +21,7 @@ export const QuoteCard = ({ refreshKey }) => {
             }
         };
         fetchReflection();
-    }, [[refreshKey]]);
+    }, [refreshKey]);
 
     const heading = reflection?.heading || "Keep Moving Forward";
     const body = reflection?.body ||

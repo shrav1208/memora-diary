@@ -91,6 +91,19 @@ export const Profile = () => {
     };
 
     const handleSave = async () => {
+        if (!user.username?.trim() || user.username.trim().length < 5) {
+            toast.error("Username must be at least 5 characters");
+            return;
+        }
+        if (user.username.trim().length > 15) {
+            toast.error("Username must be 15 characters or less");
+            return;
+        }
+        if (!user.name?.trim()) {
+            toast.error("Name cannot be empty");
+            return;
+        }
+
         try {
             const res = await axios.put(
                 '/api/update/profile',

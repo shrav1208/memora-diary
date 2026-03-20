@@ -16,29 +16,33 @@ function calculateMood(score) {
 }
 
 export const updateDailyMoodDelete = async (score, userID, tz = "UTC", entryDate) => {
-    const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
+    try {
+        const date = dayjs(entryDate).tz(tz).startOf("day").utc().toDate();
 
-    const doc = await DailyMood.findOne({ user: userID, date });
-    if (!doc || !doc.entriesCount) return;
+        const doc = await DailyMood.findOne({ user: userID, date });
+        if (!doc || !doc.entriesCount) return;
 
-    if (doc.entriesCount === 1) {
-        // No more entries for this day — clear entries fields
-        doc.entriesCount = 0;
-        doc.entriesScore = null;
-        doc.entriesMood = null;
-    } else {
-        const prevTotal = doc.entriesScore * doc.entriesCount;
-        doc.entriesCount -= 1;
-        doc.entriesScore = (prevTotal - score) / doc.entriesCount;
-        doc.entriesMood = calculateMood(doc.entriesScore);
-    }
+        if (doc.entriesCount === 1) {
+            // No more entries for this day — clear entries fields
+            doc.entriesCount = 0;
+            doc.entriesScore = null;
+            doc.entriesMood = null;
+        } else {
+            const prevTotal = doc.entriesScore * doc.entriesCount;
+            doc.entriesCount -= 1;
+            doc.entriesScore = (prevTotal - score) / doc.entriesCount;
+            doc.entriesMood = calculateMood(doc.entriesScore);
+        }
 
-    doc.resolveDisplay();
+        doc.resolveDisplay();
 
-    // If nothing left to show at all, remove the document
-    if (doc.mood === null) {
-        await doc.deleteOne();
-    } else {
-        await doc.save();
+        // If nothing left to show at all, remove the document
+        if (doc.mood === null) {
+            await doc.deleteOne();
+        } else {
+            await doc.save();
+        }
+    } catch (err) {
+        console.error("UpdateDailyMoodDelete error:", err);
     }
 };

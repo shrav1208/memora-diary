@@ -58,7 +58,7 @@ export const Login = () => {
             if (err.response) {
                 toast.error(err.response.data.message);
             } else {
-                console.log(err);
+                console.error(err);
                 toast.error("Server error");
             }
         }
