@@ -35,7 +35,7 @@ export const updateProfile = async (req, res) => {
             user.usernameChanges.push(Date.now());
         }
 
-        user.username = username;
+        user.username = username.trim().toLowerCase();
         user.name = name;
         user.age = age;
         user.gender = gender;

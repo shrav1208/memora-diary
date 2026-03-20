@@ -13,21 +13,15 @@ export const getMoods = async (req, res) => {
 
         const tz = req.session.timezone || "UTC"; //enter preferred timzone for testing if using postman
 
-        // console.log("timezone: " + req.session.timezone);
-
         const now = dayjs().tz(tz);
 
         const startDate = now.clone().startOf("month").utc().toDate();
         const today = now.clone().startOf("day").utc().toDate();
 
-        // console.log(startDate.toISOString() + " " + today.toISOString());
-
         const moods = await DailyMood.find({
             user: userId,
             date: { $gte: startDate, $lte: today },
         });
-
-        // console.log(moods);
 
         const result = moods.map(({ date, mood, score, entries }) => ({
             date, mood, score, entries,
@@ -38,7 +32,7 @@ export const getMoods = async (req, res) => {
             result,
         });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ success: false });
     }
 };
