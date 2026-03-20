@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './ProfileSetup.module.css';
 import defaultAvatar from '../../assets/profile-photo-large.png';
 import { useAuth } from "../../context/AuthContext";
+import toast from 'react-hot-toast';
 
 export const ProfileSetup = () => {
 
@@ -40,7 +41,7 @@ export const ProfileSetup = () => {
             navigate("/landing", { replace: true });
 
         } catch (err) {
-            alert("Error saving profile: " + err);
+            toast.error("Error saving profile: " + err);
         }
     };
 

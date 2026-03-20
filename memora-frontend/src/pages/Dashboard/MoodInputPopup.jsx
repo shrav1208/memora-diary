@@ -10,6 +10,7 @@ import yellow from '../../assets/emotion-yellow.png';
 import axios from 'axios';
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) => {
     const [selectedMood, setSelectedMood] = useState(null);
@@ -44,7 +45,7 @@ export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) 
 
     const handleSaveMood = async () => {
         if (!selectedMood) {
-            alert("Please select a mood");
+            toast.error("Please select a mood");
             return;
         }
 

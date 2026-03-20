@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import styles from './QuoteCard.module.css';
 import axios from 'axios';
 
-export const QuoteCard = () => {
+export const QuoteCard = ({ refreshKey }) => {
     const [reflection, setReflection] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -21,7 +21,7 @@ export const QuoteCard = () => {
             }
         };
         fetchReflection();
-    }, []);
+    }, [[refreshKey]]);
 
     const heading = reflection?.heading || "Keep Moving Forward";
     const body = reflection?.body ||

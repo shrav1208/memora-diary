@@ -6,6 +6,8 @@ import { Navbar } from "../../components/Navbar";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import EditorToolbar from "./EditorToolbar"
+import toast from 'react-hot-toast';
+import { ConfirmModal } from '../../components/ConfirmModal';
 
 import axios from "axios";
 
@@ -17,6 +19,7 @@ export const FullscreenEditor = () => {
     const [saving, setSaving] = useState(false);
     const [entryDate, setEntryDate] = useState(dayjs());
     const [editor, setEditor] = useState(null)
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const location = useLocation();
 
@@ -41,7 +44,7 @@ export const FullscreenEditor = () => {
                 setEntryDate(dayjs(res.data.createdAt));
             } catch (err) {
                 console.error("Failed to fetch entry", err);
-                alert("Failed to load diary entry");
+                toast.error("Failed to load diary entry");
 
                 navigate(-1);
             }
@@ -50,7 +53,7 @@ export const FullscreenEditor = () => {
 
     const handleSaveEntry = async () => {
         if (!inputText.trim()) {
-            alert("Diary entry cannot be empty");
+            toast.error("Diary entry cannot be empty");
             return;
         }
 
@@ -78,34 +81,30 @@ export const FullscreenEditor = () => {
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);
-            alert(err.response?.data?.message || "Failed to save entry");
+            toast.error(err.response?.data?.message || "Failed to save entry");
         } finally {
             setSaving(false);
         }
     };
 
-    const handleDelete = async () => {
-        // If entry is not saved yet, just exit editor
-        if (!entryid) {
-            navigate(-1);
-            return;
-        }
+    const handleDelete = () => {
+    if (!entryid) {
+        navigate(-1);
+        return;
+    }
+    setShowConfirm(true);
+};
 
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this diary entry?"
-        );
-
-        if (!confirmDelete) return;
-
-        try {
-            await axios.delete(`/api/delete/post/${entryid}`,
-                { withCredentials: true });
-            navigate(-1);
-        } catch (err) {
-            console.error("Delete failed:", err);
-            alert(err.response?.data?.message || "Failed to delete entry");
-        }
-    };
+const confirmDelete = async () => {
+    setShowConfirm(false);
+    try {
+        await axios.delete(`/api/delete/post/${entryid}`, { withCredentials: true });
+        navigate(-1);
+    } catch (err) {
+        console.error("Delete failed:", err);
+        toast.error(err.response?.data?.message || "Failed to delete entry");
+    }
+};
 
     const textareaRef = useRef(null);
 
@@ -130,6 +129,7 @@ export const FullscreenEditor = () => {
                         onChange={(e) => setInputTitle(e.target.value)}
                         spellCheck={false}
                         placeholder="Title"
+                        maxLength={200}
                     />
                     <div className={styles['display-date']}>{displayDate}</div>
                 </div>
@@ -179,6 +179,14 @@ export const FullscreenEditor = () => {
                 />
 
             </form>
+
+            {showConfirm && (
+                <ConfirmModal
+                    message="Are you sure you want to delete this diary entry?"
+                    onConfirm={confirmDelete}
+                    onCancel={() => setShowConfirm(false)}
+                />
+            )}
         </>
     );
 };

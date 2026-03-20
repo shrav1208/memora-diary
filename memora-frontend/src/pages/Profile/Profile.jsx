@@ -6,6 +6,7 @@ import cameraIcon from '../../assets/camera-icon.svg';
 import defaultAvatar from '../../assets/profile-photo-large.png';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 export const Profile = () => {
 
@@ -104,11 +105,11 @@ export const Profile = () => {
             );
 
             setUser(res.data.user);
-            alert("Profile updated successfully!");
+            toast.success("Profile updated successfully!");
 
         } catch (err) {
             console.error(err);
-            alert("Error updating profile");
+            toast.error("Error updating profile");
         }
     };
 
