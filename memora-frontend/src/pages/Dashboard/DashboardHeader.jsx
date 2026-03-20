@@ -157,7 +157,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
                 </div>
 
                 <div className={styles['features-flex']}>
-                    <QuoteCard />
+                    <QuoteCard refreshKey={moodRefreshKey} />
                     <div className={styles['right-boxes']}>
                         <TodayDate />
                         <MoodTracker refreshKey={moodRefreshKey} />

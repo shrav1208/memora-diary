@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) =>{
         (async()=>{
             try{
                 const res = await axios.get("/api/auth", {withCredentials: true});
-                console.log("authcontext: " + res.data.user);
                 setUser(res.data.user);
                 setLoading(false);
             }

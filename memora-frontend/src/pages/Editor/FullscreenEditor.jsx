@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from './FullscreenEditor.module.css';
-// import tickmark from "../../assets/tickmark.svg";
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
 import { Navbar } from "../../components/Navbar";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import EditorToolbar from "./EditorToolbar"
+import toast from 'react-hot-toast';
+import { ConfirmModal } from '../../components/ConfirmModal';
 
 import axios from "axios";
 
@@ -17,6 +19,7 @@ export const FullscreenEditor = () => {
     const [saving, setSaving] = useState(false);
     const [entryDate, setEntryDate] = useState(dayjs());
     const [editor, setEditor] = useState(null)
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const location = useLocation();
 
@@ -28,11 +31,6 @@ export const FullscreenEditor = () => {
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
 
-    //   const [highlightColor, setHighlightColor] = useState("#FFFF00"); // default highlight
-    // const [activeHighlight, setActiveHighlight] = useState(null);
-    // // const [textColor, setTextColor] = useState("#343434"); // default text color
-    // const editorRef = useRef(null);
-
     const displayDate = entryDate.format("ddd, YYYY MMM D, H:mm A");
 
     useEffect(() => {
@@ -42,21 +40,20 @@ export const FullscreenEditor = () => {
             try {
                 const res = await axios.get(`/api/get/post/${entryid}`);
                 setInputTitle(res.data.title);
-                setInputText(res.data.content);
+                setInputText(DOMPurify.sanitize(res.data.content));
                 setEntryDate(dayjs(res.data.createdAt));
             } catch (err) {
                 console.error("Failed to fetch entry", err);
-                alert("Failed to load diary entry");
+                toast.error("Failed to load diary entry");
 
                 navigate(-1);
             }
         })();
     }, [entryid, navigate]);
 
-
     const handleSaveEntry = async () => {
         if (!inputText.trim()) {
-            alert("Diary entry cannot be empty");
+            toast.error("Diary entry cannot be empty");
             return;
         }
 
@@ -84,42 +81,30 @@ export const FullscreenEditor = () => {
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);
-            alert(err.response?.data?.message || "Failed to save entry");
+            toast.error(err.response?.data?.message || "Failed to save entry");
         } finally {
             setSaving(false);
         }
     };
 
-    const handleDelete = async () => {
-        // If entry is not saved yet, just exit editor
-        if (!entryid) {
-            navigate(-1);
-            return;
-        }
+    const handleDelete = () => {
+    if (!entryid) {
+        navigate(-1);
+        return;
+    }
+    setShowConfirm(true);
+};
 
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this diary entry?"
-        );
-
-        if (!confirmDelete) return;
-
-        try {
-            await axios.delete(`/api/delete/post/${entryid}`,
-                { withCredentials: true });
-            navigate(-1);
-        } catch (err) {
-            console.error("Delete failed:", err);
-            alert(err.response?.data?.message || "Failed to delete entry");
-        }
-    };
-
-
-    // function to run editor commands
-    // const runCommand = (cmd, value = null) => {
-    //     if (editorRef.current) {
-    //         editorRef.current.execCommand(cmd, false, value);
-    //     }
-    // };
+const confirmDelete = async () => {
+    setShowConfirm(false);
+    try {
+        await axios.delete(`/api/delete/post/${entryid}`, { withCredentials: true });
+        navigate(-1);
+    } catch (err) {
+        console.error("Delete failed:", err);
+        toast.error(err.response?.data?.message || "Failed to delete entry");
+    }
+};
 
     const textareaRef = useRef(null);
 
@@ -144,6 +129,7 @@ export const FullscreenEditor = () => {
                         onChange={(e) => setInputTitle(e.target.value)}
                         spellCheck={false}
                         placeholder="Title"
+                        maxLength={200}
                     />
                     <div className={styles['display-date']}>{displayDate}</div>
                 </div>
@@ -152,7 +138,7 @@ export const FullscreenEditor = () => {
                 <div className={styles["editor-window"]}>
                 <Editor
                     className={styles['editor-window']}
-                    apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
+                    apiKey={import.meta.env.VITE_TINYMCE_KEY} 
                     value={inputText}
                     onInit={(evt, ed) => setEditor(ed)}
                     onEditorChange={(newValue) => setInputText(newValue)}
@@ -192,29 +178,15 @@ export const FullscreenEditor = () => {
                     handleDelete={handleDelete}
                 />
 
-                {/* <div className={styles['delete-button']} onClick={() => handleDelete()}>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="19"
-                        height="21"
-                        viewBox="0 0 19 21"
-                        fill="none"
-                    >
-                        <path
-                            d="M8.17823 8.1778H6.13379V16.3556H8.17823V8.1778Z"
-                            fill="#343434"
-                        />
-                        <path
-                            d="M12.2671 8.1778H10.2227V16.3556H12.2671V8.1778Z"
-                            fill="#343434"
-                        />
-                        <path
-                            d="M18.4 4.08889H14.3111V2.04444C14.3111 0.92 13.3911 0 12.2667 0H6.13333C5.00889 0 4.08889 0.92 4.08889 2.04444V4.08889H0V6.13333H2.04444V18.4C2.04444 19.5244 2.96444 20.4444 4.08889 20.4444H14.3111C15.4356 20.4444 16.3556 19.5244 16.3556 18.4V6.13333H18.4V4.08889ZM6.13333 2.04444H12.2667V4.08889H6.13333V2.04444ZM14.3111 18.4H4.08889V6.13333H6.13333H12.2667H14.3111V18.4Z"
-                            fill="#343434"
-                        />
-                    </svg>
-                </div> */}
             </form>
+
+            {showConfirm && (
+                <ConfirmModal
+                    message="Are you sure you want to delete this diary entry?"
+                    onConfirm={confirmDelete}
+                    onCancel={() => setShowConfirm(false)}
+                />
+            )}
         </>
     );
 };

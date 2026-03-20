@@ -15,7 +15,6 @@ export const SideBar = () => {
             async () => {
                 try {
                     const res = await axios.get('/api/read/user', { withCredentials: true });
-                    console.log(res);
                     setName(res.data.user.name);
                     setUsername(res.data.user.username);
 

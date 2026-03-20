@@ -4,19 +4,24 @@ import { motion, AnimatePresence } from 'motion/react';
 import styles from './QuoteCard.module.css';
 import axios from 'axios';
 
-export const QuoteCard = () => {
+export const QuoteCard = ({ refreshKey }) => {
     const [reflection, setReflection] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const fetchReflection = async () => {
-            const res = await axios.get("/api/get/today-reflection", {
-                withCredentials: true
-            });
-            setReflection(res.data?.reflection);
+            try {
+                const res = await axios.get("/api/get/today-reflection", {
+                    withCredentials: true
+                });
+                setReflection(res.data?.reflection);
+            } catch (err) {
+                console.error("Failed to fetch reflection:", err);
+                // fallback content already handles null reflection
+            }
         };
         fetchReflection();
-    }, []);
+    }, [[refreshKey]]);
 
     const heading = reflection?.heading || "Keep Moving Forward";
     const body = reflection?.body ||

@@ -12,19 +12,6 @@ export const Year = () => {
     const { year } = useParams();
     const navigate = useNavigate();
 
-    // const months = Array.from({ length: 12 }, (_, i) =>
-    //     dayjs().month(i).format("MMM") // "Jan", "Feb", etc.
-    // );
-
-    // Make an array of 12 zeros
-    // const counts = Array(12).fill(0);
-
-    // Count how many diary entries per month
-    // data.diary_entries.forEach(item => {
-    //     const monthIndex = dayjs(item.date).month(); // 0–11
-    //     counts[monthIndex] += 1;
-    // });
-
     const onMonthClick = (month) => {
         navigate(`/dashboard/${year}/${month}`);
     };
@@ -36,7 +23,6 @@ export const Year = () => {
                     params: { year },
                     withCredentials: true
                 });
-                console.log(res.data);
 
                 if (res.data.success) {
                     const monthMap = new Map(

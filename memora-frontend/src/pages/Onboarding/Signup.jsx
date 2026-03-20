@@ -5,6 +5,7 @@ import axios from 'axios';
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
 import { useAuth } from '../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 export const Signup = () => {
 
@@ -96,11 +97,11 @@ export const Signup = () => {
         } catch (err) {
 
             if (err.response) {
-                alert(err.response.data.message);
+                toast.error(err.response.data.message);
             }
             else {
                 console.log(err);
-                alert("Server error");
+                toast.error("Server error");
             }
         }
     }

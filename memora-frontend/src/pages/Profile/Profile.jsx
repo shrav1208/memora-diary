@@ -6,6 +6,7 @@ import cameraIcon from '../../assets/camera-icon.svg';
 import defaultAvatar from '../../assets/profile-photo-large.png';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 export const Profile = () => {
 
@@ -25,8 +26,15 @@ export const Profile = () => {
 
                 const fetchedUser = res.data.user;
 
+                const validGenders = ['male', 'female', 'other'];
+
                 setUser({
                     ...fetchedUser,
+                    gender: validGenders.includes(
+                        fetchedUser.gender?.toLowerCase()
+                    )
+                        ? fetchedUser.gender.toLowerCase()
+                        : '',
                     usernameChanges: fetchedUser.usernameChanges || []
                 });
 
@@ -97,11 +105,11 @@ export const Profile = () => {
             );
 
             setUser(res.data.user);
-            alert("Profile updated successfully!");
+            toast.success("Profile updated successfully!");
 
         } catch (err) {
             console.error(err);
-            alert("Error updating profile");
+            toast.error("Error updating profile");
         }
     };
 
@@ -173,6 +181,8 @@ export const Profile = () => {
                                         <input
                                             className={styles['input-horizontal']}
                                             type="number"
+                                            min="0"
+                                            max="120"
                                             value={user.age || ''}
                                             onChange={e => handleChange('age', e.target.value)}
                                         />
@@ -180,12 +190,24 @@ export const Profile = () => {
 
                                     <div className={styles['input-section-horizontal']}>
                                         <p>Gender</p>
-                                        <input
-                                            className={styles['input-horizontal']}
-                                            type="text"
-                                            value={user.gender || ''}
-                                            onChange={e => handleChange('gender', e.target.value)}
-                                        />
+
+                                        <div className={styles.selectWrapper}>
+                                            <select
+                                                className={styles.customSelect}
+                                                value={user.gender || ''}
+                                                onChange={(e) => handleChange('gender', e.target.value)}
+                                                required
+                                            >
+                                                <option value="" disabled hidden>
+                                                    Select
+                                                </option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+
+                                            <span className={styles.selectArrow}></span>
+                                        </div>
                                     </div>
 
                                 </div>

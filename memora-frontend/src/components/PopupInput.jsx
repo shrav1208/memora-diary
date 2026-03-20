@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from './PopupInput.module.css';
 import tickmark from '../assets/tickmark.svg';
 import dayjs from "dayjs";
@@ -6,6 +6,7 @@ import expandButton from '../assets/expand.svg';
 import { Link } from 'react-router-dom';
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 export const PopupInput = ({ isOpen, onClose, onSaved }) => {
     const [inputTitle, setInputTitle] = useState("");
@@ -19,7 +20,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
     const handleSaveEntry = async () => {
         const textOnly = content.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, "").trim();
         if (!textOnly) {
-            alert("Diary entry cannot be empty");
+            toast.error("Diary entry cannot be empty");
             return;
         }
 
@@ -42,7 +43,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);
-            alert(err.response?.data?.message || "Failed to save entry");
+            toast.error(err.response?.data?.message || "Failed to save entry");
         } finally {
             setSaving(false);
         }
@@ -61,14 +62,21 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                         onChange={(e) => setInputTitle(e.target.value)}
                         spellCheck={false}
                         placeholder="Title"
+                        maxLength={200}
                     />
 
                     <div className={styles['input-text']}>
                         <Editor
                             className={styles['input-text']}
-                            apiKey="twu50nbcj9x9ly69juc4gl9ivr7mag5fn1lqhu76eviqufnq"
+                            apiKey={import.meta.env.VITE_TINYMCE_KEY}
                             value={content}
-                            onInit={(evt, editor) => (editorRef.current = editor)}
+                            onInit={(evt, editor) => {
+                                editorRef.current = editor;
+
+                                editor.on('NodeChange', () => {
+                                    editor.selection.scrollIntoView();
+                                });
+                            }}
                             onEditorChange={setContent}
                             init={{
                                 inline: true,
@@ -89,6 +97,8 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                                     line-height: normal;
                                     outline: none !important;
                                     border: none !important;
+                                    overflow-y: auto !important;
+                                    max-height: 300px;
                                     box-shadow: none !important;
                                 }`,
                                 setup: (editor) => {
