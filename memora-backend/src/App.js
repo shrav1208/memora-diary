@@ -32,6 +32,9 @@ import { loginLimiter, signupLimiter } from './Middleware/RateLimiter.js';
 
 const app = express();
 
+//Proxy
+app.set('trust proxy', 1);
+
 //Middleware
 app.use(helmet());
 
