@@ -3,12 +3,12 @@ import { TodayDate } from './TodayDate';
 import { QuoteCard } from './QuoteCard';
 import { MoodTracker } from './MoodTracker';
 import plusIcon from '../../assets/plus-icon.svg'
-import axios from 'axios';
 import { useEffect, useState } from "react";
 import { PopupInput } from "../../components/PopupInput";
 import { Link } from 'react-router-dom';
 import { SearchPopup } from '../../components/SearchPopup';
 import searchIcon from '../../assets/search-icon.png'
+import api from '../../utils/api';
 
 export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRefreshKey, onEntrySaved }) => {
 
@@ -25,7 +25,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
 
         const timeout = setTimeout(async () => {
             try {
-                const res = await axios.get(`/api/search?q=${encodeURIComponent(query)}`);
+                const res = await api.get(`/api/search?q=${encodeURIComponent(query)}`);
                 setResults(res.data.results);
             } catch (err) {
                 console.error("Search Error: " + err.message);
@@ -38,7 +38,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get('/api/read/user', { withCredentials: true });
+                const res = await api.get('/api/read/user');
                 setName(res.data.user.name);
             } catch (err) {
                 console.error(err.message);

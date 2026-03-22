@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import styles from './QuoteCard.module.css';
-import axios from 'axios';
+import api from '../../utils/api';
 
 export const QuoteCard = ({ refreshKey }) => {
     const [reflection, setReflection] = useState(null);
@@ -11,9 +11,7 @@ export const QuoteCard = ({ refreshKey }) => {
     useEffect(() => {
         const fetchReflection = async () => {
             try {
-                const res = await axios.get("/api/get/today-reflection", {
-                    withCredentials: true
-                });
+                const res = await api.get("/api/get/today-reflection");
                 setReflection(res.data?.reflection);
             } catch (err) {
                 console.error("Failed to fetch reflection:", err);

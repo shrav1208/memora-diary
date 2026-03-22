@@ -7,10 +7,10 @@ import green from '../../assets/emotion-green.png';
 import purple from '../../assets/emotion-purple.png';
 import orange from '../../assets/emotion-orange.png';
 import yellow from '../../assets/emotion-yellow.png';
-import axios from 'axios';
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import api from '../../utils/api';
 
 export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) => {
     const [selectedMood, setSelectedMood] = useState(null);
@@ -21,7 +21,7 @@ export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) 
 
         (async () => {
             try {
-                const res = await axios.get('/api/get/moods', { withCredentials: true });
+                const res = await api.get('/api/get/moods');
 
                 const todayEntry = res.data.result.find(entry => {
                     const entryDate = new Date(entry.date);
@@ -51,10 +51,9 @@ export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) 
 
         try {
             setSaving(true);
-            await axios.post(
+            await api.post(
                 "/api/set/mood",
-                { mood: selectedMood, date: date.toISOString() },
-                { withCredentials: true }
+                { mood: selectedMood, date: date.toISOString() }
             );
             onSaved?.();  // bump the refresh key
             onClose();

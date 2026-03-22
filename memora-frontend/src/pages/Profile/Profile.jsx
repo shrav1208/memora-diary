@@ -4,9 +4,9 @@ import styles from './Profile.module.css';
 import backButton from '../../assets/back-button.svg';
 import cameraIcon from '../../assets/camera-icon.svg';
 import defaultAvatar from '../../assets/profile-photo-large.png';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import api from '../../utils/api';
 
 export const Profile = () => {
 
@@ -20,9 +20,7 @@ export const Profile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get('/api/read/user', {
-                    withCredentials: true
-                });
+                const res = await api.get('/api/read/user');
 
                 const fetchedUser = res.data.user;
 
@@ -105,7 +103,7 @@ export const Profile = () => {
         }
 
         try {
-            const res = await axios.put(
+            const res = await api.put(
                 '/api/update/profile',
                 {
                     username: user.username,
@@ -113,8 +111,7 @@ export const Profile = () => {
                     age: user.age,
                     gender: user.gender,
                     // profilePhoto: profilePreview // optional
-                },
-                { withCredentials: true }
+                }
             );
 
             setUser(res.data.user);

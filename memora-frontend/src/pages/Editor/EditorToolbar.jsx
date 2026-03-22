@@ -12,15 +12,15 @@ import {
 
 export default function EditorToolbar({ editor, handleSave, handleDelete }) {
 
-    const [showColors, setShowColors] = useState(false)
+    const [showColors, setShowColors] = useState(false);
 
-    if (!editor) return null
+    if (!editor) return null;
 
-    const run = cmd => editor.execCommand(cmd)
+    const run = cmd => editor.execCommand(cmd);
 
     const highlight = color => {
-        editor.execCommand("HiliteColor", false, color)
-        setShowColors(false)
+        editor.execCommand("HiliteColor", false, color);
+        setShowColors(false);
     }
 
     return (

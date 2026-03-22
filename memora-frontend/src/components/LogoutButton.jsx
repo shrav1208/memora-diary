@@ -1,7 +1,7 @@
 import styles from './LogoutButton.module.css'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../utils/api';
 
 export const LogoutButton = () => {
 
@@ -11,7 +11,7 @@ export const LogoutButton = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/logout', {}, { withCredentials: true });
+            await api.post('/api/logout');
         } catch (err) {
             console.error("Logout failed:", err);
         } finally {

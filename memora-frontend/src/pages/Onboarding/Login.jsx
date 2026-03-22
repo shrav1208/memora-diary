@@ -1,11 +1,11 @@
 import styles from './Login.module.css';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
+import api from '../../utils/api';
 
 export const Login = () => {
 
@@ -32,11 +32,11 @@ export const Login = () => {
         event.preventDefault();
 
         try {
-            const res = await axios.post('/api/login', {
+            const res = await api.post('/api/login', {
                 username: usernameInput,
                 password: passwordInput,
                 rememberMe: rememberMe
-            }, { withCredentials: true });
+            });
 
             if (res.data.success) {
 
@@ -44,11 +44,9 @@ export const Login = () => {
                 setPasswordInput('');
 
                 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                await axios.post("/api/session/timezone", { timezone });
+                await api.post("/api/session/timezone", { timezone });
 
-                const meRes = await axios.get("/api/auth", {
-                    withCredentials: true
-                });
+                const meRes = await api.get("/api/auth");
 
                 setUser(meRes.data.user);
                 navigate("/landing", { replace: true });
