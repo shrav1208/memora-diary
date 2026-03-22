@@ -2,8 +2,8 @@ import styles from './Year.module.css'
 import { MonthCard } from './MonthCard';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import dayjs from 'dayjs';
+import api from '../../utils/api';
 
 export const Year = () => {
 
@@ -19,9 +19,8 @@ export const Year = () => {
     useEffect(() => {
         const loadMonths = async () => {
             try {
-                const res = await axios.get("/api/get/months", {
+                const res = await api.get("/api/get/months", {
                     params: { year },
-                    withCredentials: true
                 });
 
                 if (res.data.success) {

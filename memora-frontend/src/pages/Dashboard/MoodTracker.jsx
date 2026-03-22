@@ -7,7 +7,7 @@ import {
 } from "recharts";
 import styles from './MoodTracker.module.css'
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../utils/api";
 
 const MOOD_SCALE = {
     sad: 1,
@@ -25,7 +25,7 @@ export const MoodTracker = ({ refreshKey }) => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get('/api/get/moods');
+                const res = await api.get('/api/get/moods');
                 const result = res.data.result.map(({ date, mood }) => ({
                     day: new Date(date).getDate(),
                     mood: MOOD_SCALE[mood] ?? null,

@@ -1,9 +1,9 @@
 import styles from './SideBar.module.css'
 import profile from '../assets/profile-photo.png';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LogoutButton } from './LogoutButton';
 import { Link } from 'react-router-dom';
+import api from '../utils/api';
 
 export const SideBar = () => {
 
@@ -14,7 +14,7 @@ export const SideBar = () => {
         (
             async () => {
                 try {
-                    const res = await axios.get('/api/read/user', { withCredentials: true });
+                    const res = await api.get('/api/read/user');
                     setName(res.data.user.name);
                     setUsername(res.data.user.username);
 

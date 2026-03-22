@@ -3,7 +3,7 @@ import styles from './Month.module.css'
 import { DayCard } from './DayCard'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api';
 
 export const Month = () => {
 
@@ -22,7 +22,7 @@ export const Month = () => {
     useEffect(() => {
         const loadDays = async () => {
             try {
-                const res = await axios.get('/api/get/days', {
+                const res = await api.get('/api/get/days', {
                     params: { year, month }
                 });
 

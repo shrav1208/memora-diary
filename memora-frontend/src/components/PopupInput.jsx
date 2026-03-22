@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import styles from './PopupInput.module.css';
 import tickmark from '../assets/tickmark.svg';
 import dayjs from "dayjs";
 import expandButton from '../assets/expand.svg';
 import { Link } from 'react-router-dom';
 import { Editor } from "@tinymce/tinymce-react";
-import axios from "axios";
 import toast from 'react-hot-toast';
+import api from "../utils/api";
 
 export const PopupInput = ({ isOpen, onClose, onSaved }) => {
     const [inputTitle, setInputTitle] = useState("");
@@ -27,13 +27,12 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
         try {
             setSaving(true);
 
-            await axios.post(
+            await api.post(
                 "/api/create/post",
                 {
                     title: inputTitle.trim(),
                     content,
-                },
-                { withCredentials: true }
+                }
             );
 
             setInputTitle("");
@@ -72,10 +71,6 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                             value={content}
                             onInit={(evt, editor) => {
                                 editorRef.current = editor;
-
-                                editor.on('NodeChange', () => {
-                                    editor.selection.scrollIntoView();
-                                });
                             }}
                             onEditorChange={setContent}
                             init={{
@@ -98,7 +93,6 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                                     outline: none !important;
                                     border: none !important;
                                     overflow-y: auto !important;
-                                    max-height: 300px;
                                     box-shadow: none !important;
                                 }`,
                                 setup: (editor) => {

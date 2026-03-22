@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './Signup.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import show from "../../assets/show.png";
 import hide from "../../assets/hide.png";
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
+import api from '../../utils/api';
 
 export const Signup = () => {
 
@@ -68,12 +68,12 @@ export const Signup = () => {
 
         try {
 
-            const res = await axios.post('/api/signup', {
+            const res = await api.post('/api/signup', {
                 username: newUsernameInput,
                 password: createPasswordInput,
                 name: nameInput,
                 rememberMe: rememberMe
-            }, { withCredentials: true });
+            });
 
             if (res.data.success) {
 
@@ -83,11 +83,9 @@ export const Signup = () => {
                 setConfirmPasswordInput('');
 
                 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                await axios.post("/api/session/timezone", { timezone });
+                await api.post("/api/session/timezone", { timezone });
 
-                const meRes = await axios.get("/api/auth", {
-                    withCredentials: true
-                });
+                const meRes = await api.get("/api/auth");
 
                 setUser(meRes.data.user);
 

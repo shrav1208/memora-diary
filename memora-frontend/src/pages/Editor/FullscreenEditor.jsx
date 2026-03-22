@@ -8,8 +8,7 @@ import DOMPurify from 'dompurify';
 import EditorToolbar from "./EditorToolbar"
 import toast from 'react-hot-toast';
 import { ConfirmModal } from '../../components/ConfirmModal';
-
-import axios from "axios";
+import api from "../../utils/api";
 
 // minor changes remaining - title input sizing errors during responsiveness
 
@@ -38,7 +37,7 @@ export const FullscreenEditor = () => {
 
         (async () => {
             try {
-                const res = await axios.get(`/api/get/post/${entryid}`);
+                const res = await api.get(`/api/get/post/${entryid}`);
                 setInputTitle(res.data.title);
                 setInputText(DOMPurify.sanitize(res.data.content));
                 setEntryDate(dayjs(res.data.createdAt));
@@ -61,14 +60,14 @@ export const FullscreenEditor = () => {
             setSaving(true);
 
             if (entryid) {
-                await axios.patch(`/api/update/post/${entryid}`, {
+                await api.patch(`/api/update/post/${entryid}`, {
                     title: inputTitle.trim(),
                     content: inputText,
                 })
 
             }
             else {
-                await axios.post("/api/create/post", {
+                await api.post("/api/create/post", {
                     title: inputTitle.trim(),
                     content: inputText, // TinyMCE gives HTML — perfect
                 }
@@ -98,7 +97,7 @@ export const FullscreenEditor = () => {
 const confirmDelete = async () => {
     setShowConfirm(false);
     try {
-        await axios.delete(`/api/delete/post/${entryid}`, { withCredentials: true });
+        await api.delete(`/api/delete/post/${entryid}`);
         navigate(-1);
     } catch (err) {
         console.error("Delete failed:", err);

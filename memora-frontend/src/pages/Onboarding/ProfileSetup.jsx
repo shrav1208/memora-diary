@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './ProfileSetup.module.css';
 import defaultAvatar from '../../assets/profile-photo-large.png';
 import { useAuth } from "../../context/AuthContext";
 import toast from 'react-hot-toast';
+import api from '../../utils/api';
 
 export const ProfileSetup = () => {
 
@@ -28,7 +28,7 @@ export const ProfileSetup = () => {
     const handleSubmit = async () => {
         try {
 
-            await axios.post("/api/profile/setup", {
+            await api.post("/api/profile/setup", {
                 age,
                 gender
             });

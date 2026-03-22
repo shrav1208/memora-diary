@@ -2,7 +2,7 @@
 import styles from './All.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api';
 import { YearCard } from './YearCard';
 
 export const All = () => {
@@ -17,9 +17,7 @@ export const All = () => {
     useEffect(() => {
         const loadYears = async () => {
             try {
-                const res = await axios.get("/api/get/years", {
-                    withCredentials: true
-                });
+                const res = await api.get("/api/get/years");
                 
                 if (res.data.success) {
                     setYears(res.data.years);

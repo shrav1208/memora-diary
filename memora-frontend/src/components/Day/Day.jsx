@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import styles from './Day.module.css';
 import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api';
 import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
 
 export const Day = () => {
@@ -25,14 +25,14 @@ export const Day = () => {
         setLoading(true);
         setError(null);
 
-        const res = await axios.get('/api/read/posts', {
+        const res = await api.get('/api/read/posts', {
           params: {
             year: selectedDate.year(),
             month: selectedDate.month(),
             day: selectedDate.date(),
           },
         });
-
+        
         setEntries(res.data.entries);
       } catch (err) {
         console.error('Failed to fetch diary entries:', err);
