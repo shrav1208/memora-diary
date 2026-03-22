@@ -18,7 +18,7 @@ export default session({
     cookie: {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', // false locally, true in production
-        sameSite: "strict", // CSRF protection — never send cookie on cross-site requests
+        sameSite: "none",
         maxAge: null // default = session cookie (closes on browser close)
     }
 
