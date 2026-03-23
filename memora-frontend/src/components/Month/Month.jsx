@@ -75,24 +75,24 @@ export const Month = () => {
                     <p>F</p>
                     <p>S</p>
                 </div>
+                {days.length > 0 && (
+                    <div className={styles['days-collection']}>
+                        {days.map((d, index) => (
+                            d === null ? (
+                                <div key={`blank-${index}`} className={styles['empty-day']} />
+                            ) : (
+                                <DayCard
+                                    day={d.day}
+                                    month={month}
+                                    year={year}
+                                    count={d.count}
+                                    onClick={() => onDayClick(d.day)}
+                                />
 
-                <div className={styles['days-collection']}>
-                    {days.map((d, index) => (
-                        d === null ? (
-                            <div key={`blank-${index}`} className={styles['empty-day']} />
-                        ) : (
-                            <DayCard
-                                day={d.day}
-                                month={month}
-                                year={year}
-                                count={d.count}
-                                onClick={() => onDayClick(d.day)}
-                            />
-
-                        )
-                    ))}
-                </div>
-
+                            )
+                        ))}
+                    </div>
+                )}
             </div>
             {/* </div> */}
         </>

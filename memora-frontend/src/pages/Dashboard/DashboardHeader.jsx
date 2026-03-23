@@ -75,95 +75,97 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
 
     return (
         <>
-            <div className={styles['dashboard-header']}>
-                <div className={styles['name-flex']}>
-                    <div className={styles['left-half']}>
-                        <h1 className={styles['name']}>{name}'s diary</h1>
-                        <div className={styles['plus-icon']} onClick={handleButtonClick}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="58"
-                                height="58"
-                                viewBox="0 0 58 58"
-                                fill="none"
-                                overflow="visible"
-                            >
-                                <foreignObject x="0" y="0" width="58" height="58">
-                                    <div
-                                        xmlns="http://www.w3.org/1999/xhtml"
-                                        style={{
-                                            backdropFilter: "blur(98.65px)",
-                                            clipPath: "url(#bgblur_0_265_3410_clip_path)",
-                                            height: "100%",
-                                            width: "100%",
-                                        }}
+            {name && (
+                <div className={styles['dashboard-header']}>
+                    <div className={styles['name-flex']}>
+                        <div className={styles['left-half']}>
+                            <h1 className={styles['name']}>{name}'s diary</h1>
+                            <div className={styles['plus-icon']} onClick={handleButtonClick}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="58"
+                                    height="58"
+                                    viewBox="0 0 58 58"
+                                    fill="none"
+                                    overflow="visible"
+                                >
+                                    <foreignObject x="0" y="0" width="58" height="58">
+                                        <div
+                                            xmlns="http://www.w3.org/1999/xhtml"
+                                            style={{
+                                                backdropFilter: "blur(98.65px)",
+                                                clipPath: "url(#bgblur_0_265_3410_clip_path)",
+                                                height: "100%",
+                                                width: "100%",
+                                            }}
+                                        />
+                                    </foreignObject>
+
+                                    <circle
+                                        data-figma-bg-blur-radius="197.3"
+                                        cx="29"
+                                        cy="29"
+                                        r="27.5"
+                                        fill="url(#paint0_linear_265_3410)"
+                                        stroke="url(#paint1_linear_265_3410)"
+                                        strokeWidth="3"
+                                        filter="url(#dropShadow)"
                                     />
-                                </foreignObject>
 
-                                <circle
-                                    data-figma-bg-blur-radius="197.3"
-                                    cx="29"
-                                    cy="29"
-                                    r="27.5"
-                                    fill="url(#paint0_linear_265_3410)"
-                                    stroke="url(#paint1_linear_265_3410)"
-                                    strokeWidth="3"
-                                    filter="url(#dropShadow)"
-                                />
-
-                                <defs>
-                                    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
-                                        <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="black" floodOpacity="0.25" />
-                                    </filter>
-                                    <clipPath id="bgblur_0_265_3410_clip_path" transform="translate(197.3 197.3)">
-                                        <circle cx="29" cy="29" r="27.5" />
-                                    </clipPath>
-                                    <linearGradient id="paint0_linear_265_3410" x1="28" y1="-1.78894e-06" x2="57.3822" y2="26.4977" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#94DDFF" />
-                                        <stop offset="1" stopColor="#DBF4FF" stopOpacity="0.88" />
-                                    </linearGradient>
-                                    <linearGradient id="paint1_linear_265_3410" x1="30" y1="57" x2="29" y2="-13.5" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#92DCFF" />
-                                        <stop offset="1" stopColor="#EEFAFF" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <img src={plusIcon} className={styles['plus']} />
-                        </div>
-                    </div>
-                    <div className={styles['search-wrapper']}>
-                        <div className={styles['search-box-wrapper']}>
-                            <input
-                                className={styles['search-box']}
-                                placeholder="Search your memories..."
-                                onChange={(event) => setQuery(event.target.value)}
-                                value={query}
-                            />
-                            <div className={styles['search-icon']}>
-                                <img src={searchIcon} className={styles['search-icon-img']} alt='search' />
+                                    <defs>
+                                        <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="black" floodOpacity="0.25" />
+                                        </filter>
+                                        <clipPath id="bgblur_0_265_3410_clip_path" transform="translate(197.3 197.3)">
+                                            <circle cx="29" cy="29" r="27.5" />
+                                        </clipPath>
+                                        <linearGradient id="paint0_linear_265_3410" x1="28" y1="-1.78894e-06" x2="57.3822" y2="26.4977" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#94DDFF" />
+                                            <stop offset="1" stopColor="#DBF4FF" stopOpacity="0.88" />
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_265_3410" x1="30" y1="57" x2="29" y2="-13.5" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#92DCFF" />
+                                            <stop offset="1" stopColor="#EEFAFF" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <img src={plusIcon} className={styles['plus']} />
                             </div>
                         </div>
+                        <div className={styles['search-wrapper']}>
+                            <div className={styles['search-box-wrapper']}>
+                                <input
+                                    className={styles['search-box']}
+                                    placeholder="Search your memories..."
+                                    onChange={(event) => setQuery(event.target.value)}
+                                    value={query}
+                                />
+                                <div className={styles['search-icon']}>
+                                    <img src={searchIcon} className={styles['search-icon-img']} alt='search' />
+                                </div>
+                            </div>
 
-                        {query && (
-                            <SearchPopup
-                                results={results}
-                                onClose={() => {
-                                    setQuery('');
-                                    setResults([]);
-                                }}
-                            />
-                        )}
+                            {query && (
+                                <SearchPopup
+                                    results={results}
+                                    onClose={() => {
+                                        setQuery('');
+                                        setResults([]);
+                                    }}
+                                />
+                            )}
+                        </div>
+                    </div>
+
+                    <div className={styles['features-flex']}>
+                        <QuoteCard refreshKey={moodRefreshKey} />
+                        <div className={styles['right-boxes']}>
+                            <TodayDate />
+                            <MoodTracker refreshKey={moodRefreshKey} />
+                        </div>
                     </div>
                 </div>
-
-                <div className={styles['features-flex']}>
-                    <QuoteCard refreshKey={moodRefreshKey} />
-                    <div className={styles['right-boxes']}>
-                        <TodayDate />
-                        <MoodTracker refreshKey={moodRefreshKey} />
-                    </div>
-                </div>
-            </div>
+            )}
 
             <PopupInput
                 isOpen={isPopupOpen}

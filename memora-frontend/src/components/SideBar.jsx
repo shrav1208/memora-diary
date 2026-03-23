@@ -24,25 +24,26 @@ export const SideBar = () => {
             })();
     }, []);
 
-    
+
 
     return (
         <>
             <div className={styles['container']}>
+                {name && (
+                    <div className={styles['user-information']}>
 
-                <div className={styles['user-information']}>
+                        <img src={profile} className={styles['user-profile-photo']} alt='profile-photo' />
 
-                    <img src={profile} className={styles['user-profile-photo']} alt='profile-photo' />
-
-                    <div className={styles['info']}>
-                        <p className={styles['name']}>{name}</p>
-                        <p className={styles['username']}>@{username}</p>
+                        <div className={styles['info']}>
+                            <p className={styles['name']}>{name}</p>
+                            <p className={styles['username']}>@{username}</p>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 <div className={styles['paths-section']}>
                     <Link to='/profile'><button className={styles['profile-settings-button']}>Profile Settings</button></Link>
-                    <LogoutButton/>
+                    <LogoutButton />
                 </div>
 
             </div>

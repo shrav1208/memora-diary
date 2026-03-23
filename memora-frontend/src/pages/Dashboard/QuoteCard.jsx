@@ -7,14 +7,17 @@ import api from '../../utils/api';
 export const QuoteCard = ({ refreshKey }) => {
     const [reflection, setReflection] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         const fetchReflection = async () => {
             try {
                 const res = await api.get("/api/get/today-reflection");
                 setReflection(res.data?.reflection);
+                setLoaded(true);
             } catch (err) {
                 console.error("Failed to fetch reflection:", err);
+                setLoaded(true);
                 // fallback content already handles null reflection
             }
         };
@@ -35,10 +38,14 @@ export const QuoteCard = ({ refreshKey }) => {
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && setIsOpen(true)}
             >
-                <p className={styles['quote-heading']}>{heading}</p>
-                <div className={styles['quote-outer']}>
-                    <p className={styles['quote']}>{body}</p>
-                </div>
+                {loaded && (
+                    <>
+                        <p className={styles['quote-heading']}>{heading}</p>
+                        <div className={styles['quote-outer']}>
+                            <p className={styles['quote']}>{body}</p>
+                        </div>
+                    </>
+                )}
             </div>
 
             {/* ── portal: renders directly in <body>, escapes all stacking contexts ── */}

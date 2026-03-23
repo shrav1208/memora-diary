@@ -52,17 +52,18 @@ export const Year = () => {
                 <p className={styles['year']}>
                     {year}
                 </p>
-
-                <div className={styles['months-collection']}>
-                    {months.map((m) => (
-                        <MonthCard
-                            key={m.month}
-                            month={dayjs().month(m.month).format("MMM")}
-                            count={m.count}
-                            onClick={() => onMonthClick(m.month)}
-                        />
-                    ))}
-                </div>
+                {months.length > 0 && (
+                    <div className={styles['months-collection']}>
+                        {months.map((m) => (
+                            <MonthCard
+                                key={m.month}
+                                month={dayjs().month(m.month).format("MMM")}
+                                count={m.count}
+                                onClick={() => onMonthClick(m.month)}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
             {/* </div> */}
         </>

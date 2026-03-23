@@ -21,6 +21,7 @@ const MOOD_SCALE = {
 export const MoodTracker = ({ refreshKey }) => {
 
     const [moodData, setMoodData] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -42,9 +43,11 @@ export const MoodTracker = ({ refreshKey }) => {
                 });
 
                 setMoodData(fullMonth);
+                setLoaded(true);
             } catch (err) {
                 console.error("Failed to fetch moods:", err);
                 setMoodData([]); // chart renders empty instead of crashing
+                setLoaded(true);
             }
         })();
     }, [refreshKey]); // re-fetches whenever refreshKey changes
@@ -52,38 +55,40 @@ export const MoodTracker = ({ refreshKey }) => {
     return (
         <div className={styles['mood-card']}>
             <p className={styles['mood-heading']}>Mood Tracker</p>
-            <div className={styles['chart-wrapper']}>
-                <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={moodData}>
-                        <XAxis
-                            dataKey="day"
-                            tick={false}
-                            padding={{ left: 10, right: 10 }}
-                            tickSize={0}
-                            tickMargin={0}
-                            height={1}
-                        />
-                        <YAxis
-                            domain={[1, 6]}
-                            tick={false}
-                            padding={{ top: 10, bottom: 10 }}
-                            tickSize={0}
-                            tickMargin={0}
-                            width={1}
-                        />
-                        <Line
-                            type="basisCatmullRom"
-                            dataKey="mood"
-                            stroke="#343434"
-                            strokeWidth={1}
-                            dot={{ r: 2, fill: "#343434", stroke: "#343434" }}
-                            activeDot={{ r: 1, fill: "#343434", stroke: "#343434" }}
-                            isAnimationActive={false}
-                            connectNulls={false}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
+            {loaded && (
+                <div className={styles['chart-wrapper']}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={moodData}>
+                            <XAxis
+                                dataKey="day"
+                                tick={false}
+                                padding={{ left: 10, right: 10 }}
+                                tickSize={0}
+                                tickMargin={0}
+                                height={1}
+                            />
+                            <YAxis
+                                domain={[1, 6]}
+                                tick={false}
+                                padding={{ top: 10, bottom: 10 }}
+                                tickSize={0}
+                                tickMargin={0}
+                                width={1}
+                            />
+                            <Line
+                                type="basisCatmullRom"
+                                dataKey="mood"
+                                stroke="#343434"
+                                strokeWidth={1}
+                                dot={{ r: 2, fill: "#343434", stroke: "#343434" }}
+                                activeDot={{ r: 1, fill: "#343434", stroke: "#343434" }}
+                                isAnimationActive={false}
+                                connectNulls={false}
+                            />
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
+            )}
         </div>
     );
 };

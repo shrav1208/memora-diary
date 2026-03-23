@@ -18,7 +18,7 @@ export const All = () => {
         const loadYears = async () => {
             try {
                 const res = await api.get("/api/get/years");
-                
+
                 if (res.data.success) {
                     setYears(res.data.years);
                 }
@@ -33,16 +33,18 @@ export const All = () => {
 
     return (
         <>
-            <div className={styles['years-collection']}>
-                {years.map((y) => (
-                    <YearCard
-                        key={y.year}
-                        year={y.year}
-                        count={y.count}
-                        onClick={() => onYearClick(y.year)}
-                    />
-                ))}
-            </div>
+            {years.length > 0 && (
+                <div className={styles['years-collection']}>
+                    {years.map((y) => (
+                        <YearCard
+                            key={y.year}
+                            year={y.year}
+                            count={y.count}
+                            onClick={() => onYearClick(y.year)}
+                        />
+                    ))}
+                </div>
+            )}
         </>
     );
 }

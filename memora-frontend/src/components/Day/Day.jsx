@@ -32,7 +32,7 @@ export const Day = () => {
             day: selectedDate.date(),
           },
         });
-        
+
         setEntries(res.data.entries);
       } catch (err) {
         console.error('Failed to fetch diary entries:', err);
@@ -55,26 +55,28 @@ export const Day = () => {
           {selectedDate.format(' MMMM D')}
         </p>
 
-        <div className={styles['entries-wrapper']}>
-          {loading && <p className={styles['no-entry']}>Loading...</p>}
-          {error && <p className={styles['no-entry']}>{error}</p>}
+        {!loading && !error && (
+          <div className={styles['entries-wrapper']}>
+            {loading && <p className={styles['no-entry']}>Loading...</p>}
+            {error && <p className={styles['no-entry']}>{error}</p>}
 
-          {!loading && !error && entries.length === 0 && (
-            <p className={styles['no-entry']}>
-              No entries for this day.
-            </p>
-          )}
+            {!loading && !error && entries.length === 0 && (
+              <p className={styles['no-entry']}>
+                No entries for this day.
+              </p>
+            )}
 
-          {!loading && !error &&
-            entries.map((entry) => (
-              <div
-                key={entry._id}
-                onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
-              >
-                <EntryCard entry={entry} />
-              </div>
-            ))}
-        </div>
+            {!loading && !error &&
+              entries.map((entry) => (
+                <div
+                  key={entry._id}
+                  onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
+                >
+                  <EntryCard entry={entry} />
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
