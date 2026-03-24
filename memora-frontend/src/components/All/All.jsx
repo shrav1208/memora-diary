@@ -33,8 +33,7 @@ export const All = () => {
 
     return (
         <>
-            {years.length > 0 && (
-                <div className={styles['years-collection']}>
+                <div className={styles['years-collection']} style={{ opacity: years.length ? 1 : 0, transition: 'opacity 0.4s ease' }}>
                     {years.map((y) => (
                         <YearCard
                             key={y.year}
@@ -44,7 +43,6 @@ export const All = () => {
                         />
                     ))}
                 </div>
-            )}
         </>
     );
 }

@@ -76,7 +76,7 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
         />
 
         <div className={styles['outer']}>
-          <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} />
+          <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} style={{  animation: 'fadeIn 0.4s ease-out 0.5s both;' }} />
 
           {/* Pass refreshKey to any child route via Outlet context */}
           <div className={styles['container']}>

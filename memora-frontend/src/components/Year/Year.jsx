@@ -48,11 +48,10 @@ export const Year = () => {
     return (
         <>
             {/* <div className={styles['container']}> */}
-            <div className={styles['year-component']}>
+            <div className={styles['year-component']} style={{ opacity: months.length ? 1 : 0, transition: 'opacity 0.4s ease' }} >
                 <p className={styles['year']}>
                     {year}
                 </p>
-                {months.length > 0 && (
                     <div className={styles['months-collection']}>
                         {months.map((m) => (
                             <MonthCard
@@ -63,7 +62,6 @@ export const Year = () => {
                             />
                         ))}
                     </div>
-                )}
             </div>
             {/* </div> */}
         </>

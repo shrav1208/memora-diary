@@ -60,7 +60,7 @@ export const Month = () => {
     return (
         <>
             {/* <div className={styles['container']}> */}
-            <div className={styles['month-component']}>
+            <div className={styles['month-component']} style={{ opacity: days.length ? 1 : 0, transition: 'opacity 0.4s ease' }} >
 
                 <p className={styles['month']}>
                     <span className={styles['year-month']}>{year}</span>{dayjs().year(year).month(month).format(" MMMM")}
@@ -75,7 +75,6 @@ export const Month = () => {
                     <p>F</p>
                     <p>S</p>
                 </div>
-                {days.length > 0 && (
                     <div className={styles['days-collection']}>
                         {days.map((d, index) => (
                             d === null ? (
@@ -92,7 +91,6 @@ export const Month = () => {
                             )
                         ))}
                     </div>
-                )}
             </div>
             {/* </div> */}
         </>

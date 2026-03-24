@@ -47,15 +47,14 @@ export const Day = () => {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['day-component']}>
-        <p className={styles['month']}>
-          <span className={styles['year-month']}>
-            {selectedDate.format('YYYY')}
-          </span>
-          {selectedDate.format(' MMMM D')}
-        </p>
+        <div className={styles['day-component']} style={{ opacity: !loading && !error ? 1 : 0, transition: 'opacity 0.4s ease' }} >
+          <p className={styles['month']}>
+            <span className={styles['year-month']}>
+              {selectedDate.format('YYYY')}
+            </span>
+            {selectedDate.format(' MMMM D')}
+          </p>
 
-        {!loading && !error && (
           <div className={styles['entries-wrapper']}>
             {loading && <p className={styles['no-entry']}>Loading...</p>}
             {error && <p className={styles['no-entry']}>{error}</p>}
@@ -76,8 +75,7 @@ export const Day = () => {
                 </div>
               ))}
           </div>
-        )}
-      </div>
+        </div>
     </div>
   );
 };

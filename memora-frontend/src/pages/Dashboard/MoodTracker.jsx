@@ -55,8 +55,7 @@ export const MoodTracker = ({ refreshKey }) => {
     return (
         <div className={styles['mood-card']}>
             <p className={styles['mood-heading']}>Mood Tracker</p>
-            {loaded && (
-                <div className={styles['chart-wrapper']}>
+                <div className={styles['chart-wrapper']} style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.4s ease' }} >
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={moodData}>
                             <XAxis
@@ -88,7 +87,6 @@ export const MoodTracker = ({ refreshKey }) => {
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-            )}
         </div>
     );
 };

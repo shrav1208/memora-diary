@@ -28,8 +28,7 @@ export const SideBar = () => {
 
     return (
         <>
-            <div className={styles['container']}>
-                {name && (
+            <div className={styles['container']} style={{ opacity: name ? 1 : 0, transition: 'opacity 0.4s ease' }}>
                     <div className={styles['user-information']}>
 
                         <img src={profile} className={styles['user-profile-photo']} alt='profile-photo' />
@@ -39,7 +38,6 @@ export const SideBar = () => {
                             <p className={styles['username']}>@{username}</p>
                         </div>
                     </div>
-                )}
 
                 <div className={styles['paths-section']}>
                     <Link to='/profile'><button className={styles['profile-settings-button']}>Profile Settings</button></Link>
