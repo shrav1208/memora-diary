@@ -37,13 +37,12 @@ export const QuoteCard = ({ refreshKey }) => {
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && setIsOpen(true)}
+                style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.4s ease' }}
             >
-                    <Fragment style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.4s ease' }}>
                         <p className={styles['quote-heading']}>{heading}</p>
                         <div className={styles['quote-outer']}>
                             <p className={styles['quote']}>{body}</p>
                         </div>
-                    </Fragment>
             </div>
 
             {/* ── portal: renders directly in <body>, escapes all stacking contexts ── */}
