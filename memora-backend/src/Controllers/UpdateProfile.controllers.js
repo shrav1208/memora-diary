@@ -1,4 +1,5 @@
 import User from '../Models/User.js';
+import { uploadToCloudinary } from '../Utils/CloudinaryUpload.js';
 
 export const updateProfile = async (req, res) => {
     if (!req.session.userID) {
@@ -6,7 +7,7 @@ export const updateProfile = async (req, res) => {
     }
 
     try {
-        const { username, name, age, gender, profilePhoto } = req.body;
+        const { username, name, age, gender } = req.body;
 
         // Validate username
         if (!username?.trim()) {
@@ -30,7 +31,7 @@ export const updateProfile = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Track username changes
+        // 🔥 Username change tracking
         if (username !== user.username) {
             user.usernameChanges.push(Date.now());
         }
@@ -39,7 +40,12 @@ export const updateProfile = async (req, res) => {
         user.name = name;
         user.age = age;
         user.gender = gender;
-        user.profilePhoto = profilePhoto;
+
+        // 🔥 HANDLE IMAGE UPLOAD
+        if (req.file) {
+            const result = await uploadToCloudinary(req.file.buffer);
+            user.profilePhoto = result.secure_url;
+        }
 
         await user.save();
 

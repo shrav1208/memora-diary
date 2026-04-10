@@ -1,4 +1,5 @@
 import User from "../Models/User.js";
+import { uploadToCloudinary } from "../Utils/CloudinaryUpload.js";
 
 export const completeProfile = async (req, res) => {
     try {
@@ -29,15 +30,24 @@ export const completeProfile = async (req, res) => {
             });
         }
 
+        // ✅ Basic fields
         user.age = Number(age);
         user.gender = gender.trim();
+
+        // 🔥 HANDLE IMAGE (NEW)
+        if (req.file) {
+            const result = await uploadToCloudinary(req.file.buffer);
+            user.profilePhoto = result.secure_url;
+        }
+
         user.profileCompleted = true;
 
         await user.save();
 
         return res.status(200).json({
             success: true,
-            message: "Profile completed"
+            message: "Profile completed",
+            user
         });
 
     } catch (err) {

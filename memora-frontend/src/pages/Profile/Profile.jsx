@@ -13,6 +13,7 @@ export const Profile = () => {
     const [user, setUser] = useState(null);
     const [profilePreview, setProfilePreview] = useState(defaultAvatar);
     const [usernameEditable, setUsernameEditable] = useState(true);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const navigate = useNavigate();
 
@@ -81,6 +82,8 @@ export const Profile = () => {
         const file = e.target.files[0];
         if (!file) return;
 
+        setSelectedFile(file); // 🔥 store actual file
+
         const reader = new FileReader();
         reader.onload = () => {
             setProfilePreview(reader.result);
@@ -89,39 +92,49 @@ export const Profile = () => {
     };
 
     const handleSave = async () => {
-        if (!user.username?.trim() || user.username.trim().length < 5) {
-            toast.error("Username must be at least 5 characters");
-            return;
-        }
-        if (user.username.trim().length > 15) {
-            toast.error("Username must be 15 characters or less");
-            return;
-        }
-        if (!user.name?.trim()) {
-            toast.error("Name cannot be empty");
-            return;
+    if (!user.username?.trim() || user.username.trim().length < 5) {
+        toast.error("Username must be at least 5 characters");
+        return;
+    }
+    if (user.username.trim().length > 15) {
+        toast.error("Username must be 15 characters or less");
+        return;
+    }
+    if (!user.name?.trim()) {
+        toast.error("Name cannot be empty");
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+
+        formData.append("username", user.username);
+        formData.append("name", user.name);
+        formData.append("age", user.age);
+        formData.append("gender", user.gender);
+
+        // 🔥 Only send if changed
+        if (selectedFile) {
+            formData.append("profilePhoto", selectedFile);
         }
 
-        try {
-            const res = await api.put(
-                '/api/update/profile',
-                {
-                    username: user.username,
-                    name: user.name,
-                    age: user.age,
-                    gender: user.gender,
-                    // profilePhoto: profilePreview // optional
-                }
-            );
+        const res = await api.put(
+            '/api/update/profile',
+            formData
+        );
 
-            setUser(res.data.user);
-            toast.success("Profile updated successfully!");
+        setUser(res.data.user);
 
-        } catch (err) {
-            console.error(err);
-            toast.error("Error updating profile");
-        }
-    };
+        // 🔥 Update preview with actual saved image
+        setProfilePreview(res.data.user.profilePhoto || defaultAvatar);
+
+        toast.success("Profile updated successfully!");
+
+    } catch (err) {
+        console.error(err);
+        toast.error("Error updating profile");
+    }
+};
 
     const handleBack = () => {
         if (window.history.length > 1) {

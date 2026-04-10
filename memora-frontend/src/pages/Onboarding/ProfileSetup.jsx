@@ -14,24 +14,31 @@ export const ProfileSetup = () => {
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
     const [profilePreview, setProfilePreview] = useState(defaultAvatar);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
         if (file) {
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onload = () => setProfilePreview(reader.result);
             reader.readAsDataURL(file);
         }
     };
 
-    const handleSubmit = async () => {
+     const handleSubmit = async () => {
         try {
+            const formData = new FormData();
 
-            await api.post("/api/profile/setup", {
-                age,
-                gender
-            });
+            formData.append("age", age);
+            formData.append("gender", gender);
+
+            if (selectedFile) {
+                formData.append("profilePhoto", selectedFile);
+            }
+
+            await api.post("/api/profile/setup", formData);
 
             setUser({
                 ...user,
@@ -41,7 +48,7 @@ export const ProfileSetup = () => {
             navigate("/landing", { replace: true });
 
         } catch (err) {
-            toast.error("Error saving profile: " + err);
+            toast.error("Error saving profile "+err);
         }
     };
 
