@@ -31,8 +31,8 @@ export const completeProfile = async (req, res) => {
         }
 
         // ✅ Basic fields
-        user.age = Number(age);
-        user.gender = gender.trim();
+        user.age = age && age !== "null" && age !== "undefined" ? Number(age) : null;
+        user.gender = gender && gender !== "null" && gender !== "undefined" ? gender.trim() : null;
 
         // 🔥 HANDLE IMAGE (NEW)
         if (req.file) {

@@ -38,12 +38,14 @@ export const updateProfile = async (req, res) => {
 
         user.username = username.trim().toLowerCase();
         user.name = name;
-        user.age = age;
-        user.gender = gender;
+        user.age = age && age !== "null" && age !== "undefined" ? Number(age) : null;
+        user.gender = gender && gender !== "null" && gender !== "undefined" ? gender : null;
 
         // 🔥 HANDLE IMAGE UPLOAD
         if (req.file) {
+            console.log("Uploading to Cloudinary...");
             const result = await uploadToCloudinary(req.file.buffer);
+            console.log("Cloudinary result:", result);
             user.profilePhoto = result.secure_url;
         }
 

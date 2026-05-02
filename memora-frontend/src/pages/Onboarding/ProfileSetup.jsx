@@ -20,6 +20,12 @@ export const ProfileSetup = () => {
         const file = e.target.files[0];
 
         if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                toast.error("File size must be less than 5MB");
+                e.target.value = ""; // Clear the input
+                return;
+            }
+
             setSelectedFile(file);
             const reader = new FileReader();
             reader.onload = () => setProfilePreview(reader.result);
@@ -38,14 +44,14 @@ export const ProfileSetup = () => {
                 formData.append("profilePhoto", selectedFile);
             }
 
-            await api.post("/api/profile/setup", formData);
+            const res = await api.post("/api/profile/setup", formData);
 
             setUser({
-                ...user,
+                ...res.data.user,
                 profileCompleted: true
             });
 
-            navigate("/landing", { replace: true });
+            // ProtectedRoute will automatically redirect to /landing once user.profileCompleted is true
 
         } catch (err) {
             toast.error("Error saving profile "+err);

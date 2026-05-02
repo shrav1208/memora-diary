@@ -82,6 +82,12 @@ export const Profile = () => {
         const file = e.target.files[0];
         if (!file) return;
 
+        if (file.size > 5 * 1024 * 1024) {
+            toast.error("File size must be less than 5MB");
+            e.target.value = ""; // Clear the input
+            return;
+        }
+
         setSelectedFile(file); // 🔥 store actual file
 
         const reader = new FileReader();
