@@ -4,10 +4,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import api from '../../utils/api';
+import { Loader } from '../Loader/Loader';
 
 export const Year = () => {
 
     const [months, setMonths] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const { year } = useParams();
     const navigate = useNavigate();
@@ -19,6 +21,7 @@ export const Year = () => {
     useEffect(() => {
         const loadMonths = async () => {
             try {
+                setLoading(true);
                 const res = await api.get("/api/get/months", {
                     params: { year },
                 });
@@ -38,6 +41,8 @@ export const Year = () => {
 
             } catch (err) {
                 console.error("Failed to fetch diary entries:", err);
+            } finally {
+                setLoading(false);
             }
 
         };
@@ -47,23 +52,25 @@ export const Year = () => {
 
     return (
         <>
-            {/* <div className={styles['container']}> */}
-            <div className={styles['year-component']} style={{ opacity: months.length ? 1 : 0, transition: 'opacity 0.4s ease' }} >
-                <p className={styles['year']}>
-                    {year}
-                </p>
-                    <div className={styles['months-collection']}>
-                        {months.map((m) => (
-                            <MonthCard
-                                key={m.month}
-                                month={dayjs().month(m.month).format("MMM")}
-                                count={m.count}
-                                onClick={() => onMonthClick(m.month)}
-                            />
-                        ))}
-                    </div>
-            </div>
-            {/* </div> */}
+            {loading ? (
+                <Loader text="Loading year..." />
+            ) : (
+                <div className={`${styles['year-component']} ${styles.animate}`} >
+                    <p className={styles['year']}>
+                        {year}
+                    </p>
+                        <div className={`${styles['months-collection']} ${styles.animate}`}>
+                            {months.map((m) => (
+                                <MonthCard
+                                    key={m.month}
+                                    month={dayjs().month(m.month).format("MMM")}
+                                    count={m.count}
+                                    onClick={() => onMonthClick(m.month)}
+                                />
+                            ))}
+                        </div>
+                </div>
+            )}
         </>
     );
 }

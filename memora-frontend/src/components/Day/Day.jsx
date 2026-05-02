@@ -4,6 +4,7 @@ import { EntryCard } from './EntryCard';
 import { useEffect, useState } from 'react';
 import api from '../../utils/api';
 import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
+import { Loader } from '../Loader/Loader';
 
 export const Day = () => {
   const navigate = useNavigate();
@@ -47,35 +48,38 @@ export const Day = () => {
 
   return (
     <div className={styles['container']}>
-        <div className={styles['day-component']} style={{ opacity: !loading && !error ? 1 : 0, transition: 'opacity 0.4s ease' }} >
-          <p className={styles['month']}>
-            <span className={styles['year-month']}>
-              {selectedDate.format('YYYY')}
-            </span>
-            {selectedDate.format(' MMMM D')}
-          </p>
-
-          <div className={styles['entries-wrapper']}>
-            {loading && <p className={styles['no-entry']}>Loading...</p>}
-            {error && <p className={styles['no-entry']}>{error}</p>}
-
-            {!loading && !error && entries.length === 0 && (
-              <p className={styles['no-entry']}>
-                No entries for this day.
+        {loading ? (
+            <Loader text="Loading entries..." />
+        ) : (
+            <div className={`${styles['day-component']} ${styles.animate}`}>
+              <p className={styles['month']}>
+                <span className={styles['year-month']}>
+                  {selectedDate.format('YYYY')}
+                </span>
+                {selectedDate.format(' MMMM D')}
               </p>
-            )}
 
-            {!loading && !error &&
-              entries.map((entry) => (
-                <div
-                  key={entry._id}
-                  onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
-                >
-                  <EntryCard entry={entry} />
-                </div>
-              ))}
-          </div>
-        </div>
+              <div className={`${styles['entries-wrapper']} ${styles.animate}`}>
+                {error && <p className={styles['no-entry']}>{error}</p>}
+
+                {!error && entries.length === 0 && (
+                  <p className={styles['no-entry']}>
+                    No entries for this day.
+                  </p>
+                )}
+
+                {!error &&
+                  entries.map((entry) => (
+                    <div
+                      key={entry._id}
+                      onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
+                    >
+                      <EntryCard entry={entry} />
+                    </div>
+                  ))}
+              </div>
+            </div>
+        )}
     </div>
   );
 };

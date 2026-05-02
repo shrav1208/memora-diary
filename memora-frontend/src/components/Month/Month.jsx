@@ -4,10 +4,12 @@ import { DayCard } from './DayCard'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import api from '../../utils/api';
+import { Loader } from '../Loader/Loader';
 
 export const Month = () => {
 
     const [days, setDays] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const { year, month } = useParams();
     const navigate = useNavigate();
@@ -22,6 +24,7 @@ export const Month = () => {
     useEffect(() => {
         const loadDays = async () => {
             try {
+                setLoading(true);
                 const res = await api.get('/api/get/days', {
                     params: { year, month }
                 });
@@ -52,6 +55,8 @@ export const Month = () => {
                 }
             } catch (err) {
                 console.error("Failed to fetch diary entries:", err);
+            } finally {
+                setLoading(false);
             }
         };
         loadDays();
@@ -59,40 +64,42 @@ export const Month = () => {
 
     return (
         <>
-            {/* <div className={styles['container']}> */}
-            <div className={styles['month-component']} style={{ opacity: days.length ? 1 : 0, transition: 'opacity 0.4s ease' }} >
+            {loading ? (
+                <Loader text="Loading month..." />
+            ) : (
+                <div className={`${styles['month-component']} ${styles.animate}`} >
 
-                <p className={styles['month']}>
-                    <span className={styles['year-month']}>{year}</span>{dayjs().year(year).month(month).format(" MMMM")}
-                </p>
+                    <p className={styles['month']}>
+                        <span className={styles['year-month']}>{year}</span>{dayjs().year(year).month(month).format(" MMMM")}
+                    </p>
 
-                <div className={styles['weekdays']}>
-                    <p>S</p>
-                    <p>M</p>
-                    <p>T</p>
-                    <p>W</p>
-                    <p>T</p>
-                    <p>F</p>
-                    <p>S</p>
-                </div>
-                    <div className={styles['days-collection']}>
-                        {days.map((d, index) => (
-                            d === null ? (
-                                <div key={`blank-${index}`} className={styles['empty-day']} />
-                            ) : (
-                                <DayCard
-                                    day={d.day}
-                                    month={month}
-                                    year={year}
-                                    count={d.count}
-                                    onClick={() => onDayClick(d.day)}
-                                />
-
-                            )
-                        ))}
+                    <div className={styles['weekdays']}>
+                        <p>S</p>
+                        <p>M</p>
+                        <p>T</p>
+                        <p>W</p>
+                        <p>T</p>
+                        <p>F</p>
+                        <p>S</p>
                     </div>
-            </div>
-            {/* </div> */}
+                        <div className={`${styles['days-collection']} ${styles.animate}`}>
+                            {days.map((d, index) => (
+                                d === null ? (
+                                    <div key={`blank-${index}`} className={styles['empty-day']} />
+                                ) : (
+                                    <DayCard
+                                        day={d.day}
+                                        month={month}
+                                        year={year}
+                                        count={d.count}
+                                        onClick={() => onDayClick(d.day)}
+                                    />
+
+                                )
+                            ))}
+                        </div>
+                </div>
+            )}
         </>
     );
 };
