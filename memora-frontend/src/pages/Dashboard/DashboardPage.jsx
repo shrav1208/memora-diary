@@ -4,8 +4,9 @@ import { DashboardHeader } from './DashboardHeader';
 import styles from './DashboardPage.module.css';
 import { NavigateViews } from '../../components/NavigateViews';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MoodInputPopup } from './MoodInputPopup';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const DashboardPage = ({ fromLanding, setFromLanding }) => {
 
@@ -46,17 +47,34 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
     ? new Date(year, month, day)
     : new Date();
 
+  // Determine view depth for slide direction
+  const getViewIndex = (path) => {
+    if (path.includes('/all')) return 0;
+    const parts = path.split('/').filter(Boolean);
+    if (parts.length === 2) return 1; // year
+    if (parts.length === 3) return 2; // month
+    if (parts.length === 4) return 3; // day
+    return 3;
+  };
+
+  const currentIdx = getViewIndex(location.pathname);
+  const prevIndex = useRef(currentIdx);
+  const direction = useRef(1);
+
+  if (currentIdx !== prevIndex.current) {
+    // If pill moves right (current > prev), direction is 1 (enters from right +30, exits to left -30 = view shifts left)
+    direction.current = currentIdx > prevIndex.current ? 1 : -1;
+    prevIndex.current = currentIdx;
+  }
+
   /**
   * AUTO OPEN AT 10 PM IF NO ENTRY EXISTS
   * (assumes you already know whether today has an entry)
   */
   // useEffect(() => {
   //   const now = dayjs();
-
   //   const isAfter10PM = now.hour() >= 22;
-
   //   const hasDiaryEntryToday = false; // 🔴 replace with real value from API/state
-
   //   if (isAfter10PM && !hasDiaryEntryToday) {
   //     setIsMoodPopupOpen(true);
   //   }
@@ -79,8 +97,25 @@ export const DashboardPage = ({ fromLanding, setFromLanding }) => {
           <NavigateViews onMoodClick={() => setIsMoodPopupOpen(true)} />
 
           {/* Pass refreshKey to any child route via Outlet context */}
-          <div className={styles['container']}>
-            <Outlet context={{ refreshKey }} />
+          <div className={styles['container']} style={{ position: 'relative' }}>
+            <AnimatePresence mode="wait" custom={direction.current}>
+              <motion.div
+                key={location.pathname}
+                custom={direction.current}
+                variants={{
+                  initial: (dir) => ({ opacity: 0, x: dir * 30 }),
+                  animate: { opacity: 1, x: 0 },
+                  exit: (dir) => ({ opacity: 0, x: dir * -30 })
+                }}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                style={{ width: "100%" }}
+              >
+                <Outlet context={{ refreshKey }} />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <MoodInputPopup

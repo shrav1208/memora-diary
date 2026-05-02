@@ -16,6 +16,17 @@ export const MoodInputPopup = ({ isOpen, onClose, onSaved, date = new Date() }) 
     const [selectedMood, setSelectedMood] = useState(null);
     const [saving, setSaving] = useState(false);
 
+    // Handle Escape key to close
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape" && isOpen && !saving) {
+                onClose();
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, saving, onClose]);
+
     useEffect(() => {
         if (!isOpen) return;
 

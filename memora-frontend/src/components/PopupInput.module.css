@@ -63,6 +63,15 @@
   height: 100%;
 }
 
+.first-entry-prompt {
+    color: #343434;
+    font-family: Inter, sans-serif;
+    font-size: clamp(14px, 2vmin, 18px);
+    font-weight: 500;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
 .popup-box input,
 .input-text {
     width: 100%;

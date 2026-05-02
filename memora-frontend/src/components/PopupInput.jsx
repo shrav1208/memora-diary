@@ -8,12 +8,41 @@ import { Editor } from "@tinymce/tinymce-react";
 import toast from 'react-hot-toast';
 import api from "../utils/api";
 
-export const PopupInput = ({ isOpen, onClose, onSaved }) => {
+export const PopupInput = ({ isOpen, onClose, onSaved, isFirstEntry }) => {
     const [inputTitle, setInputTitle] = useState("");
     const [content, setContent] = useState("");
     const [saving, setSaving] = useState(false);
 
     const editorRef = useRef(null);
+
+    // Load draft from localStorage when popup opens
+    useEffect(() => {
+        if (isOpen && !isFirstEntry) {
+            const savedTitle = localStorage.getItem("memora_draft_title");
+            const savedContent = localStorage.getItem("memora_draft_content");
+            if (savedTitle) setInputTitle(savedTitle);
+            if (savedContent) setContent(savedContent);
+        }
+    }, [isOpen, isFirstEntry]);
+
+    // Save draft to localStorage whenever title or content changes
+    useEffect(() => {
+        if (isOpen) {
+            localStorage.setItem("memora_draft_title", inputTitle);
+            localStorage.setItem("memora_draft_content", content);
+        }
+    }, [inputTitle, content, isOpen]);
+
+    // Handle Escape key to close
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape" && isOpen && !saving) {
+                onClose();
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, saving, onClose]);
 
     const displayDate = dayjs().format('ddd, YYYY MMM D, H:mm A');
 
@@ -35,10 +64,16 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                 }
             );
 
+            // Clear draft on successful save
+            localStorage.removeItem("memora_draft_title");
+            localStorage.removeItem("memora_draft_content");
+            
             setInputTitle("");
             setContent("");
             onSaved?.();
             onClose();
+            
+            toast.success("Memory safely locked away 🔒");
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);
@@ -54,6 +89,11 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
         <div className={styles['popup-overlay']} onClick={onClose}>
             <div className={styles['popup-box']} onClick={(e) => e.stopPropagation()}>
                 <form>
+                    {isFirstEntry && (
+                        <div className={styles['first-entry-prompt']}>
+                            Welcome to memora! Let's write your very first entry.
+                        </div>
+                    )}
                     <input
                         className={styles['input-title']}
                         type="text"
@@ -81,7 +121,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved }) => {
                                 statusbar: false,
                                 body_class: styles['input-text'],
                                 plugins: [],
-                                placeholder: "What's on your mind...",
+                                placeholder: isFirstEntry ? "How was your day? Don't overthink it, just start writing..." : "What's on your mind...",
                                 content_style: `
                                 body {
                                     font-family: 'Inter', sans-serif;

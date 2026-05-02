@@ -42,14 +42,18 @@ export const All = () => {
                 <Loader text="Loading timeline..." />
             ) : (
                 <div className={`${styles['years-collection']} ${styles.animate}`}>
-                    {years.map((y) => (
-                        <YearCard
-                            key={y.year}
-                            year={y.year}
-                            count={y.count}
-                            onClick={() => onYearClick(y.year)}
-                        />
-                    ))}
+                    {years.length === 0 ? (
+                        <p className={styles['no-entry']}>Your timeline is empty. Start writing today!</p>
+                    ) : (
+                        years.map((y) => (
+                            <YearCard
+                                key={y.year}
+                                year={y.year}
+                                count={y.count}
+                                onClick={() => onYearClick(y.year)}
+                            />
+                        ))
+                    )}
                 </div>
             )}
         </>

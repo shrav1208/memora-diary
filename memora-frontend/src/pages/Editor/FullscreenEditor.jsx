@@ -73,10 +73,9 @@ export const FullscreenEditor = () => {
                 }
                 );
 
-                // Navigate only AFTER successful save
-
             }
             navigate(-1);
+            toast.success("Memory safely locked away 🔒");
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);

@@ -37,3 +37,14 @@
 .years-collection.animate {
     animation: fadeUp 0.4s ease-out both;
 }
+
+.no-entry {
+    color: #343434a4;
+    text-align: center;
+    font-family: Inter;
+    font-size: clamp(20px, 4vw, 32px);
+    font-style: italic;
+    font-weight: 100;
+    align-self: center;
+    margin: 100px 0;
+}

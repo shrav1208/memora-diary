@@ -16,6 +16,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
     const [name, setName] = useState('');
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+    const [isFirstEntry, setIsFirstEntry] = useState(false);
 
     useEffect(() => {
         if (!query.trim()) {
@@ -63,6 +64,24 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
             setFromLanding(false);
         }
     }, [fromLanding, setFromLanding]);
+
+    // Check if brand new user with 0 entries to prompt them automatically
+    useEffect(() => {
+        const checkFirstTimeUser = async () => {
+            try {
+                const res = await api.get("/api/get/years");
+                if (res.data.success && res.data.years.length === 0) {
+                    // User has no entries ever, prompt them with the diary entry popup!
+                    setIsFirstEntry(true);
+                    setIsPopupOpen(true);
+                }
+            } catch (err) {
+                console.error("Failed to check first-time user status:", err);
+            }
+        };
+
+        checkFirstTimeUser();
+    }, []);
 
     const handleButtonClick = () => {
         setIsPopupOpen(true); // open popup on button click
@@ -169,6 +188,7 @@ export const DashboardHeader = ({ goToToday, fromLanding, setFromLanding, moodRe
                 isOpen={isPopupOpen}
                 onClose={handleClose}
                 onSaved={onEntrySaved}
+                isFirstEntry={isFirstEntry}
             />
         </>
     );
