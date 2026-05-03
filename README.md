@@ -58,7 +58,7 @@ The application employs a decoupled, service-oriented architecture divided into 
    ```
 3. Initialize the backend development server:
    ```bash
-   npm run dev
+   node Server.js
    ```
 
 ### Frontend Initialization
