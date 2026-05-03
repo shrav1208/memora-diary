@@ -70,8 +70,10 @@ export const QuoteCard = ({ refreshKey }) => {
                                 
                                 {reflection?.cbt && (
                                     <div className={styles['cbt-section']}>
-                                        <p className={styles['cbt-label']}>Mindful Exercise</p>
-                                        <p className={styles['cbt-text']}>{reflection.cbt}</p>
+                                        <p className={styles['cbt-label']}>
+                                            <span>🧠</span> Mindful Exercise
+                                        </p>
+                                        <p className={styles['cbt-text']}>Try this: {reflection.cbt}</p>
                                     </div>
                                 )}
                                 <button

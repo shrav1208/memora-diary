@@ -86,17 +86,6 @@ export default function EditorToolbar({ editor, handleSave, handleDelete, hasRef
 
             </div>
 
-            {/* Reflection Toggle */}
-            {hasReflection && (
-                <button
-                    type="button"
-                    className={`${styles.actionBtn} ${isReflectionOpen ? styles.activeReflection : ""}`}
-                    onClick={onToggleReflection}
-                    title="Show AI Reflection & CBT"
-                >
-                    {isReflectionOpen ? "Hide Reflection" : "Show Reflection"}
-                </button>
-            )}
 
             {/* Save */}
             <button type="button" className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSave}>

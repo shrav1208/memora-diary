@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import styles from './FullscreenEditor.module.css';
 import dayjs from "dayjs";
 import { Editor } from "@tinymce/tinymce-react";
@@ -120,7 +121,23 @@ const confirmDelete = async () => {
     return (
         <>
             <Navbar />
-            <form className={styles['fullscreen-editor-form']}>
+
+            {/* Reflection floating pill button — only when entry has reflection */}
+            {reflection && (
+                <button
+                    type="button"
+                    className={`${styles['reflection-toggle']} ${showReflection ? styles['reflection-toggle-active'] : ''}`}
+                    onClick={() => setShowReflection(!showReflection)}
+                    title="AI Reflection & CBT Exercise"
+                >
+                    <span className={styles['reflection-toggle-icon']}>✦</span>
+                    <span className={styles['reflection-toggle-label']}>
+                        {showReflection ? 'Close' : 'Reflection'}
+                    </span>
+                </button>
+            )}
+
+            <form className={`${styles['fullscreen-editor-form']} ${(showReflection && reflection) ? styles['form-panel-open'] : ''}`}>
                 {/* Title + Date */}
                 <div className={styles['date-and-expand']}>
                     <textarea
@@ -177,30 +194,48 @@ const confirmDelete = async () => {
                     editor={editor}
                     handleSave={handleSaveEntry}
                     handleDelete={handleDelete}
-                    hasReflection={!!reflection}
-                    onToggleReflection={() => setShowReflection(!showReflection)}
-                    isReflectionOpen={showReflection}
                 />
 
-                {/* Reflection Panel */}
+            </form>
+
+            {/* Reflection Slide-in Panel */}
+            <AnimatePresence>
                 {showReflection && reflection && (
-                    <div className={styles['reflection-panel']}>
+                    <motion.div
+                        className={styles['reflection-panel']}
+                        initial={{ opacity: 0, x: 48, scale: 0.97 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: 48, scale: 0.97 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
                         <div className={styles['reflection-header']}>
-                            <h3>{reflection.heading}</h3>
-                            <button type="button" onClick={() => setShowReflection(false)}>×</button>
+                            <div className={styles['reflection-header-left']}>
+                                <span className={styles['reflection-icon']}>✦</span>
+                                <h3>{reflection.heading}</h3>
+                            </div>
+                            <button
+                                type="button"
+                                className={styles['reflection-close']}
+                                onClick={() => setShowReflection(false)}
+                            >
+                                ×
+                            </button>
                         </div>
+
                         <p className={styles['reflection-body']}>{reflection.body}</p>
-                        
+
                         {reflection.cbt && (
                             <div className={styles['cbt-box']}>
-                                <span className={styles['cbt-tag']}>CBT Exercise</span>
-                                <p className={styles['cbt-text']}>{reflection.cbt}</p>
+                                <div className={styles['cbt-box-header']}>
+                                    <span className={styles['cbt-tag-icon']}>🧠</span>
+                                    <span className={styles['cbt-tag']}>Mindful Exercise</span>
+                                </div>
+                                <p className={styles['cbt-text']}>Try this: {reflection.cbt}</p>
                             </div>
                         )}
-                    </div>
+                    </motion.div>
                 )}
-
-            </form>
+            </AnimatePresence>
 
             {showConfirm && (
                 <ConfirmModal
