@@ -72,6 +72,8 @@ export const Day = () => {
                   entries.map((entry) => (
                     <div
                       key={entry._id}
+                      role="button"
+                      tabIndex="0"
                       onClick={() => navigate(`/fullscreen-editor/${entry._id}`)}
                     >
                       <EntryCard entry={entry} />

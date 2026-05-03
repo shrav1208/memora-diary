@@ -22,6 +22,40 @@ a {
 }
 
 /* ============================================
+   GLOBAL INTERACTIVE STATES (Buttons & Links)
+============================================ */
+
+button, 
+input[type="submit"], 
+input[type="button"],
+[role="button"] {
+    cursor: pointer;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), filter 0.15s ease-out, opacity 0.15s ease-out !important;
+    will-change: transform;
+}
+
+button:hover:not(:disabled), 
+input[type="submit"]:hover:not(:disabled),
+input[type="button"]:hover:not(:disabled),
+[role="button"]:hover:not(:disabled) {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+button:active:not(:disabled), 
+input[type="submit"]:active:not(:disabled),
+input[type="button"]:active:not(:disabled),
+[role="button"]:active:not(:disabled) {
+    transform: scale(0.95) !important;
+    filter: brightness(0.95);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ============================================
    GLOBAL ANIMATION SYSTEM
    Usage: add class="animate" (or animate-2/3/4
    for stagger) to any element you want to

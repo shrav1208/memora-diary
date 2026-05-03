@@ -67,6 +67,13 @@ export const QuoteCard = ({ refreshKey }) => {
                             >
                                 <p className={styles['popup-heading']}>{heading}</p>
                                 <p className={styles['popup-body']}>{body}</p>
+                                
+                                {reflection?.cbt && (
+                                    <div className={styles['cbt-section']}>
+                                        <p className={styles['cbt-label']}>Mindful Exercise</p>
+                                        <p className={styles['cbt-text']}>{reflection.cbt}</p>
+                                    </div>
+                                )}
                                 <button
                                     className={styles['close-button']}
                                     onClick={() => setIsOpen(false)}

@@ -152,6 +152,7 @@ export const PopupInput = ({ isOpen, onClose, onSaved, isFirstEntry }) => {
                         <div className={styles['expand-button']}>
                             <Link
                                 to="/fullscreen-editor"
+                                role="button"
                                 state={{
                                     title: inputTitle,
                                     content: content
@@ -166,6 +167,8 @@ export const PopupInput = ({ isOpen, onClose, onSaved, isFirstEntry }) => {
 
             <div
                 className={styles['okay-button']}
+                role="button"
+                tabIndex="0"
                 onClick={(e) => {
                     e.stopPropagation();
                     if (!saving) handleSaveEntry();

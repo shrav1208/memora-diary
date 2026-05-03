@@ -89,6 +89,7 @@ export const Month = () => {
                                 ) : (
                                     <DayCard
                                         day={d.day}
+                                        role="button"
                                         month={month}
                                         year={year}
                                         count={d.count}

@@ -39,6 +39,7 @@ const diaryEntrySchema = new mongoose.Schema({
     reflection: {
         heading: String,
         body: String,
+        cbt: String, // Added for Cognitive Behavioral Therapy exercises
         generatedBy: {
             type: String,
             enum: ['template', 'llm'],

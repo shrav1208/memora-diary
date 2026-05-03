@@ -11,7 +11,7 @@ export const generateReflection = async (title, content, mood) => {
     const combinedText = `${title}. ${content}`;
 
     const prompt = `
-You are a supportive reflection assistant.
+You are a supportive reflection assistant specializing in Cognitive Behavioral Therapy (CBT) techniques.
 
 Journal entry:
 "${combinedText.slice(0, 800)}"
@@ -21,8 +21,9 @@ Detected mood: ${mood}
 Return JSON with keys:
 - heading (short 3-6 word title)
 - body (1-2 sentence supportive reflection)
+- cbt (A short, actionable CBT-based exercise or "reframing" thought. Max 20 words. If the mood is happy or calm, leave this as an empty string).
 
-Do not include anything else. Do not give medical advice. Acknowledge feelings but do not mention them, instead only mention supportive reflections based on those feelings.
+Do not include anything else. Do not give medical advice. Acknowledge feelings and provide a gentle nudge towards a healthier perspective.
 `;
 
     const result = await model.generateContent(prompt);

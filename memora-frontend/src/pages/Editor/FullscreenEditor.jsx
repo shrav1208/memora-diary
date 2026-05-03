@@ -19,6 +19,8 @@ export const FullscreenEditor = () => {
     const [entryDate, setEntryDate] = useState(dayjs());
     const [editor, setEditor] = useState(null)
     const [showConfirm, setShowConfirm] = useState(false);
+    const [reflection, setReflection] = useState(null);
+    const [showReflection, setShowReflection] = useState(false);
 
     const location = useLocation();
 
@@ -41,6 +43,7 @@ export const FullscreenEditor = () => {
                 setInputTitle(res.data.title);
                 setInputText(DOMPurify.sanitize(res.data.content));
                 setEntryDate(dayjs(res.data.createdAt));
+                setReflection(res.data.reflection);
             } catch (err) {
                 console.error("Failed to fetch entry", err);
                 toast.error("Failed to load diary entry");
@@ -174,7 +177,28 @@ const confirmDelete = async () => {
                     editor={editor}
                     handleSave={handleSaveEntry}
                     handleDelete={handleDelete}
+                    hasReflection={!!reflection}
+                    onToggleReflection={() => setShowReflection(!showReflection)}
+                    isReflectionOpen={showReflection}
                 />
+
+                {/* Reflection Panel */}
+                {showReflection && reflection && (
+                    <div className={styles['reflection-panel']}>
+                        <div className={styles['reflection-header']}>
+                            <h3>{reflection.heading}</h3>
+                            <button type="button" onClick={() => setShowReflection(false)}>×</button>
+                        </div>
+                        <p className={styles['reflection-body']}>{reflection.body}</p>
+                        
+                        {reflection.cbt && (
+                            <div className={styles['cbt-box']}>
+                                <span className={styles['cbt-tag']}>CBT Exercise</span>
+                                <p className={styles['cbt-text']}>{reflection.cbt}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
 
             </form>
 

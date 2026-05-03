@@ -126,6 +126,36 @@
     margin: 0;
 }
 
+.cbt-section {
+    background: rgba(148, 221, 255, 0.15);
+    border-left: 4px solid #94DDFF;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 4px;
+    animation: fadeIn 0.4s ease-out 0.2s both;
+}
+
+.cbt-label {
+    color: #343434;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 8px 0;
+    opacity: 0.7;
+}
+
+.cbt-text {
+    color: #343434;
+    font-family: Inter;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}
+
 .close-button {
     align-self: flex-end;
     padding: 0 20px;

@@ -52,6 +52,7 @@ export const createPost = async (req, res) => {
       reflection: {
         heading: reflection.heading,
         body: reflection.body,
+        cbt: reflection.cbt || "",
         generatedBy,
       },
     });

@@ -48,6 +48,7 @@ export const All = () => {
                         years.map((y) => (
                             <YearCard
                                 key={y.year}
+                                role="button"
                                 year={y.year}
                                 count={y.count}
                                 onClick={() => onYearClick(y.year)}

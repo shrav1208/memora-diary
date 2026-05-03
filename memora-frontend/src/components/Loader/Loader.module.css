@@ -5,17 +5,19 @@
     align-items: center;
     width: 100%;
     min-height: 300px;
-    gap: 16px;
-    animation: fadeIn 0.3s ease-out;
+    gap: 20px;
+    /* Delay the fade in by 0.3s. This entirely prevents the loader from rendering 
+       during the framer-motion exit transition, fixing the double-mount bug! */
+    animation: fadeIn 0.4s ease-out 0.3s both;
 }
 
 .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid rgba(52, 52, 52, 0.1);
-    border-top-color: #343434;
-    border-radius: 50%;
-    animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    width: 44px;
+    height: 44px;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    background: linear-gradient(135deg, #94DDFF, #EEFAFF);
+    box-shadow: 0 4px 15px rgba(148, 221, 255, 0.4);
+    animation: morph 2s infinite ease-in-out;
 }
 
 .text {
@@ -23,21 +25,29 @@
     font-family: Inter, sans-serif;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    animation: pulse 1.5s ease-in-out infinite;
+    opacity: 0.7;
+    animation: pulseText 2s ease-in-out infinite;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+@keyframes morph {
+    0%, 100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        transform: rotate(180deg) scale(1.1);
+    }
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
+@keyframes pulseText {
+    0%, 100% { opacity: 0.4; transform: scale(0.98); }
+    50% { opacity: 0.8; transform: scale(1); }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

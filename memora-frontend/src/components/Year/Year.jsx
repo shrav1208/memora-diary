@@ -63,6 +63,7 @@ export const Year = () => {
                             {months.map((m) => (
                                 <MonthCard
                                     key={m.month}
+                                    role="button"
                                     month={dayjs().month(m.month).format("MMM")}
                                     count={m.count}
                                     onClick={() => onMonthClick(m.month)}

@@ -70,6 +70,7 @@ export const updatePost = async (req, res) => {
         entry.reflection = {
             heading: reflection.heading,
             body: reflection.body,
+            cbt: reflection.cbt || "",
             generatedBy,
         };
 

@@ -435,3 +435,114 @@
 *:focus-visible {
     outline: none !important;
 }
+
+/* ── Reflection Panel ── */
+
+.reflection-panel {
+    position: fixed;
+    top: clamp(90px, 10vh, 120px);
+    right: 24px;
+    width: min(340px, 85vw);
+    max-height: 60vh;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    z-index: 50;
+    overflow-y: auto;
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(40px) scale(0.98); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.reflection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.reflection-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #343434;
+    letter-spacing: -0.3px;
+}
+
+.reflection-header button {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    color: #343434;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.reflection-header button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.reflection-body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #343434;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.cbt-box {
+    background: rgba(148, 221, 255, 0.15);
+    border-left: 3px solid #94DDFF;
+    padding: 14px 16px;
+    border-radius: 12px;
+}
+
+.cbt-tag {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #343434;
+    opacity: 0.5;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+.cbt-text {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #343434;
+    margin: 0;
+}
+
+@media (max-width: 1100px) {
+    .reflection-panel {
+        width: min(300px, 80vw);
+    }
+}
+
+@media (max-width: 800px) {
+    .reflection-panel {
+        position: fixed;
+        bottom: 110px;
+        top: auto;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        max-height: 40vh;
+    }
+}
