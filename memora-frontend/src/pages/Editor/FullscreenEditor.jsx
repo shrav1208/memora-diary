@@ -20,8 +20,6 @@ export const FullscreenEditor = () => {
     const [entryDate, setEntryDate] = useState(dayjs());
     const [editor, setEditor] = useState(null)
     const [showConfirm, setShowConfirm] = useState(false);
-    const [reflection, setReflection] = useState(null);
-    const [showReflection, setShowReflection] = useState(false);
 
     const location = useLocation();
 
@@ -29,9 +27,16 @@ export const FullscreenEditor = () => {
 
     const initialTitle = location.state?.title || "";
     const initialContent = location.state?.content || "";
+    const isCbtResponse = location.state?.isCbtResponse || false;
+    const initialReflection = location.state?.reflection || null;
 
     const [inputTitle, setInputTitle] = useState(initialTitle);
     const [inputText, setInputText] = useState(initialContent);
+
+    // Pre-seed reflection from route state (CBT response mode)
+    const [reflection, setReflection] = useState(initialReflection);
+    const [showReflection, setShowReflection] = useState(isCbtResponse);
+    const [showBanner, setShowBanner] = useState(isCbtResponse);
 
     const displayDate = entryDate.format("ddd, YYYY MMM D, H:mm A");
 
@@ -79,7 +84,11 @@ export const FullscreenEditor = () => {
 
             }
             navigate(-1);
-            toast.success("Memory safely locked away 🔒");
+            toast.success(
+                isCbtResponse
+                    ? "Your reflection has been recorded."
+                    : "Memory safely locked away."
+            );
 
         } catch (err) {
             console.error("Failed to save diary entry:", err);
@@ -130,7 +139,9 @@ const confirmDelete = async () => {
                     onClick={() => setShowReflection(!showReflection)}
                     title="AI Reflection & CBT Exercise"
                 >
-                    <span className={styles['reflection-toggle-icon']}>✦</span>
+                    <svg className={styles['reflection-toggle-icon']} width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" />
+                    </svg>
                     <span className={styles['reflection-toggle-label']}>
                         {showReflection ? 'Close' : 'Reflection'}
                     </span>
@@ -138,6 +149,25 @@ const confirmDelete = async () => {
             )}
 
             <form className={`${styles['fullscreen-editor-form']} ${(showReflection && reflection) ? styles['form-panel-open'] : ''}`}>
+
+                {/* CBT Response Prompt Banner */}
+                {isCbtResponse && showBanner && reflection?.cbt && (
+                    <div className={styles['cbt-prompt-banner']}>
+                        <div className={styles['cbt-prompt-header']}>
+                            <span className={styles['cbt-prompt-label']}>Responding to</span>
+                            <button
+                                type="button"
+                                className={styles['cbt-banner-dismiss']}
+                                onClick={() => setShowBanner(false)}
+                                title="Dismiss"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                        <p className={styles['cbt-prompt-text']}>{reflection.cbt}</p>
+                    </div>
+                )}
+
                 {/* Title + Date */}
                 <div className={styles['date-and-expand']}>
                     <textarea
@@ -146,7 +176,7 @@ const confirmDelete = async () => {
                         value={inputTitle}
                         onChange={(e) => setInputTitle(e.target.value)}
                         spellCheck={false}
-                        placeholder="Title"
+                        placeholder={isCbtResponse ? "What did this exercise make you feel?" : "Title"}
                         maxLength={200}
                     />
                     <div className={styles['display-date']}>{displayDate}</div>
@@ -198,19 +228,21 @@ const confirmDelete = async () => {
 
             </form>
 
-            {/* Reflection Slide-in Panel */}
+            {/* Reflection Panel */}
             <AnimatePresence>
                 {showReflection && reflection && (
                     <motion.div
                         className={styles['reflection-panel']}
-                        initial={{ opacity: 0, x: 48, scale: 0.97 }}
-                        animate={{ opacity: 1, x: 0, scale: 1 }}
-                        exit={{ opacity: 0, x: 48, scale: 0.97 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, x: 32 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 32 }}
+                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <div className={styles['reflection-header']}>
                             <div className={styles['reflection-header-left']}>
-                                <span className={styles['reflection-icon']}>✦</span>
+                                <svg className={styles['reflection-icon']} width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" />
+                                </svg>
                                 <h3>{reflection.heading}</h3>
                             </div>
                             <button
@@ -218,7 +250,7 @@ const confirmDelete = async () => {
                                 className={styles['reflection-close']}
                                 onClick={() => setShowReflection(false)}
                             >
-                                ×
+                                &times;
                             </button>
                         </div>
 
@@ -227,10 +259,9 @@ const confirmDelete = async () => {
                         {reflection.cbt && (
                             <div className={styles['cbt-box']}>
                                 <div className={styles['cbt-box-header']}>
-                                    <span className={styles['cbt-tag-icon']}>🧠</span>
                                     <span className={styles['cbt-tag']}>Mindful Exercise</span>
                                 </div>
-                                <p className={styles['cbt-text']}>Try this: {reflection.cbt}</p>
+                                <p className={styles['cbt-text']}>{reflection.cbt}</p>
                             </div>
                         )}
                     </motion.div>

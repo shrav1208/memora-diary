@@ -1,13 +1,25 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 import styles from './QuoteCard.module.css';
 import api from '../../utils/api';
 
 export const QuoteCard = ({ refreshKey }) => {
+    const navigate = useNavigate();
     const [reflection, setReflection] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [loaded, setLoaded] = useState(false);
+
+    const handleRespond = () => {
+        setIsOpen(false);
+        navigate('/fullscreen-editor', {
+            state: {
+                reflection,
+                isCbtResponse: true,
+            }
+        });
+    };
 
     useEffect(() => {
         const fetchReflection = async () => {
@@ -70,18 +82,27 @@ export const QuoteCard = ({ refreshKey }) => {
                                 
                                 {reflection?.cbt && (
                                     <div className={styles['cbt-section']}>
-                                        <p className={styles['cbt-label']}>
-                                            <span>🧠</span> Mindful Exercise
-                                        </p>
-                                        <p className={styles['cbt-text']}>Try this: {reflection.cbt}</p>
+                                        <p className={styles['cbt-label']}>Mindful Exercise</p>
+                                        <p className={styles['cbt-text']}>{reflection.cbt}</p>
                                     </div>
                                 )}
-                                <button
-                                    className={styles['close-button']}
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Back to my diary
-                                </button>
+
+                                <div className={styles['popup-actions']}>
+                                    {reflection?.cbt && (
+                                        <button
+                                            className={styles['respond-button']}
+                                            onClick={handleRespond}
+                                        >
+                                            Respond to this exercise
+                                        </button>
+                                    )}
+                                    <button
+                                        className={styles['close-button']}
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Back to my diary
+                                    </button>
+                                </div>
                             </motion.div>
                         </motion.div>
                     )}
