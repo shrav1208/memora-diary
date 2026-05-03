@@ -20,8 +20,11 @@ export const createPost = async (req, res) => {
     let reflection;
     let generatedBy;
 
-    // ✅ Only call AI if mood is sad or anxious
-    if ((mood === "sad" || mood === "anxious") && content.length > 50) {
+    // ✅ Selective AI call to respect free-tier rate limits
+    // Call Gemini only for entries where user seems sad/anxious/distressed
+    const isNegative = mood === "sad" || mood === "anxious";
+
+    if (isNegative && content.length > 50) {
       try {
         reflection = await generateReflection(title, content, mood);
         generatedBy = "llm";
@@ -35,7 +38,7 @@ export const createPost = async (req, res) => {
         generatedBy = "template";
       }
     } else {
-      // not sad/anxious → use a random template
+      // Happy/Neutral or very short entry → use a random template
       reflection =
         reflectionTemplates[
           Math.floor(Math.random() * reflectionTemplates.length)

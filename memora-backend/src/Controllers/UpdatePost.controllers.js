@@ -45,9 +45,7 @@ export const updatePost = async (req, res) => {
         let reflection;
         let generatedBy;
 
-        const shouldCallLLM =
-            (mood === "sad" || Math.abs(score) > 0.8) &&
-            entry.content.length > 50;
+        const shouldCallLLM = (mood === "sad" || mood === "anxious") && entry.content.length > 50;
 
         if (shouldCallLLM) {
             try {

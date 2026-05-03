@@ -31,10 +31,7 @@ export const getTodayReflection = async (req, res) => {
         }
 
         return res.json({
-            reflection: {
-                heading: entry.reflection.heading,
-                body: entry.reflection.body
-            }
+            reflection: entry.reflection
         });
 
     } catch (err) {

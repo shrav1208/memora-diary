@@ -21,7 +21,7 @@ Detected mood: ${mood}
 Return JSON with keys:
 - heading (short 3-6 word title)
 - body (1-2 sentence supportive reflection)
-- cbt (A short, actionable CBT-based exercise or "reframing" thought. Max 20 words. If the mood is happy or calm, leave this as an empty string).
+- cbt (A short, actionable CBT-based exercise or "reframing" thought. Max 20 words. Provide this whenever the user seems stressed, stuck, or could benefit from a perspective shift; otherwise, leave as an empty string).
 
 Do not include anything else. Do not give medical advice. Acknowledge feelings and provide a gentle nudge towards a healthier perspective.
 `;

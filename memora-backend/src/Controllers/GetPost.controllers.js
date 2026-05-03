@@ -30,6 +30,7 @@ export const getPost = async (req, res) => {
             title: result.title,
             content: result.content,
             createdAt: result.createdAt,
+            reflection: result.reflection,
         });
 
     }catch(err){
