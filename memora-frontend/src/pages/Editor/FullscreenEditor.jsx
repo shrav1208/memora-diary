@@ -36,7 +36,6 @@ export const FullscreenEditor = () => {
     // Pre-seed reflection from route state (CBT response mode)
     const [reflection, setReflection] = useState(initialReflection);
     const [showReflection, setShowReflection] = useState(isCbtResponse);
-    const [showBanner, setShowBanner] = useState(isCbtResponse);
 
     const displayDate = entryDate.format("ddd, YYYY MMM D, H:mm A");
 
@@ -139,9 +138,7 @@ const confirmDelete = async () => {
                     onClick={() => setShowReflection(!showReflection)}
                     title="AI Reflection & CBT Exercise"
                 >
-                    <svg className={styles['reflection-toggle-icon']} width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" />
-                    </svg>
+                    <span className={styles['reflection-toggle-icon']}>✦</span>
                     <span className={styles['reflection-toggle-label']}>
                         {showReflection ? 'Close' : 'Reflection'}
                     </span>
@@ -150,23 +147,7 @@ const confirmDelete = async () => {
 
             <form className={`${styles['fullscreen-editor-form']} ${(showReflection && reflection) ? styles['form-panel-open'] : ''}`}>
 
-                {/* CBT Response Prompt Banner */}
-                {isCbtResponse && showBanner && reflection?.cbt && (
-                    <div className={styles['cbt-prompt-banner']}>
-                        <div className={styles['cbt-prompt-header']}>
-                            <span className={styles['cbt-prompt-label']}>Responding to</span>
-                            <button
-                                type="button"
-                                className={styles['cbt-banner-dismiss']}
-                                onClick={() => setShowBanner(false)}
-                                title="Dismiss"
-                            >
-                                &times;
-                            </button>
-                        </div>
-                        <p className={styles['cbt-prompt-text']}>{reflection.cbt}</p>
-                    </div>
-                )}
+
 
                 {/* Title + Date */}
                 <div className={styles['date-and-expand']}>
@@ -210,7 +191,7 @@ const confirmDelete = async () => {
                                             box-shadow: none !important;
                                         }
 
-                                        p, li, span, div {
+                                        .mce-content-body p, .mce-content-body li, .mce-content-body span, .mce-content-body div {
                                             font-size: clamp(18px, 2.2vw, 24px) !important;
                                             line-height: 1.6;
                                         }
@@ -240,18 +221,9 @@ const confirmDelete = async () => {
                     >
                         <div className={styles['reflection-header']}>
                             <div className={styles['reflection-header-left']}>
-                                <svg className={styles['reflection-icon']} width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z" />
-                                </svg>
+                                <span className={styles['reflection-icon']}>✦</span>
                                 <h3>{reflection.heading}</h3>
                             </div>
-                            <button
-                                type="button"
-                                className={styles['reflection-close']}
-                                onClick={() => setShowReflection(false)}
-                            >
-                                &times;
-                            </button>
                         </div>
 
                         <p className={styles['reflection-body']}>{reflection.body}</p>

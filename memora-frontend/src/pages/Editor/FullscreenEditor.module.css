@@ -79,59 +79,7 @@
     }
 }
 
-/* -- CBT Response Prompt Banner -- */
 
-.cbt-prompt-banner {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 12px 16px;
-    background: rgba(148,221,255,0.1);
-    border-left: 2px solid #7dd6ff;
-    border-radius: 10px;
-    margin-bottom: 4px;
-    animation: fadeUp 0.35s ease-out both;
-}
-
-.cbt-prompt-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cbt-banner-dismiss {
-    background: none;
-    border: none;
-    font-size: 16px;
-    color: #aaa;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    transition: color 0.15s ease;
-}
-
-.cbt-banner-dismiss:hover {
-    color: #555;
-}
-
-.cbt-prompt-label {
-    font-family: Inter, sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #3a9ec2;
-}
-
-.cbt-prompt-text {
-    font-family: Inter, sans-serif;
-    font-size: 13px;
-    font-style: italic;
-    color: #3a6b82;
-    margin: 0;
-    line-height: 1.5;
-    font-weight: 300;
-}
 
 
 /* Hide scrollbar but keep scrolling */
@@ -510,10 +458,12 @@
     z-index: 300;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 
-    padding: 10px 16px;
+    padding: 20px 12px;
     width: auto;
 
     background: rgba(255,255,255,0.75);
@@ -527,13 +477,12 @@
 }
 
 .reflection-toggle:hover {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.92);
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
 .reflection-toggle:active {
-    transform: translateY(-50%) scale(0.94) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transform: translateY(-50%) scale(0.96) !important;
 }
 
 .reflection-toggle-active {
@@ -543,19 +492,21 @@
 }
 
 .reflection-toggle-icon {
-    color: #343434;
-    flex-shrink: 0;
-    opacity: 0.7;
-    transition: opacity 0.15s ease;
-}
-
-.reflection-toggle:hover .reflection-toggle-icon {
-    opacity: 1;
-}
-
-.reflection-toggle-active .reflection-toggle-icon {
+    font-size: 16px;
     color: #3a9ec2;
-    opacity: 1;
+    margin-bottom: 2px;
+}
+
+.reflection-toggle-label {
+    font-family: Inter, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #343434;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
 }
 
 @media (max-width: 768px) {
@@ -564,14 +515,17 @@
         bottom: 110px;
         right: 16px;
         transform: none;
-    }
-
-    .reflection-toggle:hover {
-        transform: translateY(-1px);
+        flex-direction: row;
+        padding: 10px 16px;
     }
 
     .reflection-toggle:active {
         transform: scale(0.96) !important;
+    }
+
+    .reflection-toggle-label {
+        writing-mode: horizontal-tb;
+        transform: none;
     }
 }
 
@@ -619,55 +573,26 @@
     opacity: 0.9;
 }
 
-.reflection-toggle-label {
-    font-family: Inter, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
-    color: #343434;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
+
 
 .reflection-header h3 {
     margin: 0;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: #2a2a2a;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.3px;
     line-height: 1.4;
     word-break: break-word;
 }
 
-.reflection-close {
-    background: transparent;
-    border: none;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    color: #999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.15s ease;
-    line-height: 1;
-    flex-shrink: 0;
-    margin-top: 1px;
-}
 
-.reflection-close:hover {
-    color: #343434;
-}
 
 .reflection-body {
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.7;
-    color: #555;
-    font-weight: 300;
-    margin: 0 0 14px 0;
+    color: #444;
+    font-weight: 400;
+    margin: 0 0 18px 0;
     font-family: Inter, sans-serif;
 }
 
